@@ -28,12 +28,12 @@ class WYLWidget extends WP_Widget {
 	}
 
 	$WYLurl=str_replace("httpv://","http://",trim($instance['WYLurl']));
-    $WYLqs=substr(strstr($WYLurl,'?'),1);
-    parse_str($WYLqs,$WYLarr);
+	$WYLqs=substr(strstr($WYLurl,'?'),1);
+	parse_str($WYLqs,$WYLarr);
 
     if (strpos($WYLurl,'youtu.be')) {
         $WYLid=substr(parse_url($WYLurl,PHP_URL_PATH),1,11);
-		$WPLClass="";
+		$PLClass="";
 		$WYLthumb="http://img.youtube.com/vi/".$WYLid."/mqdefault.jpg";
     } else {
 		if (isset($WYLarr['v'])) {
