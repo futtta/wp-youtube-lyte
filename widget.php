@@ -28,25 +28,26 @@ class WYLWidget extends WP_Widget {
 	}
 
 	$WYLurl=str_replace("httpv://","http://",trim($instance['WYLurl']));
+    $WYLqs=substr(strstr($WYLurl,'?'),1);
+    parse_str($WYLqs,$WYLarr);
 
-        $WYLqs=substr(strstr($WYLurl,'?'),1);
-        parse_str($WYLqs,$WYLarr);
-
-        if (strpos($WYLurl,'youtu.be')) {
-                $WYLid=substr(parse_url($WYLurl,PHP_URL_PATH),1,11);
-		$PLClass="";
+    if (strpos($WYLurl,'youtu.be')) {
+        $WYLid=substr(parse_url($WYLurl,PHP_URL_PATH),1,11);
+		$WPLClass="";
 		$WYLthumb="http://img.youtube.com/vi/".$WYLid."/mqdefault.jpg";
-        } else {
+    } else {
 		if (isset($WYLarr['v'])) {
 			$WYLid=$WYLarr['v'];
 			$PLClass="";
 			$WYLthumb="http://img.youtube.com/vi/".$WYLid."/mqdefault.jpg";
 		} else if (isset($WYLarr['list'])) {
-                	$WYLid=$WYLarr['list'];
+           	$WYLid=$WYLarr['list'];
+			$yt_resp=lyte_get_YT_resp($WYLid,true,"","",true);
+			$WYLthumb=$yt_resp["thumbUrl"];
 			$PLClass=" playlist";
-			$WYLthumb="";
 		}
-        }
+    }
+	$WYLthumb = apply_filters( "lyte_filter_widget_thumb", $WYLthumb, $WYLid );
 
 	if (isset($WYLarr['start'])) $qsa="&amp;start=".$WYLarr['start'];
 	if (isset($WYLarr['enablejsapi'])) {
@@ -131,14 +132,13 @@ class WYLWidget extends WP_Widget {
             <p><label for="<?php echo $this->get_field_id('WYLsize'); ?>"><?php _e("Size:","wp-youtube-lyte") ?>
 		<select class="widefat" id="<?php echo $this->get_field_id('WYLsize'); ?>" name="<?php echo $this->get_field_name('WYLsize'); ?>">
 			<?php
-				$x=1;
-				while ($wSize[$x]) {
+				foreach ($wSize as $x => $size) {
 					if ($x==$WYLsize) {
 						$selected=" selected=\"true\"";
-						} else {
+					} else {
 						$selected="";
-						}
-					unset($deprecated);
+					}
+					
 					if ($wSize[$x]['depr']!==true) {
 						echo "<option value=\"".$x."\"".$selected.">".$wSize[$x]['w']."X".$wSize[$x]['h']."</option>";
 					}
@@ -152,8 +152,10 @@ class WYLWidget extends WP_Widget {
                         <?php
 				if($WYLaudio==="audio") {
 					$aselected=" selected=\"true\"";
+					$vselected="";
 				} else {
 					$vselected=" selected=\"true\"";
+					$aselected="";
 				}
                 echo "<option value=\"audio\"".$aselected.">".__("audio","wp-youtube-lyte")."</option>";
 				echo "<option value=\"video\"".$vselected.">".__("video","wp-youtube-lyte")."</option>";
@@ -167,4 +169,3 @@ class WYLWidget extends WP_Widget {
 } 
 
 add_action('widgets_init', create_function('', 'return register_widget("WYLWidget");'));
-?>
