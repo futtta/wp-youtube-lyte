@@ -584,6 +584,7 @@ function lyte_rm_cache() {
 			}
 			delete_option('lyte_cache_index');
 		}
+		update_option('lyte_widget_cache','');
 		return "OK";
 	} catch(Exception $e) {
 		return $e->getMessage();
