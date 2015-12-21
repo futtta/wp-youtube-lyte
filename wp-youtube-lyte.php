@@ -365,7 +365,7 @@ function captions_lookup($postID, $cachekey, $vid) {
 	}
 }
 
-function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="") {
+function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidget=false) {
 	/** logic to get video info from cache or get it from YouTube and set it */
 	global $postID, $cachekey, $toCache_index;
 	if ( $postID && empty($apiTestKey)) {
@@ -379,14 +379,20 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="") {
 				}
 			}
 		}
+	} else if ($isWidget) {
+		$cache_resp = get_option("lyte_widget_cache");
+		if (!empty($cache_resp)) {
+			$widget_cache = json_decode(gzuncompress(base64_decode($cache_resp)),1);
+			$_thisLyte = $widget_cache[$vid];
+		}
 	} else {
 		$_thisLyte = "";
 	}
 
 	if ( empty( $_thisLyte ) ) {
 		// get info from youtube
-        	// first get yt api key
-	        $lyte_yt_api_key = get_option('lyte_yt_api_key','');
+       	// first get yt api key
+        $lyte_yt_api_key = get_option('lyte_yt_api_key','');
 		$lyte_yt_api_key = apply_filters('lyte_filter_yt_api_key', $lyte_yt_api_key);
 		if (!empty($apiTestKey)) {
 			$lyte_yt_api_key=$apiTestKey;
@@ -462,19 +468,30 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="") {
 				}
 					
 				// try to cache the result
-				if ( ($postID) && (!empty($_thisLyte)) && (empty($apiTestKey)) ) {
+				if ( (($postID) || ($isWidget)) && !empty($_thisLyte) && empty($apiTestKey) ) {
 					$_thisLyte['lyte_date_added']=time();
-					$yt_resp_precache=json_encode($_thisLyte);
 
-					// then gzip + base64 (to limit amount of data + solve problems with wordpress removing slashes)
-					$yt_resp_precache=base64_encode(gzcompress($yt_resp_precache));
 
-					// and do the actual caching
-					$toCache = ( $yt_resp_precache ) ? $yt_resp_precache : '{{unknown}}';
-					update_post_meta( $postID, $cachekey, $toCache );
 
-					// and finally add new cache-entry to toCache_index which will be added to lyte_cache_index pref
-					$toCache_index[]=$cachekey;
+					if ($postID) {
+						$yt_resp_precache=json_encode($_thisLyte);
+
+
+
+
+						// then gzip + base64 (to limit amount of data + solve problems with wordpress removing slashes)
+						$yt_resp_precache=base64_encode(gzcompress($yt_resp_precache));
+
+						// and do the actual caching
+						$toCache = ( $yt_resp_precache ) ? $yt_resp_precache : '{{unknown}}';
+
+						update_post_meta( $postID, $cachekey, $toCache );
+						// and finally add new cache-entry to toCache_index which will be added to lyte_cache_index pref
+						$toCache_index[]=$cachekey;
+					} else if ($isWidget) {
+						$widget_cache[$vid]=$_thisLyte;
+						update_option("lyte_widget_cache",base64_encode(gzcompress(json_encode($widget_cache))));
+					}
 				}
 			}
 		}
