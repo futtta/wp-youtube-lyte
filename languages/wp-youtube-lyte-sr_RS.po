@@ -1,0 +1,242 @@
+# Copyright (C) 2010 WP YouTube Lyte
+# This file is distributed under the same license as the WP YouTube Lyte package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP YouTube Lyte 0.8.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-youtube-lyte\n"
+"POT-Creation-Date: 2011-10-12 13:51:40+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-11-26 09:17+0100\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: widget.php:74
+msgid "Title:"
+msgstr "Naslov:"
+
+#: widget.php:75
+msgid "Size:"
+msgstr "Veličina:"
+
+#: widget.php:91
+msgid "Type:"
+msgstr "Vrsta:"
+
+#: widget.php:99
+msgid "audio"
+msgstr "audio"
+
+#: widget.php:100
+msgid "video"
+msgstr "video"
+
+#: widget.php:104
+msgid "Youtube-URL:"
+msgstr "Youtube-URL:"
+
+#: widget.php:105
+msgid "Text:"
+msgstr "Tekst:"
+
+#: player_sizes.inc.php:11
+msgid "Smaller 4:3 player"
+msgstr "Manji 4:3 player"
+
+#: player_sizes.inc.php:16
+msgid "Smaller 16:9 player"
+msgstr "Manji 16:9 player"
+
+#: player_sizes.inc.php:21
+msgid "Standard value, YouTube default for 4:3-ratio video"
+msgstr "Standardna vrednost, podrazumevana za YouTube video-odnos 4:3 "
+
+#: player_sizes.inc.php:26
+msgid "YouTube default for 16:9-ratio video"
+msgstr "YouTube podrazumevana vrednost za video-odnos 16:9"
+
+#: player_sizes.inc.php:31
+msgid "Larger 4:3 player"
+msgstr "Veći 4:3 player"
+
+#: player_sizes.inc.php:36
+msgid "Larger 16:9 player"
+msgstr "Veći 16:9 player"
+
+#: player_sizes.inc.php:41
+msgid "Maxi 4:3 player"
+msgstr "Najveći 4:3 player"
+
+#: player_sizes.inc.php:46
+msgid "Maxi 16:9 player"
+msgstr "Najveći 16:9 player"
+
+#: wp-youtube-lyte.php:60 wp-youtube-lyte.php:64
+msgid "Watch this playlist on YouTube"
+msgstr "Gledajte ovu listu pesama na YouTube-u"
+
+#: wp-youtube-lyte.php:65
+msgid "Watch this playlist"
+msgstr "Gledajte ovu listu pesama"
+
+#: wp-youtube-lyte.php:65 wp-youtube-lyte.php:78 wp-youtube-lyte.php:82
+msgid "on YouTube"
+msgstr "na YouTube-u"
+
+#: wp-youtube-lyte.php:73
+msgid "Watch this video on YouTube"
+msgstr "Gledajte ovaj video na YouTube-u"
+
+#: wp-youtube-lyte.php:78 wp-youtube-lyte.php:82
+msgid "Watch this video"
+msgstr "Gledajte ovaj video"
+
+#: wp-youtube-lyte.php:78
+msgid "or on"
+msgstr "ili na"
+
+#: options.php:37
+msgid "WP YouTube Lyte Settings"
+msgstr "WP YouTube Lyte podešavanja"
+
+#: options.php:39
+msgid ""
+"WP YouTube Lyte inserts \"Lite YouTube Embeds\" in your blog. These look and "
+"feel like normal embedded YouTube, but don't use Flash unless clicked on, "
+"thereby <a href=\"http://blog.futtta.be/2010/08/30/the-state-of-wp-youtube-"
+"lyte/\" target=\"_blank\">reducing download size & rendering time "
+"substantially</a>. When a video is played, WP-YouTube-Lyte can either "
+"activate <a href=\"http://apiblog.youtube.com/2010/07/new-way-to-embed-"
+"youtube-videos.html\" target=\"_blank\">YouTube's embedded html5-player</a> "
+"or the older Flash-version, depending on the settings below."
+msgstr ""
+"WP YouTube Lyte ubacuje \"Lite YouTube Embeds\" u vaš blog. Izgleda i "
+"funkcioniše kao uobičajeni ubačeni YouTube, ali nemojte koristiti Flash, "
+"osim ako niste kliknuli na  <a href=\"http://blog.futtta.be/2010/08/30/the-"
+"state-of-wp-youtube-lyte/\" target=\"_blank\">smanjenje veličine preuzimanja "
+"i vremena prikazivanja </a>. Kad se prikazuje video, WP-YouTube-Lyte može "
+"aktivirati  <a href=\"http://apiblog.youtube.com/2010/07/new-way-to-embed-"
+"youtube-videos.html\" target=\"_blank\">ugrađeni YouTube html5-player</a> "
+"ili stariju Flash verziju u zavisnosti od podešavanja koja slede."
+
+#: options.php:40
+msgid ""
+"You can place video and audio in your posts and pages by adding one or more "
+"http<strong>v</strong> or http<strong>a</strong> YouTube-links to your post. "
+"These will automatically be replaced by WP YouTube Lyte with the correct "
+"(flash-less) code. To add a video for example, you type a URL like "
+"<em>http<strong>v</strong>://www.youtube.com/watch?v=QQPSMRQnNlU</em> or "
+"<em>http<strong>v</strong>://www.youtube.com/playlist?"
+"list=PLA486E741B25F8E00</em> for a playlist. If you want an audio-only "
+"player, you enter <em>http<strong>a</strong>://www.youtube.com/watch?"
+"v=BIQIGR-kWtc</em>. There's more info on the <a href=\"http://wordpress.org/"
+"extend/plugins/wp-youtube-lyte/faq/\" target=\"_blank\">wordpress.org WP "
+"YouTube Lyte FAQ page</a>."
+msgstr ""
+"Možete ubaciti video ili audio sadržaj u svoje postove i stranice tako što "
+"ćete dodati jedan ili više http<strong>v</strong> ili http<strong>a</strong> "
+"YouTube linkova svom postu. Njih će WP YouTube Lyte automatski zameniti "
+"ispravnim kodom (bez flash-a). Da biste dodali video, na primer, unesite URL "
+"kao što je <em>http<strong>v</strong>://www.youtube.com/watch?v=QQPSMRQnNlU</"
+"em> ili <em>http<strong>v</strong>://www.youtube.com/playlist?"
+"list=PLA486E741B25F8E00</em> za listu pesama. Više informacija naći ćete na "
+"<a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/faq/\" target="
+"\"_blank\">wordpress.org WP YouTube Lyte FAQ page</a>."
+
+#: options.php:41
+msgid ""
+"You can modify WP-YouTube-Lyte's behaviour by changing the following "
+"settings:"
+msgstr "WP-YouTube-Lyte možete modifikovati izmenom sledećih podešavanja:"
+
+#: options.php:48
+msgid "Player size"
+msgstr "Veličina player-a"
+
+#: options.php:65
+msgid "Add links below the embedded videos?"
+msgstr "Dodati linkove ispod ugrađenih video sadržaja?"
+
+#: options.php:67
+msgid "Show links?"
+msgstr "Prikaži linkove?"
+
+#: options.php:68
+msgid " Add YouTube-link."
+msgstr "Dodaj YouTube link."
+
+#: options.php:69
+msgid ""
+" Add both a YouTube and an <a href=\"http://icant.co.uk/easy-youtube/docs/"
+"index.html\" target=\"_blank\">Easy YouTube</a>-link."
+msgstr ""
+"Dodaj i YouTube i <a href=\"http://icant.co.uk/easy-youtube/docs/index.html"
+"\" target=\"_blank\">Easy YouTube</a> link."
+
+#: options.php:70
+msgid " Don't add any links."
+msgstr "Nemoj da dodaješ nikakve linkove."
+
+#: options.php:75
+msgid "Play video in HD if possible?"
+msgstr "Prikaži video u HD-u ako je moguće?"
+
+#: options.php:79
+msgid "Enable HD"
+msgstr "Aktiviraj HD"
+
+#: options.php:80
+msgid "No HD, we're smallband!"
+msgstr "Nema HD-a, mi smo smallband!"
+
+#: options.php:85
+msgid "Bonus feature: "
+msgstr "Dodatna karakteristika:"
+
+#: options.php:89
+msgid "Disable 3rd party tracking."
+msgstr "Deaktiviraj praćenje 3. strane."
+
+#: options.php:90
+msgid "I don't mind 3rd party tracking (default)"
+msgstr "Ne smeta mi praćenje 3. strane (podrazumevano)"
+
+#: options.php:97
+msgid "Save Changes"
+msgstr "Sačuvaj izmene"
+
+#: options.php:105
+msgid "futtta about"
+msgstr "futtta o"
+
+#. #-#-#-#-#  plugin.pot (WP YouTube Lyte 0.8.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: options.php:107
+msgid "WP YouTube Lyte"
+msgstr "WP YouTube Lyte"
+
+#: options.php:108
+msgid "WordPress"
+msgstr "WordPress"
+
+#: options.php:109
+msgid "Web Technology"
+msgstr "Web tehnologija"
+
+#. Plugin URI of the plugin/theme
+msgid "http://blog.futtta.be/tag/lyte"
+msgstr "http://blog.futtta.be/tag/lyte"
+
+#. Description of the plugin/theme
+msgid "Lite and accessible YouTube audio and video embedding."
+msgstr "Lite i pristupačno ugrađivanje YouTube audio i video sadržaja."
+
+#. Author of the plugin/theme
+msgid "Frank Goossens (futtta)"
+msgstr "Frank Goossens (futtta)"
+
+#. Author URI of the plugin/theme
+msgid "http://blog.futtta.be/"
+msgstr "http://blog.futtta.be/"

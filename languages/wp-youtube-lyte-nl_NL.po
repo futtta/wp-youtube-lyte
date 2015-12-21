@@ -1,0 +1,454 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP YouTube Lyte\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-youtube-lyte\n"
+"POT-Creation-Date: 2015-03-06 17:49:26+00:00\n"
+"PO-Revision-Date: 2015-03-27 07:18+0100\n"
+"Last-Translator: frank goossens (futtta) <futtta@gmail.com>\n"
+"Language-Team: frank goossens ('futtta') <futtta@gmail.com>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: options.php:21
+msgid "Your WP YouTube Lyte cache has been succesfully cleared."
+msgstr "De WP YouTube Lyte is leeggemaakt."
+
+#: options.php:27
+msgid "There was a problem, the WP YouTube Lyte cache could not be cleared."
+msgstr "Er was een probleem, de cache kon niet worden leeggemaakt."
+
+#: options.php:61
+msgid ""
+"For WP YouTube Lyte to function optimally, you should enter an YouTube API "
+"key "
+msgstr ""
+"Om WP YouTube Lyte optimaal te laten functioneren, zou je een YouTube API "
+"key invoeren"
+
+#: options.php:63
+msgid "in the settings screen."
+msgstr "in het instellingen-scherm."
+
+#: options.php:76
+msgid "WP YouTube Lyte got the following error back from the YouTube API: "
+msgstr "WP YouTube Lyte kreeg deze foutmelding van de YouTube API:"
+
+#: options.php:91
+msgid "WP YouTube Lyte Settings"
+msgstr "WP YouTube Lyte instellingen"
+
+#: options.php:98
+msgid "Your YouTube API key."
+msgstr "Uw YouTube API key."
+
+#: options.php:104
+msgid "Please enter your YouTube API key."
+msgstr "Vul je YouTube API key in."
+
+#: options.php:105
+msgid "API key"
+msgstr "API key"
+
+#: options.php:105
+msgid "Test Key"
+msgstr "Test API Key"
+
+#: options.php:107
+msgid ""
+"WP YouTube Lyte uses YouTube's API to fetch information on each video. For "
+"your site to use that API, you will have to <a href=\"https://console."
+"developers.google.com/project/\" target=\"_blank\">register your site as a "
+"new application</a>, enable the YouTube API for it and get a server key and "
+"fill it out here."
+msgstr ""
+"WP YouTube Lyte gebruikt YouTube's API om informatie over iedere video te "
+"verkrijgen. Om uw site die API te laten gebruiken, zul je je <a href="
+"\"https://console.developers.google.com/project/\" target=\"_blank\">site "
+"moeten registreren als een nieuwe applicatie</a>, de YouTube API ervoor "
+"activeren en een server key genereren die je hier moet invoeren."
+
+#: options.php:110
+msgid "Great, your YouTube API key has been taken care of!"
+msgstr "Tof, er is voor je YouTube API key gezorgd!"
+
+#: options.php:115 options.php:117
+msgid "Player size"
+msgstr "Afmetingen van de player"
+
+#: options.php:136
+msgid "Add links below the embedded videos?"
+msgstr "Voeg links to onder de video?"
+
+#: options.php:139
+msgid "Show links?"
+msgstr "Toon links?"
+
+#: options.php:140
+msgid "Show YouTube-link"
+msgstr "Voeg YouTube-link toe"
+
+#: options.php:140
+msgid " Add YouTube-link."
+msgstr "Voeg YouTube-link toe"
+
+#: options.php:141
+msgid "Show YouTube and Ease YouTube link"
+msgstr "Toon de Youtube and Easy YouTube link"
+
+#: options.php:141
+msgid ""
+" Add both a YouTube and an <a href=\"http://icant.co.uk/easy-youtube/docs/"
+"index.html\" target=\"_blank\">Easy YouTube</a>-link."
+msgstr ""
+"Voeg zowel een YouTube als een <a href=\"http://icant.co.uk/easy-youtube/"
+"docs/index.html\" target=\"_blank\">Easy YouTube</a>-link toe."
+
+#: options.php:142
+msgid "Don't include links."
+msgstr "Voeg geen links toe"
+
+#: options.php:142
+msgid " Don't add any links."
+msgstr "Voeg geen links toe"
+
+#: options.php:147
+msgid "Player position:"
+msgstr "Positie van de player:"
+
+#: options.php:150
+msgid "Left, center or right?"
+msgstr "Links, gecentreerd of rechts?"
+
+#: options.php:151
+msgid "Left"
+msgstr "Links"
+
+#: options.php:152
+msgid "Center"
+msgstr "Gecentreerd"
+
+#: options.php:157
+msgid "Try to force HD (experimental)?"
+msgstr "Forceer HD video?"
+
+#: options.php:160
+msgid "HD or not?"
+msgstr "HD of geen HD?"
+
+#: options.php:161
+msgid "Enable HD?"
+msgstr "Ja, HD graag!"
+
+#: options.php:161
+msgid "Enable HD"
+msgstr "Ja, HD graag!"
+
+#: options.php:162
+msgid "Don't enable HD playback"
+msgstr "Geen HD video"
+
+#: options.php:162
+msgid "No HD (default)"
+msgstr "Geen HD (standaard)"
+
+#: options.php:167
+msgid "Add microdata?"
+msgstr "Microdata toevoegen?"
+
+#: options.php:170
+msgid "Add video microdata to the HTML?"
+msgstr "Microdata over de video toevoegen aan de HTML?"
+
+#: options.php:171
+msgid "Sure, add microdata!"
+msgstr "Microdata toevoegen?"
+
+#: options.php:171 options.php:181
+msgid "Yes (default)"
+msgstr "Ja (standaard)"
+
+#: options.php:172
+msgid "No microdata in my HTML please."
+msgstr "Geen microdata voor mij."
+
+#: options.php:172
+msgid "No microdata, thanks."
+msgstr "Geen microdata voor mij."
+
+#: options.php:177 options.php:180
+msgid "Also act on normal YouTube links?"
+msgstr "Ook normale YouTube-links omzetten?"
+
+#: options.php:181
+msgid "That would be great!"
+msgstr "Dat zou tof zijn."
+
+#: options.php:182
+msgid "No, I'll stick to httpv or shortcodes."
+msgstr "Nee, ik hou het bij httpv-links of shortcodes"
+
+#: options.php:182
+msgid "No thanks."
+msgstr "Nee, liever niet."
+
+#: options.php:187
+msgid "Empty WP YouTube Lyte's cache"
+msgstr "WP YouTube Lyte's cache leegmaken."
+
+#: options.php:198
+msgid "Save Changes"
+msgstr "Bewaar"
+
+#: options.php:206
+msgid "futtta about"
+msgstr "futtta over"
+
+#. #-#-#-#-#  plugin.pot (WP YouTube Lyte 1.5.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: options.php:208
+msgid "WP YouTube Lyte"
+msgstr "WP YouTube Lyte"
+
+#: options.php:209
+msgid "WordPress"
+msgstr "WordPress"
+
+#: options.php:210
+msgid "Web Technology"
+msgstr "Web Technologie"
+
+#: options.php:214
+msgid "Do not donate for this plugin!"
+msgstr "Draag niet bij aan deze plugin!"
+
+#: options.php:228
+msgid "Checking your key ..."
+msgstr "Je API key aan het controleren ..."
+
+#: options.php:242
+msgid "That does not seem to be a correct API key!"
+msgstr "Dat lijkt geen correcte API key!"
+
+#: options.php:283
+msgid "API seems OK, you can Save Changes below now."
+msgstr "API key lijkt OK, je kunt onderaan op \"Bewaar\" klikken."
+
+#: options.php:285
+msgid "API key not OK, your key seems to "
+msgstr "API key is niet OK, want lijkt"
+
+#: options.php:288
+msgid "be invalid."
+msgstr "ongeldig."
+
+#: options.php:291
+msgid "be valid, but restricted to an IP-address which is not your server's."
+msgstr "geldig, maar beperkt tot een IP-adres dat niet dat van je server is."
+
+#: options.php:292
+msgid "Try changing the allowed IP for your API key to include this one: "
+msgstr "Probeer het toegestane IP voor je API key te wijzigen naar:"
+
+#: options.php:296
+msgid "have expired, please check in the Google Developer Console."
+msgstr "vervallen, controleer in de Google Developer Console"
+
+#: options.php:302
+msgid ""
+"be correct, but seems to have exceeded the number of requests that can be "
+"made with it."
+msgstr "juist te zijn, maar het maximaal aantal requests lijkt overschreden."
+
+#: options.php:305
+msgid "probably work, but as the video with id "
+msgstr "te werken, maar aangezien video met ID"
+
+#: options.php:307
+msgid " was not found we cannot be sure, please try again."
+msgstr "niet gevonden is, kunnen we niet zeker zijn, probeer dus opnieuw."
+
+#: options.php:310
+msgid "be faulty, with YouTube API returning reason: "
+msgstr "verkeerd te zijn, met volgende reden volgens de YouTube API:"
+
+#: options.php:315
+msgid ""
+"Something went wrong, WP YouTube Lyte might not have been able to retrieve "
+"information from the YouTube API, got error: "
+msgstr ""
+"Er ging iets verkeerd, WP YouTube Lyte kon vermoedelijk geen informatie van "
+"de YouTube API krijgen, foutmelding:"
+
+#: player_sizes.inc.php:11
+msgid "Mini 16:9 player"
+msgstr "Mini 16:9 player"
+
+#: player_sizes.inc.php:17
+msgid "Smaller 4:3 player"
+msgstr "Kleiner 4:3 player"
+
+#: player_sizes.inc.php:23
+msgid "Smaller 16:9 player"
+msgstr "Kleinere 16:9 player"
+
+#: player_sizes.inc.php:29
+msgid "Standard value, YouTube default for 4:3-ratio video"
+msgstr "Standaard 4:3-ratio video"
+
+#: player_sizes.inc.php:35
+msgid "YouTube default for 16:9-ratio video"
+msgstr "Standaard 16:9-ratio video"
+
+#: player_sizes.inc.php:41
+msgid "Larger 4:3 player"
+msgstr "Grotere 4:3 player"
+
+#: player_sizes.inc.php:47
+msgid "Larger 16:9 player"
+msgstr "Grotere 16:9 player"
+
+#: player_sizes.inc.php:53
+msgid "Maxi 4:3 player"
+msgstr "Maxi 4:3 player"
+
+#: player_sizes.inc.php:59
+msgid "Maxi 16:9 player"
+msgstr "Maxi 16:9 player"
+
+#: widget.php:130
+msgid "Title:"
+msgstr "Titel:"
+
+#: widget.php:131
+msgid "Size:"
+msgstr "Afmetingen:"
+
+#: widget.php:150
+msgid "Type:"
+msgstr "Type:"
+
+#: widget.php:158
+msgid "audio"
+msgstr "audio"
+
+#: widget.php:159
+msgid "video"
+msgstr "video"
+
+#: widget.php:163
+msgid "Youtube-URL:"
+msgstr "Youtube-URL:"
+
+#: widget.php:164
+msgid "Text:"
+msgstr "Tekst:"
+
+#: wp-youtube-lyte.php:186
+msgid "Watch this playlist on YouTube"
+msgstr "Bekijk deze playlist op YouTube"
+
+#: wp-youtube-lyte.php:192
+msgid "Watch this playlist"
+msgstr "Bekijk deze playlist"
+
+#: wp-youtube-lyte.php:192 wp-youtube-lyte.php:204 wp-youtube-lyte.php:208
+msgid "on YouTube"
+msgstr "op YouTube"
+
+#: wp-youtube-lyte.php:199
+msgid "Watch this video on YouTube"
+msgstr "Bekijk deze video op YouTube"
+
+#: wp-youtube-lyte.php:204 wp-youtube-lyte.php:208
+msgid "Watch this video"
+msgstr "Bekijk deze video"
+
+#: wp-youtube-lyte.php:204
+msgid "or on"
+msgstr "of op"
+
+#: wp-youtube-lyte.php:586
+msgid "Settings"
+msgstr "Instellingen"
+
+#. Plugin URI of the plugin/theme
+msgid "http://blog.futtta.be/wp-youtube-lyte/"
+msgstr "http://blog.futtta.be/wp-youtube-lyte/"
+
+#. Description of the plugin/theme
+msgid "Lite and accessible YouTube audio and video embedding."
+msgstr "YouTube audio en video embedding \"light\"."
+
+#. Author of the plugin/theme
+msgid "Frank Goossens (futtta)"
+msgstr "Frank Goossens (futtta)"
+
+#. Author URI of the plugin/theme
+msgid "http://blog.futtta.be/"
+msgstr "http://blog.futtta.be/"
+
+#~ msgid ""
+#~ "WP YouTube Lyte inserts \"Lite YouTube Embeds\" in your blog. These look "
+#~ "and feel like normal embedded YouTube, but don't use Flash unless clicked "
+#~ "on, thereby <a href=\"http://blog.futtta.be/2012/04/03/speed-matters-re-"
+#~ "evaluating-wp-youtube-lytes-performance/\" target=\"_blank\">reducing "
+#~ "download size & rendering time substantially</a>. When a video is played, "
+#~ "WP-YouTube-Lyte can either activate <a href=\"http://apiblog.youtube."
+#~ "com/2010/07/new-way-to-embed-youtube-videos.html\" target=\"_blank"
+#~ "\">YouTube's embedded html5-player</a> or the older Flash-version, "
+#~ "depending on the settings below."
+#~ msgstr ""
+#~ "WP YouTube Lyte voegt  \"Lite YouTube Embeds\" toe aan je blog. Die zien "
+#~ "er uit als normale ingebedde YouTube video's, maar laden geen Flash of "
+#~ "HTML5 voordat de bezoeker de video wilt bekijken, waardoor <a href="
+#~ "\"http://blog.futtta.be/2010/08/30/the-state-of-wp-youtube-lyte/\" target="
+#~ "\"_blank\">de hoeveelheid te downloaden informatie verminderd en de "
+#~ "pagina sneller te zien is</a>."
+
+#~ msgid ""
+#~ "You can place video and audio in your posts and pages by adding one or "
+#~ "more http<strong>v</strong> or http<strong>a</strong> YouTube-links to "
+#~ "your post. These will automatically be replaced by WP YouTube Lyte with "
+#~ "the correct (flash-less) code. To add a video for example, you type a URL "
+#~ "like <em>http<strong>v</strong>://www.youtube.com/watch?v=QQPSMRQnNlU</"
+#~ "em> or <em>http<strong>v</strong>://www.youtube.com/playlist?"
+#~ "list=PLA486E741B25F8E00</em> for a playlist. If you want an audio-only "
+#~ "player, you enter <em>http<strong>a</strong>://www.youtube.com/watch?"
+#~ "v=BIQIGR-kWtc</em>. There's more info on the <a href=\"http://wordpress."
+#~ "org/extend/plugins/wp-youtube-lyte/faq/\" target=\"_blank\">wordpress.org "
+#~ "WP YouTube Lyte FAQ page</a>."
+#~ msgstr ""
+#~ "Je kunt video an audio in je blogposts opnemen door http<strong>v</"
+#~ "strong> of http<strong>a</strong>-links in je post te plaatsen. WP "
+#~ "YouTube Lyte zal die automatisch vervangen met de correcte (Flash-loze) "
+#~ "code. Om bijvoorbeeld een nieuwe video toe te voegen, gebruik je iets als "
+#~ "<em>http<strong>v</strong>://www.youtube.com/watch?v=QQPSMRQnNlU</em> of "
+#~ "<em>http<strong>v</strong>://www.youtube.com/playlist?"
+#~ "list=PLA486E741B25F8E00</em> voor een playlist. Wil je enkel audio, dan "
+#~ "vervang je de http\"v\" in http\"a\", bv. <em>http<strong>a</strong>://"
+#~ "www.youtube.com/watch?v=BIQIGR-kWtc</em>. Meer info vind je op de <a href="
+#~ "\"http://wordpress.org/extend/plugins/wp-youtube-lyte/faq/\" target="
+#~ "\"_blank\">wordpress.org WP YouTube Lyte FAQ pagina</a>."
+
+#~ msgid ""
+#~ "You can modify WP-YouTube-Lyte's behaviour by changing the following "
+#~ "settings:"
+#~ msgstr "Je kunt WP YouTube Lyte wijzigen met onderstaande instellingen:"
+
+#~ msgid "Play video in HD if possible?"
+#~ msgstr "Speel indien mogelijk in HD af?"
+
+#~ msgid "No HD, we're smallband!"
+#~ msgstr "Geen HD, graag licht en luchtig"
+
+#~ msgid "Bonus feature: "
+#~ msgstr "Bonus:"
+
+#~ msgid "Disable 3rd party tracking."
+#~ msgstr "Tracking door derden stoppen"
+
+#~ msgid "I don't mind 3rd party tracking (default)"
+#~ msgstr "Laat die derden maar meekijken"

@@ -1,0 +1,485 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP YouTube Lyte v1.5.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-youtube-lyte\n"
+"POT-Creation-Date: 2011-10-12 13:51:40+00:00\n"
+"PO-Revision-Date: 2015-03-30 11:17:25+0200\n"
+"Last-Translator: Mitja Mihelic <mitja@arnes.si>\n"
+"Language-Team: ARNES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: widget.php:130
+#@ wp-youtube-lyte
+msgid "Title:"
+msgstr "Naslov:"
+
+#: widget.php:131
+#@ wp-youtube-lyte
+msgid "Size:"
+msgstr "Velikost:"
+
+#: widget.php:150
+#@ wp-youtube-lyte
+msgid "Type:"
+msgstr "Tip:"
+
+#: widget.php:158
+#@ wp-youtube-lyte
+msgid "audio"
+msgstr "zvok"
+
+#: widget.php:159
+#@ wp-youtube-lyte
+msgid "video"
+msgstr "video"
+
+#: widget.php:163
+#@ wp-youtube-lyte
+msgid "Youtube-URL:"
+msgstr "YouTube URL:"
+
+#: widget.php:164
+#@ wp-youtube-lyte
+msgid "Text:"
+msgstr "Besedilo:"
+
+#: player_sizes.inc.php:17
+#@ wp-youtube-lyte
+msgid "Smaller 4:3 player"
+msgstr "Manjši predvajalnik: razmerje 4:3"
+
+#: player_sizes.inc.php:23
+#@ wp-youtube-lyte
+msgid "Smaller 16:9 player"
+msgstr "Manjši predvajalnik: razmerje 16:9"
+
+#: player_sizes.inc.php:29
+#@ wp-youtube-lyte
+msgid "Standard value, YouTube default for 4:3-ratio video"
+msgstr "Standardna velikost: YouTubova privzeta velikost za video v razmerju 4:3"
+
+#: player_sizes.inc.php:35
+#@ wp-youtube-lyte
+msgid "YouTube default for 16:9-ratio video"
+msgstr "YouTubova privzeta velikost za video v razmerju 16:9"
+
+#: player_sizes.inc.php:41
+#@ wp-youtube-lyte
+msgid "Larger 4:3 player"
+msgstr "Večji predvajalnik: razmerje 4:3"
+
+#: player_sizes.inc.php:47
+#@ wp-youtube-lyte
+msgid "Larger 16:9 player"
+msgstr "Večji predvajalnik: razmerje 16:9"
+
+#: player_sizes.inc.php:53
+#@ wp-youtube-lyte
+msgid "Maxi 4:3 player"
+msgstr "Maksi predvajalnik: razmerje 4:3"
+
+#: player_sizes.inc.php:59
+#@ wp-youtube-lyte
+msgid "Maxi 16:9 player"
+msgstr "Maksi predvajalnik: razmerje 16:9"
+
+#: wp-youtube-lyte.php:186
+#@ wp-youtube-lyte
+msgid "Watch this playlist on YouTube"
+msgstr "Oglej si seznam predvajanja na YouTube"
+
+#: wp-youtube-lyte.php:192
+#@ wp-youtube-lyte
+msgid "Watch this playlist"
+msgstr "Oglej si seznam predvajanja"
+
+#: wp-youtube-lyte.php:192
+#: wp-youtube-lyte.php:204
+#: wp-youtube-lyte.php:208
+#@ wp-youtube-lyte
+msgid "on YouTube"
+msgstr "na Youtube"
+
+#: wp-youtube-lyte.php:199
+#@ wp-youtube-lyte
+msgid "Watch this video on YouTube"
+msgstr "Oglej si posnetek na YouTube"
+
+#: wp-youtube-lyte.php:204
+#: wp-youtube-lyte.php:208
+#@ wp-youtube-lyte
+msgid "Watch this video"
+msgstr "Oglej si posnetek"
+
+#: wp-youtube-lyte.php:204
+#@ wp-youtube-lyte
+msgid "or on"
+msgstr "ali na"
+
+#: options.php:91
+#@ wp-youtube-lyte
+msgid "WP YouTube Lyte Settings"
+msgstr "Nastavitve za WP YouTube Lyte"
+
+#: options.php:136
+#@ wp-youtube-lyte
+msgid "Add links below the embedded videos?"
+msgstr "Dodaj povezave pod vdelan video"
+
+#: options.php:139
+#@ wp-youtube-lyte
+msgid "Show links?"
+msgstr "Prikaži povezave?"
+
+#: options.php:140
+#@ wp-youtube-lyte
+msgid " Add YouTube-link."
+msgstr " Dodaj povezavo na YouTube"
+
+#: options.php:141
+#@ wp-youtube-lyte
+msgid " Add both a YouTube and an <a href=\"http://icant.co.uk/easy-youtube/docs/index.html\" target=\"_blank\">Easy YouTube</a>-link."
+msgstr " Dodaj povezavo na YouTube in na <a href=\"http://icant.co.uk/easy-youtube/docs/index.html\" target=\"_blank\">Easy YouTube</a>"
+
+#: options.php:142
+#@ wp-youtube-lyte
+msgid " Don't add any links."
+msgstr " Ne dodaj povezav"
+
+#: options.php:161
+#@ wp-youtube-lyte
+msgid "Enable HD"
+msgstr "Omogoči HD (širokopasovna povezava)"
+
+#: options.php:198
+#@ wp-youtube-lyte
+msgid "Save Changes"
+msgstr "Shrani spremembe"
+
+#: options.php:207
+#@ wp-youtube-lyte
+msgid "futtta about"
+msgstr "futtta o"
+
+#. translators: plugin header field 'Name'
+#: options.php:209
+#: wp-youtube-lyte.php:0
+#@ wp-youtube-lyte
+msgid "WP YouTube Lyte"
+msgstr "WP Youtube Lyte"
+
+#: options.php:210
+#@ wp-youtube-lyte
+msgid "WordPress"
+msgstr "WordPress"
+
+#: options.php:211
+#@ wp-youtube-lyte
+msgid "Web Technology"
+msgstr "spletnih tehnologijah"
+
+#. translators: plugin header field 'Description'
+#: wp-youtube-lyte.php:0
+#@ wp-youtube-lyte
+msgid "Lite and accessible YouTube audio and video embedding."
+msgstr "Preprosto vstavljanje posnetkov YouTube."
+
+#. translators: plugin header field 'Author'
+#: wp-youtube-lyte.php:0
+#@ wp-youtube-lyte
+msgid "Frank Goossens (futtta)"
+msgstr "Frank Goossens (futtta)"
+
+#. translators: plugin header field 'AuthorURI'
+#: wp-youtube-lyte.php:0
+#@ wp-youtube-lyte
+msgid "http://blog.futtta.be/"
+msgstr "http://blog.futta.be/"
+
+#: options.php:21
+#@ wp-youtube-lyte
+msgid "Your WP YouTube Lyte cache has been succesfully cleared."
+msgstr "Predpomnilnik YouTube Lyte je bil uspešno izpraznjen."
+
+#: options.php:27
+#@ wp-youtube-lyte
+msgid "There was a problem, the WP YouTube Lyte cache could not be cleared."
+msgstr "Napaka, predpomnilnika YouTube Lyte ni bilo mogoče izprazniti."
+
+#: options.php:115
+#: options.php:117
+#@ wp-youtube-lyte
+msgid "Player size"
+msgstr "Velikost predvajalnika"
+
+#: options.php:147
+#@ wp-youtube-lyte
+msgid "Player position:"
+msgstr "Položaj predvajalnika"
+
+#: options.php:151
+#@ wp-youtube-lyte
+msgid "Left"
+msgstr "Levo"
+
+#: options.php:152
+#@ wp-youtube-lyte
+msgid "Center"
+msgstr "Sredinsko"
+
+#: options.php:157
+#@ wp-youtube-lyte
+msgid "Try to force HD (experimental)?"
+msgstr "Skušaj vsiliti HD (poskusno)"
+
+#: options.php:162
+#@ wp-youtube-lyte
+msgid "No HD (default)"
+msgstr "Brez HD (privzeto)"
+
+#: options.php:167
+#@ wp-youtube-lyte
+msgid "Add microdata?"
+msgstr "Dodaj mikropodatke"
+
+#: options.php:171
+#: options.php:181
+#@ wp-youtube-lyte
+msgid "Yes (default)"
+msgstr "Da (privzeto)"
+
+#: options.php:172
+#@ wp-youtube-lyte
+msgid "No microdata, thanks."
+msgstr "Brez mikropodatkov"
+
+#: options.php:187
+#@ wp-youtube-lyte
+msgid "Empty WP YouTube Lyte's cache"
+msgstr "Izprazni predpomnilnik YouTube Lyte"
+
+#: options.php:215
+#@ wp-youtube-lyte
+msgid "Do not donate for this plugin!"
+msgstr "Brez donacij, prosim!"
+
+#: player_sizes.inc.php:11
+#@ wp-youtube-lyte
+msgid "Mini 16:9 player"
+msgstr "Mini predvajalnik: razmerje 16:9"
+
+#. translators: plugin header field 'PluginURI'
+#: wp-youtube-lyte.php:0
+#@ wp-youtube-lyte
+msgid "http://blog.futtta.be/wp-youtube-lyte/"
+msgstr "http://blog.futtta.be/wp-youtube-lyte/"
+
+#: options.php:150
+#@ wp-youtube-lyte
+msgid "Left, center or right?"
+msgstr "Levo, sredinsko ali desno?"
+
+#: options.php:160
+#@ wp-youtube-lyte
+msgid "HD or not?"
+msgstr "HD ali ne?"
+
+#: options.php:170
+#@ wp-youtube-lyte
+msgid "Add video microdata to the HTML?"
+msgstr "Dodaj mikropodatke v HTML?"
+
+#: options.php:177
+#: options.php:180
+#@ wp-youtube-lyte
+msgid "Also act on normal YouTube links?"
+msgstr "Deluj tudi za običajne YouTube povezave"
+
+#: options.php:182
+#@ wp-youtube-lyte
+msgid "No thanks."
+msgstr "Ne"
+
+#. translators: plugin header field 'Version'
+#: wp-youtube-lyte.php:0
+#@ wp-youtube-lyte
+msgid "1.5.0"
+msgstr ""
+
+#: options.php:140
+#@ wp-youtube-lyte
+msgid "Show YouTube-link"
+msgstr "Prikaži YouTube povezavo"
+
+#: options.php:142
+#@ wp-youtube-lyte
+msgid "Don't include links."
+msgstr "Ne prikaži YouTube povezave"
+
+#: options.php:161
+#@ wp-youtube-lyte
+msgid "Enable HD?"
+msgstr "Omogoči predvajanje v HD"
+
+#: options.php:162
+#@ wp-youtube-lyte
+msgid "Don't enable HD playback"
+msgstr "Onemogoči predvajanje v HD"
+
+#: options.php:171
+#@ wp-youtube-lyte
+msgid "Sure, add microdata!"
+msgstr "Da, dodaj mikropodatke"
+
+#: options.php:172
+#@ wp-youtube-lyte
+msgid "No microdata in my HTML please."
+msgstr "Na spletišču ne želim mikropodatkov"
+
+#: options.php:181
+#@ wp-youtube-lyte
+msgid "That would be great!"
+msgstr "Da, deluj tudi za običajne YouTube povezave"
+
+#: options.php:61
+#@ wp-youtube-lyte
+msgid "For WP YouTube Lyte to function optimally, you should enter an YouTube API key "
+msgstr "Za najboljše delovanje vtičnika je priročljivo, da vpišete ključ za YoutTube API. "
+
+#: options.php:63
+#@ wp-youtube-lyte
+msgid "in the settings screen."
+msgstr " v nastavitvah."
+
+#: options.php:76
+#@ wp-youtube-lyte
+msgid "WP YouTube Lyte got the following error back from the YouTube API: "
+msgstr "YouTube API je vrnil naslednjo napako: "
+
+#: options.php:104
+#@ wp-youtube-lyte
+msgid "Please enter your YouTube API key."
+msgstr "Vpišete vaš ključ za YouTube API."
+
+#: options.php:105
+#@ wp-youtube-lyte
+msgid "API key"
+msgstr "API ključ"
+
+#: options.php:105
+#@ wp-youtube-lyte
+msgid "Test Key"
+msgstr "Preveri ključ"
+
+#: options.php:107
+#@ wp-youtube-lyte
+msgid "WP YouTube Lyte uses YouTube's API to fetch information on each video. For your site to use that API, you will have to <a href=\"https://console.developers.google.com/project/\" target=\"_blank\">register your site as a new application</a>, enable the YouTube API for it and get a server key and fill it out here."
+msgstr "Vtičnik prek YouTube APIja pridobi informacijo za vsak posnetek. Da bi na vašem spletišču lahko uporabili YouTube API, <a href=\"https://console.developers.google.com/project/\" target=\"_blank\">registrirajte vaš spletišče kot novo aplikacijo</a>, zanjo omogočite YouTube API, pridobite ključ in ga vpišite v zgornje polje."
+
+#: options.php:110
+#@ wp-youtube-lyte
+msgid "Great, your YouTube API key has been taken care of!"
+msgstr "Odlično! Vaš ključ za YouTube API je bil uspešno vpisan."
+
+#: options.php:182
+#@ wp-youtube-lyte
+msgid "No, I'll stick to httpv or shortcodes."
+msgstr "Ne, deluj le za httpv, httpa in kratke kode."
+
+#: options.php:204
+#@ wp-youtube-lyte
+msgid "Happy with WP YouTube Lyte? Try my other plugins!"
+msgstr "Vam je vtičnik WP YouTube Lyte všeč? Preizkusite še ostale moje vtičnike."
+
+#: options.php:229
+#@ wp-youtube-lyte
+msgid "Checking your key ..."
+msgstr "Preverjanje ključa ..."
+
+#: options.php:243
+#@ wp-youtube-lyte
+msgid "That does not seem to be a correct API key!"
+msgstr "Vnesli ste napačen API ključ!"
+
+#: options.php:284
+#@ wp-youtube-lyte
+msgid "API seems OK, you can Save Changes below now."
+msgstr "API ključ je veljaven. Zdaj lahko shranite nastavitve."
+
+#: options.php:286
+#@ wp-youtube-lyte
+msgid "API key not OK, your key seems to "
+msgstr "Napaka pri API ključu. "
+
+#: options.php:289
+#@ wp-youtube-lyte
+msgid "be invalid."
+msgstr "Vpisani ključ ni veljaven."
+
+#: options.php:292
+#@ wp-youtube-lyte
+msgid "be valid, but restricted to an IP-address which is not your server's."
+msgstr "Ključ je veljaven, a je omejen na naslov IP, ki pa ni vaš strežnik."
+
+#: options.php:293
+#@ wp-youtube-lyte
+msgid "Try changing the allowed IP for your API key to include this one: "
+msgstr "Poskusite spremeniti dovoljene naslove IP na naslednjega: "
+
+#: options.php:297
+#@ wp-youtube-lyte
+msgid "have expired, please check in the Google Developer Console."
+msgstr "Ključ je potekel. Preverite ga na Google Developer Console."
+
+#: options.php:303
+#@ wp-youtube-lyte
+msgid "be correct, but seems to have exceeded the number of requests that can be made with it."
+msgstr "Ključ je pravilen, a videti je, da je število zahtevkov, ki jih sme opraviti, preseženo."
+
+#: options.php:306
+#@ wp-youtube-lyte
+msgid "probably work, but as the video with id "
+msgstr "Ključ verjetno deluje. Žal posnetek z IDjem "
+
+#: options.php:308
+#@ wp-youtube-lyte
+msgid " was not found we cannot be sure, please try again."
+msgstr "ni bil najden, zato ga ni bilo mogoče preveriti. Poskusite ponovno."
+
+#: options.php:311
+#@ wp-youtube-lyte
+msgid "be faulty, with YouTube API returning reason: "
+msgstr "Ključ je napačen. YouTube API je vrnil napako: "
+
+#: options.php:316
+#@ wp-youtube-lyte
+msgid "Something went wrong, WP YouTube Lyte might not have been able to retrieve information from the YouTube API, got error: "
+msgstr "Prišlo je do napake. Vtičnik ni mogel pridobiti podatkov prek YouTube APIja. "
+
+#: wp-youtube-lyte.php:586
+#@ wp-youtube-lyte
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: options.php:98
+#@ wp-youtube-lyte
+msgid "Your YouTube API key:"
+msgstr "Vaš ključ za YouTube API:"
+
+#: options.php:141
+#@ wp-youtube-lyte
+msgid "Show YouTube and Easy YouTube link"
+msgstr "Dodaj povezavo na YouTube in na Easy YouTube"
+

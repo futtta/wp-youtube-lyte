@@ -1,0 +1,1202 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "WP YouTube Lyte"
+msgstr ""
+
+#. Short description.
+msgid "High performance YouTube video, playlist and audio-only embeds which don&#039;t slow down your blog and offer optimal accessibility."
+msgstr ""
+
+#. Found in description list item.
+msgid "httpv://www.youtube.com/watch?v=_SQkWbRublY (normal video embed)"
+msgstr ""
+
+#. Found in description list item.
+msgid "httpv://youtu.be/_SQkWbRublY (video embed with youtube-shortlink)"
+msgstr ""
+
+#. Found in description list item.
+msgid "httpa://www.youtube.com/watch?v=_SQkWbRublY (audio only embed)"
+msgstr ""
+
+#. Found in description list item.
+msgid "httpv://www.youtube.com/playlist?list=PLA486E741B25F8E00 (playlist embed)"
+msgstr ""
+
+#. Found in description list item.
+msgid "httpv://www.youtube.com/watch?v=_SQkWbRublY#stepSize=-1 (video player, one size smaller than what's configured as default)"
+msgstr ""
+
+#. Found in description list item.
+msgid "httpv://www.youtube.com/watch?v=_SQkWbRublY?start=20&amp;showinfo=0 (video player, start playing at 20 seconds and don't show title)"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "WP YouTube Lyte allows you to \"lazy load\" your video's, by inserting responsive \"Lite YouTube Embeds\". These look and feel like normal embedded YouTube, but only call the actual \"fat\" Flash or HTML5-player when clicked on, thereby <a href=\"http://blog.futtta.be/2012/04/03/speed-matters-re-evaluating-wp-youtube-lytes-performance/\">reducing download size &amp; rendering time substantially</a> when embedding YouTube occasionally and improving page performance dramatically when you've got multiple YouTube video's on one and the same page."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Just add a YouTube-link for a video or <a href=\"http://blog.futtta.be/2011/10/11/wp-youtube-lyte-support-for-playlists-almost-included/\">an entire playlist</a> with \"httpv\" (or \"httpa\" to <a href=\"http://blog.futtta.be/2011/04/19/audio-only-youtube-embedding-with-wp-youtube-lyte-0-7/\">embed YouTube's audio</a> only) instead of \"http\" or add a Lyte widget to your sidebar and WP YouTube Lyte replaces that link with the correct performance-optimized code. When a visitor clicks the play-button, WP YouTube Lyte seamlessly initiates <a href=\"http://apiblog.youtube.com/2010/07/new-way-to-embed-youtube-videos.html\">YouTube's new embedded player</a>. Some examples:"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Or using shortcodes:"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "As from 1.5.0 WP YouTube Lyte can also parse normal YouTube links (i.e. without httpv or not using lyte shortcodes). This feature can be enabled and disabled in the settings-page."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "WP YouTube Lyte has been written with optimal performance as primary goal, but has been tested for maximum browser-compatibility (iPad included) while keeping an eye on accessibility. Starting with version 1.2.0 lyte embeds are fully responsive and can automatically embed <a href=\"http://support.google.com/webmasters/bin/answer.py?hl=en&amp;answer=2413309\">videoObject microdata</a> as well. The plugin is fully multi-language, with support for Catalan, Dutch, English, French, German, Hebrew, Romanian, Spanish and Slovene."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Feedback is welcome; see <a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/faq/\">info in the faq</a> for bug reports/ feature requests and feel free to <a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/\">rate and/or report on compatibility on wordpress.org</a>."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the zip-file and unzip it in the <code>/wp-content/plugins/</code> directory"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Place a link to a YouTube clip like this; httpv://www.youtube.com/watch?v=_SQkWbRublY"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "Just install form your Wordpress \"Plugins|Add New\" screen and all will be well. Manual installation is very straightforward as well:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated to latest YouTube UI, again thanks to Draikin. the bottom control is now hidden by defaults, see FAQ"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added filter <code>lyte_do_mobile</code> to display lyte video instead of normal youtube on mobile as well, see FAQ"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "if WP YouTube Lyte is configured to load HD video, it will also show the maxresdefault.jpg thumbnail."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: on some mobile browsers WP YouTybe Lyte <a href=\"https://wordpress.org/support/topic/mobil-page-view-only-covering-14-size?replies=11#post-7328487\">made the page too wide</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changed Lyte widget constructor to PHP5-style object contructor"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested &amp; confirmed working with WordPress 4.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improvement: youtube playlist URL will now be recognized automatically and rendered LYTE as well (hat tip to <a href=\"https://wordpress.org/support/topic/playlist-recognition-possible\">markothaler for proposing this</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improvement: enter \"none\" in API key not to be bothered by the missing key notice any more (as <a href=\"https://wordpress.org/support/topic/remove-notice-in-backend\">requested by TheGiantRedFox1986</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improvement: if no API key (or \"none\" for key) is provided, don't try to contact YouTube any more, instead just setting a thumbnail (does not work for playlists)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "cleanup: removed code that catered to YouTube API v2."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated French translations (merci Serge!)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix for WP YouTube Lyte widgets not loading"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "New: support for YouTube API v3, requiring a server API key to be provided (due to <a href=\"http://blog.futtta.be/2015/01/27/wp-youtube-lyte-and-youtube-api-v2-end-of-life/\">YouTube closing down the anonymous v2 API</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "New: updated player UI by Draikin, great job!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improvement: better support for renamed wp-content directories (kudos to <a href=\"https://wordpress.org/support/topic/plugin-doesnt-work-in-custom-plugins-dir\">Wendihihihi</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added Slovenian translation by <a href=\"http://arnes.si\">Mitja Mihelič or arnes.si</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated Dutch &amp; French translations, <a href=\"http://blog.futtta.be/contact/\">others are more then welcome</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "New: WP YouTube Lyte can now also act on normal YouTube URL's. This behavior is by default active on new installations and is by default off for upgrades (from 1.4.x) to avoid unexpected behavior."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improvement (API): apply lyte_settings filter after after_setup_theme actoin as <a href=\"http://blog.futtta.be/wp-youtube-lyte/#comment-61923\">proposed by Yun</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improvement (API): added lyte_match_thumburl filter to set thumbnail as <a href=\"https://wordpress.org/support/topic/hqthumb1-not-reflecting-on-playlists-in-custom-fields?replies=6#post-5861751\">requested by Simon Barnett</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: for audio-only player make title visible to improve accessibility (for screenreaders) as <a href=\"http://blog.futtta.be/wp-youtube-lyte/#comment-61928\">requested</a> by <a href=\"http://www.nemoviz.org/\">Octocorn</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: some playlists were not working, as <a href=\"https://wordpress.org/support/topic/individual-playlist-not-working\">reported by jpress</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated most translations, added Ukranian (by <a href=\"http://getvoip.com/blog\">Michael Yunat of getvoip.com</a> and Serbian <a href=\"http://firstsiteguide.com/\">by Ogi Djuraskovic of firstsiteguide.com</a>, kudo's to all who helped!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: Playlists in rss-feeds were broken"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: YouTube-link under a playlist was wrong"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improvement: example code in lyte_helper.php to also parse http-youtube-links now only triggers if the link is on a new line"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Tested with WordPress 3.9"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "set interval for captionscheck to 30 days"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new: if microdata is enabled, check if captions are available and if so add the accessibilityFeature=captions markup. Gracefully contributed <a href=\"http://benetech.org/\">by Benetech</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: widgets with youtu.be short URL's were broken (as observed by <a href=\"http://www.audio-times.com/\">Robert of audio-times.com</a>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: in some cases iframe size on mobile was not correct (reported by <a href=\"http://www.webquarry.com/\">David of webquarry.com</a>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: mobile rotation handled more efficiently (based on <a href=\"http://wordpress.org/support/topic/rotation-bug-on-iphoneipad#post-5102835\">feedback from Skyfield</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix for playlist shortcode as <a href=\"http://wordpress.org/support/topic/playlist-via-shortcode-broken\">reported by pete777</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix for mobile orientation-change bug <a href=\"http://wordpress.org/support/topic/rotation-bug-on-iphoneipad\">described by Kevinlikes</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fix for better html-validation as <a href=\"http://wordpress.org/support/topic/validatorw3-error\">requested by Kevinlikes</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested and confirmed working with WordPress 3.7"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added \"Do not Donate\"-link"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added playlist support in the WP YouTube Lyte widget (forget to add it really, thanks to <a href=\"http://www.sinthomedia.com/\">Ed Dingwall</a> to remind me)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added an alternative lytesprite version, created by <a href=\"http://pcplay.se/\">Claes from PCPLAY.se</a>. To switch, rename lyte/lytesprite.png to lyte/lytesprite_orig.png and then rename lyte/lytesprite_claes.png to lyte/lytesprite.png."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed some PHP notices in widget.php"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Workaround for broken audio-only on mobile (due to YouTube not showing bottom controls when iOS or Android is detected) as reported by <a href=\"http://wordpress.org/support/topic/audio-embed-is-a-black-bar-on-iphone\">stevygee1987</a>. Result; audio-only YouTube becomes a normal YouTube video on mobile <a href=\"http://stackoverflow.com/questions/18273658/embedded-yt-on-mobile-autohide-0controls-1-but-controls-invisible\">until a better solution can be found</a>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added extra check to prevent plugin-files being called outside of WordPress <a href=\"http://mikejolley.com/2013/08/keeping-your-shit-secure-whilst-developing-for-wordpress/\">as suggested in this good article on security</a>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "WP YouTube Lyte now has an API to allow its behavior to be changed, with extensive examples in lyte_helper.php_example"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Support for higher quality thumbnails by adding #hqThumb=1 to httpv-link"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "You can disable microdata on a per-video level by adding #noMicrodata=1 to the httpv-link when microdata is enabled."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Checkbox on admin-page to flush WP YouTube Lyte cache (which holds title, description, ... from YouTube)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added a lyte_preparse function to be used by themes/ plugins (input is the YouTube ID)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improvement: added opacity to the play-button when not hovered over"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: suppress error messages if yt_resp does not contain all data"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: solve PHP notice for pS-array in options.php"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: apply sanitize_text_field to microdata description- and title-fields to escape e.g. quotes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: added CSS resets to better avoid CSS-conflicts with themes (as reported by longtime user <a href=\"http://fruityoaty.com/\">FruityOaty</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: fallback for missing wp_trim_words function in wordpress &lt; 3.3 (as reported by <a href=\"http://www.armudepictures.es/\">Armude</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: check if the data from cache/ youtube is valid before trying to extract info from it <a href=\"http://blog.futtta.be/2013/03/01/the-best-wp-youtube-lyte-to-date/#li-comment-39222\">as reported by Collin</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improvement: better support for RSS/ ATOM feeds <a href=\"http://wordpress.org/support/topic/textlinks-around-embedded-video-in-rss-feed\">as requested by drreen</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added item in FAQ on how to force normal YouTube links to be parsed by WP YouTube Lyte as well"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested with WordPress 3.6 beta 1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: if e.g. modernizr added \"audio\" as class to the html element, wp youtube lyte got confused. reported by <a href=\"http://www.dubtechnoblog.com/\">Peco of dubtechnoblog.com</a> and <a href=\"http://delphuk.ru/\">Delphuk</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested succesfully with WordPress 3.6 (development-version)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "LYTE embeds are now fully responsive"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "automatic inclusion of <a href=\"http://support.google.com/webmasters/bin/answer.py?hl=en&amp;answer=2413309\">scheme.org microdata (VideoObject)</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "even better performance (less requests; was 5, now 3)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated to current YouTube look &amp; feel"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "less JavaScript, more CSS"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: all lyte-output is now removed from excerpts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "privacy enhancement: load thumbnails from the cookie-less i.ytimg.com instead of from the cookie-riddled youtube.com (but there are some caveats, <a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/faq/\">see FAQ</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: the fullscreen-button did not always appear when playing a video, added the \"allowfullscreen\" attribute to the iframe (as in the most recent youtube embed code)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "still <a href=\"http://blog.futtta.be/2012/10/16/wp-youtube-lyte-waiting-for-the-big-leap-forwards/\">waiting for the big leap forwards (responsive LYTE and custom sizes) I'm afraid</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: <a href=\"http://apiblog.youtube.com/2012/08/playlists-now-with-more-pl.html\">playlists API changed: playlists can now have ID's of more than 16 chars and always should be prepended with PL</a>, which broke playlist rendering. Hat tip for the guys over at <a href=\"http://www.dubtechnoblog.com\">dubtechnoblog.com</a> for reporting!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: further work on excerpts to make sure http(v|a) links in manual excerpts get replaced by a lyte player."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: 1.1.6 broke excerpts, as reported by Franz of <a href=\"http://www.noobtech.at\">noobtech.at</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: remove noscript-stuff from the_excerpt <a href=\"http://wordpress.org/support/topic/plugin-wp-youtube-lyte-wp-youtube-lyte-adds-text-to-my-posts?replies=8#post-2977006\">as requested by wordpressvoxbox13</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: switch HTTPS detection to is_ssl() WordPress function to avoid breakage on MS IIS"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "removed the \"DoNotTrack\" bonus feature due to added complexity, <a href=\"http://wordpress.org/support/topic/wp-youtube-lyte-conflicts-with-wysija-newsletter\">at least one bug</a> and the fact that <a href=\"http://wordpress.org/extend/plugins/wp-donottrack/\">WP DoNotTrack</a> does a better job at this"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: added missing lyte/controls-400.png, which was needed for the new widget-size in 1.1.4"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: force margin for widget to 0 for themes that think they know better (as reported by long-time user <a href=\"http://fruityoaty.com/\">FruityOaty</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: workaround for iOS quirk that caused the video to only start after 2nd click (as reported by Robert of <a href=\"http://audio-times.com\">audio-times.com</a> and <a href=\"http://www.realsceptic.com/\">Collin Maessen</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: add sizes to images as <a href=\"http://wordpress.org/support/topic/plugin-wp-youtube-lyte-specify-img-dimensions\">suggested by elmll on the wordpress.org forum</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "beta: shortcode (see <a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/\">Description</a> for examples) as <a href=\"http://wordpress.org/support/topic/plugin-wp-youtube-lyte-shortcode-custom-class\">suggested by ben4d85 on the wordpress.org forum</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: audio-only youtube was broken due to changes at YouTube (thanks for reporting <a href=\"http://www.yeahlabs.ca/\">Adrian</a>!)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: playlist embedding was somewhat broken (again due to changes at YouTube)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: httpv- or httpa- links were only found if the v-parameter was at the beginning of the querystring (as discovered by <a href=\"http://virtualassistanttipsthatmatters.com/\">Mye</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added 2 new widget sizes (250X200px and 400X333px)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new: Player position can now be set to \"left\" (default) or \"center\"."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "YouTube bugfix: playlist player should now <a href=\"http://apiblog.youtube.com/2012/03/new-player-options-for-lists-of-videos.html\">also work on iphone/ipad</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "YouTube TOS change: official <a href=\"http://apiblog.youtube.com/2012/03/minimum-embeds-200px-x-200px.html\">minimal embed size is now 200X200</a>, created new widget size for that and marked others as deprecated"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: recent version of <a href=\"http://support.addthis.com/customer/portal/questions/216309-getelementsbyclassname-error-appearing\">AddThis caused problems with getElementsByClassName</a>, which impacted WP YouTube Lyte as reported by <a href=\"http://nocotytato.org.pl/\">nocotytato</a>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix for mixed HTTP/HTTPS resources while in HTTPS admin (as reported for <a href=\"http://wordpress.org/extend/plugins/wp-donottrack/\">WP DoNotTrack</a> by Paul Martinus)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested and confirmed to work with WordPress 3.4 (beta 2)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: during development of 1.1.0 the javascript to lazy load the lyte player got lost somehow, readded (now in lyte(-min).js)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "performance: replaced the external stylesheet (lyte.css) with inline javascript that adds an internal stylesheet to the head of the document (thanks for pushing me <a href=\"http://www.realsceptic.com/\">Collin</a>!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: lyte css wasn't applied as class was already removed (regression caused by \"Infinite Scroll\" support), lyMe now is the name of the unprocessed div and becomes lyte after processing"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "performance: <a href=\"http://blog.futtta.be/2012/03/20/going-against-the-reflow/\">minimizing reflows caused by amongst others how styles are applied</a> (kudo's to <a href=\"http://tuxproject.de/blog\">\"der Tuxman\"</a> again, buy that man a beer!)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated LYTE-player UI: larger display of preview image, changed look of title placeholder, updated controls image"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new: added support for \"Infinite Scroll\" as proposed by <a href=\"http://tuxproject.de/blog\">\"der Tuxman\"</a> and <a href=\"http://www.wwebsolution.com/hemisphere\">Olivier</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new: added beta-support for YouTube's JS API as requested by Yun"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "performance: remove double DOM-lookups in javascript, hat tip Yun"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "annoyance-avoidance: check for \"Karma Blocker\" addon and warn, based on feedback from <a href=\"http://www.tinuum.net/\">Leona</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "translation: added Romanian, thanks to Alexander and <a href=\"http://webhostinggeeks.com/\">Web Hosting Geeks</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: 2nd video with start or showinfo parameters inherited the ones from the 1st one as well as reported by Josh D"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: marked lyte img border css as !important"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: moved inline javascript (for each lyte-div) to the footer of the page to solve conflict with some jQuery plugins in MSIE as reported by Yun"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: set autohide to false for audio-only embeds"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new: also works on (manual) excerpts; just add a httpv link to the \"excerpt\" field on the post/page admin (based on feedback from <a href=\"http://www.tuttingegneri.com\">Ruben@tuttingegneri</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new: if youtube-url contains \"start\" or \"showinfo\" parameters, these are used when playing the actual video. This means that you can now jump to a specific time in the YouTube video or stop the title/ author from being displayed (based on feedback from a.o. Miguel and Josh D)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "update: javascript now initiates either after full page load or after 1 second (whatever comes first), thus avoiding video not showing due to other requests taking too long"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "update: bonus feature stops lockerz.com tracking by addtoany (you'll still want to <a href=\"http://share.lockerz.com/buttons/customize/hide_lockerz_earn_ptz_tab\">hide the \"earn pointz\" tab though</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: prevent the playing video to be in front of e.g. a dropdown-menu or lightbox (thanks to Matt Whittingham)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: solve overlap between player and text when option was set not to show links (reported by Josh D)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "security: WP YouTube Lyte now works entirely in https if your blog is running in https"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "performance (js/ page rendering): initiate the javascript a little later (at \"load\" instead of \"DOMContentLoaded\") to speed up page load (might need further optimizations)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "performance (php): have the plugin <a href=\"http://w-shadow.com/blog/2009/02/22/make-your-plugin-faster-with-conditional-tags/\">only include/ execute php when needed</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated donottrack.js to match the version used in my <a href=\"http://wordpress.org/extend/plugins/wp-donottrack/\">WP DoNotTrack-plugin</a>. if want to tweak the way donottrack.js functions, you migth want to <a href=\"http://wordpress.org/extend/plugins/wp-donottrack/\">check that plugin out</a> (and disable the option in WP YouTube Lyte)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: small tweak in css to force transparency of play-button"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: donottrack.js incorrectly handled document.write, causing javascript that depends on it to malfunction (reported by <a href=\"http://aimwa.in\">S.K.</a>, thanks for helping out!)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: moved inline javascript into a function expression to protect values (d=document) from other javascript that might use global variables (thanks to Eric McNiece of <a href=\"http://emc2innovation.com\">emc2innovation.com</a> for reporting &amp; investigating)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: made changes to widgets to allow a video to appear both in a blog post and in the widget bar and to allow httpv-links in there (although httpv is not needed in widgets) based on feedback from <a href=\"http://nicktann.co.uk/\">Nick Tann</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: changed priority of add_filter to ensure wp-youtube-lyte can work alongside of the new Smart Youtube Pro v4 (although this might become a problem again if/when a new version of Smart Youtube arrives)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Languages: added a full French translation (thanks Serge of <a href=\"http://www.blogaf.org\">blogaf.org</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "solved bug with W3 Total Cache where the URL for lyte-min.js got broken (thanks to Serge of <a href=\"http://www.blogaf.org\">blogaf.org</a> for reporting and helping figure this out)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "some <a href=\"http://blog.futtta.be/2011/11/16/applying-javascript-aop-magic-to-stop-3rd-party-tracking-in-wordpress/\">work on the bonus feature</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "even better xhtml-compliancy"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed readme.txt problems"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "you can now change player size from the default one (as proposed by <a href=\"http://www.edwardlowen.com/\">Edward Owen</a>); httpv://www.youtube.com/watch?v=_SQkWbRublY#stepSize=-2 or httpv://youtu.be/_SQkWbRublY#stepSize=+1 will change player size to one of the other available sizes in your choosen format (4:3 or 16:9)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added a smaller 16:9 size and re-arranged player sizes on the options-screen"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: changed lyte-div ID to force it to be xhtml-compliant (ID's can't start with a digit, hat tip: Ruben of <a href=\"http://ytuquelees.net\">ytuquelees.net</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: added version in js-call to avoid caching issues (lyte-min.js?ver=0.8.1) as experienced by some users and reported by <a href=\"http://www.givemeshred.com\">Ryan of givemeshred.com</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Upgrade to the \"bonus feature\" to <a href=\"http://blog.futtta.be/2011/11/07/wp-privacy-quantcast-sneaks-back-in/\">fix things</a> (consider this beta)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Languages: added Hebrew (by <a href=\"http://www.sagive.co.il/\">Sagive SEO</a>) and Catalan (by Ruben of <a href=\"http://ytuquelees.net\">ytuquelees.net</a>) translations and added completed Spanish version (thanks to <a href=\"http://socialmediatravelers.com/\" title=\"Paulino Brener from Social Media Travelers, Your guide to your Social Media journey. We help businesses start or improve their Social Media presence.\">Paulino Brener from Social Media Travelers</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested succesfully on WordPress 3.3 (beta 2)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added support for playlists"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added support for HD"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "dropped support for the legacy YouTube embed-code"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated UI elements to match new, dark YouTube player style"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated player sizes to match YouTube's"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added new translations: Spanish (front-end strings, thanks to <a href=\"http://socialmediatravelers.com/\">Paulino Brener @Social Media Travelers</a>) and German (complete, by <a href=\"http://tuxproject.de/blog\">\"der Tuxman\"</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "sdded support for youtu.be links"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added sl_SI translation (thanks <a href=\"http://www.arnes.si/\">Mitja Miheli&#268; @arnes.si</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "load donottrack js in https if needed (thanks <a href=\"http://campino2k.de/\">Chris @campino2k.de</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested &amp; confirmed to work perfectly with wordpress 3.2.1"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed a bug introduced in 0.7.1 which caused httpv-links that were not on newline, not to be turned into a lyte-player"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added audio as option for widgets as well (consider this beta, not thoroughly tested yet)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "re-minized lyte-min.js (there's lyte.js for your reading pleasure though)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "thumbnail image in noscript-tags now inherits size of div (to keep it from messing up the layout when JS is not available, e.g. in a feedburner-feed)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "the html5 version of the audio-player now is a bit higher (was 27px, now 33px) to allow scrolling through the clip"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "the html-output of the plugin now validates against xhtml 1.0 transitional (thanks for the heads-up Carolin)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "text in frontend (i.e. what your visitors see) is translated into Dutch &amp; French, <a href=\"http://blog.futtta.be/contact/\">corrections and other translations are welcome</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "new feature (as seen <a href=\"http://pitchfork.com/\" title=\"great site for music lovers\">on Pitchfork</a>): <a href=\"http://blog.futtta.be/2011/04/19/audio-only-youtube-embedding-with-wp-youtube-lyte-0-7/\">audio-only YouTube embeds</a> (use \"httpa://\" instead of \"httpv://\")"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "merged lyte-min.js and lyte-newtube-min.js into one file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added wmode=transparant when video is played in flash-mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "updated images for html5-version to new look&amp;feel"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "disabled \"watch later\" by adding variable \"probably_logged_in=false\" to youtube embed"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changed lyte/lyte.css (move margin from .lt to .lyte) to allow changes to positioning of player"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changed name of js-variable in options.php to solve small bug in rss display"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added an (experimental) bonus feature"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "happy New Year &amp; thanks for the 10.000 downloads so far!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "solved an <a href=\"http://wordpress.org/support/topic/plugin-wp-youtube-lyte-parse_url-error-in-widget-version\">issue with pre-5.2.1 versions of PHP which caused errors in widget.php</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested on iPad, the HTML5-version works"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested succesfully on WordPress 3.0.4 and 3.1 (release candidate)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "only load jquery plugins on this plugin's options page"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "change thumbnail positiong slightly (5 pixels up)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested on WordPress 3.0.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: the javascript in widgets.php caused a wp youtube lyte widget not to be shown in the sidebar if no wp youtube lyte was present in the main content"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "load jquery plugins in admin screen using wp_enqueue_script rather then adding them \"manually\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "store the selected feed on the admin-page in a cookie to show the same feed next time"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "widget size can now be set (3 sizes available, to be specified for each widget individually)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "admin-page now contains links to most recent info (blogposts) on WP YouTube Lyte (and optionally WordPress and Web Technology in general) using <a href=\"http://www.zazar.net/developers/zrssfeed/\">the excellent jQuery-plugin zrssfeed</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "bugfix: removed CDATA-wrapper from javascript as WordPress turned ]]&gt; into ]]&amp;gt; which broke the html (which in turn broke syndication in e.g. planets)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "There now is a WP-YouTube-Lyte widget which you can add to your sidebar (see under \"Appearance\"-&gt;\"Widgets\"), as requested by the fabulous <a href=\"http://fruityoaty.com/\">fruityoaty</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "The thumbnail is now stretched to use as much of the player as possible (thanks to css3's background-size:contain directive, which works in <a href=\"https://developer.mozilla.org/en/CSS/background-size#Browser_compatibility\">all bleeding edge browsers</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated the \"play\"-button to fit the new YouTube style"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "we now wait for the DOM to be fully loaded (except for MS IE, where we have to wait for window.load) before kicking in, which means wp-youtube-lyte now functions correctly in Opera"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed a bug where lyte's javascript would overwrite the main div's class-name (causing css-issues in some themes)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "there's <a href=\"http://blog.futtta.be/2010/08/30/the-state-of-wp-youtube-lyte/\">new test-data on my blog</a> that shows how fast wp-youtube-lyte really is."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed a bug where WordPress' the_excerpt function showed wp-youtube-lyte javascript as text in excerpts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed problem where google tried to index e.g. options.php (which produced ugly php errors)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed some css-related bugs, do contact me (see FAQ) if LYTE-player isn't rendered correctly in your wordpress-theme!"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "moved more css out of javascript to the static css-file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added new versions of images, fitting the player width (no more ugly rescaling)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "moved a lot of css from javascript to a css-file which gets loaded on-the-fly"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "implemented the new <a href=\"http://apiblog.youtube.com/2010/07/new-way-to-embed-youtube-videos.html\">HTML5 YouTube embed code</a> and removed my <a href=\"http://blog.futtta.be/2010/06/16/embedding-html5-youtube-video-with-wp-youtube-lyte/\">newTube.js-hack</a> for html5-embedding"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "player size now applies to Flash- and the new HTML5-embeds"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add fullscreen-button to player"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "disable size in options if html5 is selected"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "move player_sizes.inc to player_sizes.inc.php"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "add options to change player size (does not apply to html5-version)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "noscript optimizations: show image (typically useful in rss-feeds), no text if config is to show links beneath lyte-player"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "changed function-name in options.php to avoid errors like \"Fatal error: Cannot redeclare register_mysettings()\""
+msgstr ""
+
+#. Found in changelog list item.
+msgid "tested succesfully on the brand new wordpress 3.0 release"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "css changes to avoid themes messing up lyte-player layout"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "minor text tweaks"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "the \"sorry for the linebreak-release\"; a linebreak at the very end of options.php caused some configurations <a href=\"http://codex.wordpress.org/FAQ_Troubleshooting#How_do_I_solve_the_Headers_already_sent_warning_problem.3F\">to produce \"headers already sent\" errors on all wp-admin pages</a>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "some further readme.txt optimizations"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "fixed misc. readme.txt markdown issues (again)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added very experimental support for embedded html5 video (see <a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/faq/\">faq</a>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "improved the html of the form in options.php for better accessibility"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "0.2.0 was broken (options.php M.I.A.), 0.2.1 fixes this"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added a simple admin-page to allow administrators to choose if links to YouTube and Easy YouTube are added or not"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added some bottom-margin to the lytelinks div"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "forgot to update version in the php-file for 0.1.3, causing the update not being fully propageted"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "small bugfix release (opacity of the play-button in Chrome/Safari)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added alt attributes to images"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "moved youtube link from noscript to div"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "added link to easy youtube"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Changed meta-info in readme and php-file"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Initial version"
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid "Accessibility enhancements (hat tip: Ricky Buchanan):"
+msgstr ""
+
+#. Found in faq header.
+msgid "Why does WP YouTube Lyte need to access the YouTube API? What is an API anyway?"
+msgstr ""
+
+#. Found in faq header.
+msgid "What is an API key and why does WP YouTube Lyte need one all of a sudden?"
+msgstr ""
+
+#. Found in faq header.
+msgid "OK, now how can get that API key?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Will WP YouTube Lyte work if I don't provide an API key?"
+msgstr ""
+
+#. Found in faq header.
+msgid "I don't want an API key, how can I get rid of the \"API key\"-notice?"
+msgstr ""
+
+#. Found in faq header.
+msgid "What does \"html5 video support\" mean?"
+msgstr ""
+
+#. Found in faq header.
+msgid "What are the requirements to see embedded YouTube HTML5 video?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Does WP YouTube Lyte protect my visitor's privacy?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Can I use WP YouTube Lyte for a custom field?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Does WP YouTube Lyte work with Infinite Scroll?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Can I still integrate with YouTube's JS API?"
+msgstr ""
+
+#. Found in faq header.
+msgid "How does WP YouTube Lyte support microdata?"
+msgstr ""
+
+#. Found in faq header.
+msgid "How does captions-support get added to the microdata?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Responsive LYTE embeds"
+msgstr ""
+
+#. Found in faq header.
+msgid "Can I use WP YouTube Lyte on normal YouTube links?"
+msgstr ""
+
+#. Found in faq header.
+msgid "What can I do with the API?"
+msgstr ""
+
+#. Found in faq header.
+msgid "How can I use/ activate lyte_helper.php_example?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Problem with All In One Seo Pack"
+msgstr ""
+
+#. Found in faq header.
+msgid "When I click on a LYTE video, a link to YouTube opens, what's up with that?"
+msgstr ""
+
+#. Found in faq header.
+msgid "My video's seem to load slower on mobile devices?"
+msgstr ""
+
+#. Found in faq header.
+msgid "Any bugs/ issues should I know about?"
+msgstr ""
+
+#. Found in faq header.
+msgid "I found a bug/ I would like a feature to be added!"
+msgstr ""
+
+#. Found in faq header.
+msgid "How you can help"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Go to <a href=\"https://console.developers.google.com/project/\">Google Developer Console</a> and log in with your Google account."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Fill in a Project Name"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Fill in a Project ID"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Click on 'Create'"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Click on 'Enable an API'"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Scroll down to YouTube Data API v3 and click on it"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Click on 'OFF' at the top to enable the API"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Optionally disable other API's"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Click on 'Credentials'"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Click on 'Create new Key'"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Click on 'Server Key'"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Leave the box with whitelisted IP's empty"
+msgstr ""
+
+#. Found in faq list item.
+msgid "<p>Copy your API key to WP YouTube Lyte settings page.</p>"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Beginning 2015 YouTube announced it would switch to HTML5 video by default."
+msgstr ""
+
+#. Found in faq list item.
+msgid "This will work in browsers that support the h264 or WebM video codecs, most modern browser should work."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Browsers that don't support those codecs will, upon playing, fall back to Flash."
+msgstr ""
+
+#. Found in faq list item.
+msgid "There is a <a href=\"http://support.google.com/webmasters/bin/answer.py?hl=en&amp;answer=2413309\">specific microdata scheme for \"videoObject\"</a> which WP YouTube Lyte can add to your page, which Google can use to display the video thumbnail next to the search-result"
+msgstr ""
+
+#. Found in faq list item.
+msgid "This is optional and can be disabled in the options page"
+msgstr ""
+
+#. Found in faq list item.
+msgid "The videoobject microdata is NOT added for audio-only embeds, playlists or widgets"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Google will not always display the thumbnail, this presumably depends of the relevance of the video to the rest of the page."
+msgstr ""
+
+#. Found in faq list item.
+msgid "The video width in posts and pages will adapt to the width of the container (the div) in which your blogposts/ pages are shown. This means that if your theme is responsive, WP YouTube Lyte will follow."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Widgets are not responsive."
+msgstr ""
+
+#. Found in faq list item.
+msgid "if the content div width gets to around 200 pixels, the LYTE UI will become garbled (YouTube requires the minimum embed width to be 200px as well)."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Although the widget is available in (very) small sizes, these do not display that great and might, in the near future, be disabled by YouTube as their Terms of Service state that the smallest available embedded player is 200X200 pixels. Use the deprecated smaller sizes at your own risk."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Having the same YouTube-video on one page can cause WP YouTube Lyte to malfunction (as the YouTube id is used as the div's id in the DOM, and DOM id's are supposed to be unique)"
+msgstr ""
+
+#. Found in faq list item.
+msgid "When using the Firefox plugin Karma Blocker, the <a href=\"http://blog.futtta.be/?p=7584\">video isn't visible when clicking \"play\", with a warning message being shown instead</a>. This is expected behavior and should be solved by tweaking Karma Blocker's configuration."
+msgstr ""
+
+#. Found in faq list item.
+msgid "The translations have not been updated entirely for version 1.2.0 and later. Help with translations is high on my wish-list, <a href=\"http://blog.futtta.be/contact\">contact me if you are interested to help</a>!"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Tell me about bugs you think you've found and if you can't find any, <a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/\">confirm it works with your version of WP on wordpress.org</a>"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Ask me for a feature you would like to see added"
+msgstr ""
+
+#. Found in faq list item.
+msgid "<a href=\"http://wordpress.org/extend/plugins/wp-youtube-lyte/\">Rate my plugin on wordpress.org</a>"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "An API is a way to have two pieces of software talk to each other to exchange information. In this case WP YouTube Lyte contacts YouTube to ask it for the thumbnail, the title and the description of the video you added. The thumbnail and title are visible on the webpage (in the Lyte player) while the description is in the HTML as microdata for search engines optimization reasons (see below)."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Up until WP YouTube Lyte 1.5.0 the v2 YouTube API was used, but <a href=\"http://youtube-eng.blogspot.be/2014/09/have-you-migrated-to-data-api-v3-yet.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed:+YouTubeEngDevBlog+%28YouTube+Engineering+and+Developers+Blog%29\">in September 2014 Google announced it was going to decommission that version, forcing the switch to v3</a>. A big difference between v2 and v3 is that, whereas v2 allowed \"anonymous\" requests, this is not the case for v3 any more. This means any request to the YouTube API v3 has to be identified with a key (a string with seamingly random letters &amp; numbers). You can get such a key from Google for free (see below) and you have to enter that in WP YouTube Lyte's settings page."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Click on 'Create Project' and:"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "On the next page (or when there is no next page, click on your Project's name):"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "In the sidebar on the left:"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Copy your API key to WP YouTube Lyte settings page."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Yes, with some exceptions; WP YouTube Lyte will continue to work, rendering Lyte players, but without the title and microdata (description, time, ...) and without thumbnails for playlists."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Just enter \"none\" (without the quotes) in the API key field and Lyte will stop nagging you."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "When playing, HTML5 video will not be visible for everyone (see requirements). Indeed some visitors will see the fallback Flash video instead."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "As opposed to some of the <a href=\"http://blog.futtta.be/2010/12/15/wordpress-com-stats-trojan-horse-for-quantcast-tracking/\">most important</a> <a href=\"http://blog.futtta.be/2010/01/22/add-to-any-removed-from-here/\">plugins</a> there is no 3rd party tracking code in WP YouTube Lyte, but YouTube off course does see visitor requests coming in (see also the youtube-nocookie.com remark in Bugs/Issues below) for the thumbnails."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Just pass the httpv url of such a field to lyte_preparse like this:"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "and you're good to go!"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Starting from version 1.1.0 it does; in <a href=\"http://wordpress.org/extend/plugins/infinite-scroll/\">Infinite Scroll</a>'s configuration you just have to add \"ly.te()\" in the  \"Javascript to be called after the next posts are fetched\"-box."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "This was added as a beta feature in version 1.1.0; add ?enablejsapi=1 to the httpv URL. WP YouTube Lyte will pick this up, and add ?enablejsapi=1&amp;origin= to the URL of the iFrame with the iFrame id being set to iF_. As soon as your visitors plays the video, you should be able to hook up with the video."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "In January 2014 <a href=\"http://benetech.org/\">Benetech</a>, a U.S. nonprofit that develops and uses technology to create positive social change, offered a patch that adds the <a href=\"http://schema.org/accessibilityFeature\">accessibilityFeature property</a> to the microdata for videos that have captions. If you have microdata enabled, WP YouTube Lyte will automatically try to check (in a seperate, asynchronous call via a proxy-webservice, as YouTube only offers captions in their API v3 which requires authentication) if captions are available and if so, adds the accessibilityFeature property with value captions to the microdata. This can be disabled by either disabling microdata or, if you want microdata but not the accessibilityFeature-property by using the \"lyte_docaptions\"-filter to set captions to false (example-code is in lyte_helper.php_example)."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Yes, starting with version 1.5.0 normal YouTube links are automatically transferred in Lyte embeds as well. You will automagically also get a (non-Lyte) preview of the video in your visual post edit screen."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "A whole lot; there are filters to pre-parse the_content, to change settings, to change the CSS, to change the HTML of the LYTE-div, ... There are examples for all filters (and one action) in lyte_helper.php_example"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Copy it to /wp-content/plugins/lyte_helper.php and activate it in WordPress' plugin page. After that you can simple remove the one of the comment-sequences (double-slash) to activate one (or more) of the functions in there."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "All in One SEO Pack be default generates a description which still has httpv-links in it. To remove those, you'll have to use (example code in) lyte_helper.php (see above) and add lyte_filter_aioseop_description to the aioseop-filter in there."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "You probably added a link around the httpv-url. No link is needed, just the httpv-url."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "By default WP YouTube Lyte will indeed load slower normal YouTube video's instead of Lyte ones, as Lyte video's require would require two clicks from the user to play a video (once to load the YouTube video and once to start it) because there is no autoplay-support on mobile. If you want to, you can force WP YouTube Lyte to make video's Lyte on mobile with this code (add it in your child theme's functions.php, in a seperate helper plugin or using the <a href=\"https://wordpress.org/plugins/code-snippets/\">code snippets plugin</a>;"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Just tell me, I like the feedback! Use the <a href=\"http://blog.futtta.be/contact/\">Contact-page on my blog</a>, <a href=\"http://blog.futtta.be/tag/wp-youtube-lyte/\">leave a comment in a post about wp-youtube-lyte</a> or <a href=\"http://wordpress.org/tags/wp-youtube-lyte?forum_id=10#postform\">create a new topic on the wordpress.org forum</a>."
+msgstr ""
