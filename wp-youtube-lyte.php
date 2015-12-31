@@ -471,13 +471,8 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
 				if ( (($postID) || ($isWidget)) && !empty($_thisLyte) && empty($apiTestKey) ) {
 					$_thisLyte['lyte_date_added']=time();
 
-
-
-					if ($postID) {
+					if ( $postID && !$isWidget ) {
 						$yt_resp_precache=json_encode($_thisLyte);
-
-
-
 
 						// then gzip + base64 (to limit amount of data + solve problems with wordpress removing slashes)
 						$yt_resp_precache=base64_encode(gzcompress($yt_resp_precache));
