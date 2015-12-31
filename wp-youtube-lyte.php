@@ -368,7 +368,7 @@ function captions_lookup($postID, $cachekey, $vid) {
 function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidget=false) {
 	/** logic to get video info from cache or get it from YouTube and set it */
 	global $postID, $cachekey, $toCache_index;
-	if ( $postID && empty($apiTestKey)) {
+	if ( $postID && empty($apiTestKey) && !$isWidget ) {
         	$cache_resp = get_post_meta( $postID, $cachekey, true );
 		if (!empty($cache_resp)) {
 			$_thisLyte = json_decode(gzuncompress(base64_decode($cache_resp)),1);
