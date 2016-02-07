@@ -1,8 +1,7 @@
 (function( ly ) {
 var d = document;
 
-var sch="http";
-if (bU.indexOf('https')!=-1) {sch+="s"}
+var sch="https";
 
 ly.te = function() {
     if (!rn) {
