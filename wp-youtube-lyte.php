@@ -309,11 +309,11 @@ function lyte_parse($the_content,$doExcerpt=false) {
 				$templateType="postMicrodata";
 			} else {
 				$lytetemplate = $wrapper."<div class=\"lyMe".$audioClass.$hidefClass.$plClass.$qsaClass."\" id=\"WYL_".$vid."\"><div id=\"lyte_".$vid."\" data-src=\"".$thumbUrl."\" class=\"pL\">";
-				
-				if (isset($yt_resp_array) && !empty($yt_resp_array) && $yt_resp_array["title"] != NULL) : 
-				$lytetemplate .= "<div class=\"tC".$titleClass."\"><div class=\"tT\">".$yt_resp_array['title']."</div></div>";
-				endif;
 
+				if (isset($yt_resp_array) && !empty($yt_resp_array) && !empty($yt_resp_array["title"])) {
+                                        $lytetemplate .= "<div class=\"tC".$titleClass."\"><div class=\"tT\">".$yt_resp_array['title']."</div></div>";
+                                }
+				
 				$lytetemplate .= "<div class=\"play\"></div><div class=\"ctrl\"><div class=\"Lctrl\"></div><div class=\"Rctrl\"></div></div></div>".$noscript."</div></div>".$lytelinks_txt;
 				$templateType="post";
 			}
