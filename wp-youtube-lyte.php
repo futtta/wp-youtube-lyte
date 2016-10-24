@@ -81,6 +81,9 @@ function lyte_settings_enforcer() {
 add_action('after_setup_theme','lyte_settings_enforcer');
 
 function lyte_parse($the_content,$doExcerpt=false) {
+	/** bail if amp */
+        if ( is_amp()) { return $the_content; }
+	
 	/** main function to parse the content, searching and replacing httpv-links */
 	global $lyteSettings, $toCache_index, $postID, $cachekey;
 	$lyteSettings['path']=plugins_url() . "/" . dirname(plugin_basename(__FILE__)) . '/lyte/';
@@ -601,6 +604,17 @@ function lyte_preparse($videoId) {
 function lyte_add_action_link($links) {
 	$links[]='<a href="' . admin_url( 'options-general.php?page=lyte_settings_page' ) . '">' . __('Settings') . '</a>';
 	return $links;
+}
+
+/** is_amp, but I shouldn't have to do this, should I? */
+if (!function_exists("is_amp")) {
+	function is_amp() {
+		if ((strpos($_SERVER['REQUEST_URI'],'?amp')!==false) || (strpos($_SERVER['REQUEST_URI'],'/amp/')!==false)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 /** hooking it all up to wordpress */
