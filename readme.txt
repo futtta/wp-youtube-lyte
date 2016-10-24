@@ -154,6 +154,16 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 
 == Changelog ==
 
+= 1.6.7 =
+* fix for AMP-trouble as [reported by winderttal](https://wordpress.org/support/topic/error-in-amp-pages/)
+
+= 1.6.6 =
+* emergency bugfix; else was lost but now got found. sorry for that!
+
+= 1.6.5 =
+* bug: PHP warning/ notices when title is empty, fix by [kReEsTaL](http://marieguillaumet.com/), thanks!
+* bug: YouTube player controls not visible in all browsers when loaded over HTTP, switching to HTTPS for all, as [reported by georg6840tb](https://wordpress.org/support/topic/bottom-control-buttons-not-displayed)
+
 = 1.6.4 =
 * updated to latest YouTube UI, again thanks to Draikin. the bottom control is now hidden by defaults, see FAQ
 * added filter `lyte_do_mobile` to display lyte video instead of normal youtube on mobile as well, see FAQ
