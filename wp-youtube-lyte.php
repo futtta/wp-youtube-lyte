@@ -413,8 +413,8 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
 				$_thisLyte['thumbUrl']="";
 				$_thisLyte['HQthumbUrl']="";
 			} else {
-				$_thisLyte['thumbUrl']="http://i.ytimg.com/vi/".$vid."/hqdefault.jpg";
-                        	$_thisLyte['HQthumbUrl']="http://i.ytimg.com/vi/".$vid."/maxresdefault.jpg";
+				$_thisLyte['thumbUrl']="//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
+                        	$_thisLyte['HQthumbUrl']="//i.ytimg.com/vi/".$vid."/maxresdefault.jpg";
 			}
                         $_thisLyte['dateField']="";
                         $_thisLyte['duration']="";
