@@ -116,7 +116,7 @@ function lyte_settings_page() {
             <td>
                 <fieldset><legend class="screen-reader-text"><span><?php _e("Player size","wp-youtube-lyte") ?></span></legend>
 		<?php
-			if (is_bool(get_option('lyte_size'))) { $sel = (int) $pDefault; } else { $sel= (int) get_option('lyte_size'); }
+			$sel = !is_bool(get_option('lyte_size')) ? (int) get_option('lyte_size') : 0;
 			foreach (array("169","43") as $f) {
 				foreach ($pSizeOrder[$f] as $i) {
 					$pS=$pSize[$i];
