@@ -580,6 +580,8 @@ function lyte_not_greedy() {
 function lyte_rm_cache() {
 	try {
 		ini_set('max_execution_time',90); // give PHP some more time for this, post-meta can be sloooooow
+		
+		// cache in post_meta, for posts
 		$lyte_posts = json_decode(get_option("lyte_cache_index"),true);
 		$lyteCacheIterator = 0;
 		$lytePurgeThreshold = 500;
@@ -598,6 +600,10 @@ function lyte_rm_cache() {
 			}
 			update_option("lyte_cache_index",json_encode($lyte_posts));
 		}
+		
+		// and the widget cache which isn't in post_meta
+		update_option('lyte_widget_cache','');
+		
 		return $returnCode;
 	} catch(Exception $e) {
 		return $e->getMessage();
