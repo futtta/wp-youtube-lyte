@@ -8,17 +8,26 @@ add_action('admin_menu', 'lyte_create_menu');
 
 if (get_option('lyte_emptycache','0')==="1") {
 	$emptycache=lyte_rm_cache();
+	update_option('lyte_emptycache','0');
 	if ($emptycache==="OK") {
 		add_action('admin_notices', 'lyte_cacheclear_ok_notice');
+	} elseif ($emptycache==="PART") {
+		add_action('admin_notices', 'lyte_cacheclear_part_notice');
+		update_option('lyte_emptycache','1'); // to ensure cache-purging continues
 	} else {
 		add_action('admin_notices', 'lyte_cacheclear_fail_notice');
 	}
-	update_option('lyte_emptycache','0');
 }
 
 function lyte_cacheclear_ok_notice() {
 	echo '<div class="updated"><p>';
 	_e('Your WP YouTube Lyte cache has been succesfully cleared.', 'wp-youtube-lyte' );
+	echo '</p></div>';
+}
+
+function lyte_cacheclear_part_notice() {
+	echo '<div class="error"><p>';
+	_e('WP YouTube Lyte cache was partially cleared, refresh this page to continue purging.', 'wp-youtube-lyte' );
 	echo '</p></div>';
 }
 

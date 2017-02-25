@@ -579,17 +579,26 @@ function lyte_not_greedy() {
 /** function to flush YT responses from cache */
 function lyte_rm_cache() {
 	try {
-		$lyte_posts=json_decode(get_option('lyte_cache_index'),true);
+		ini_set('max_execution_time',90); // give PHP some more time for this, post-meta can be sloooooow
+		$lyte_posts = json_decode(get_option("lyte_cache_index"),true);
+		$lyteCacheIterator = 0;
+		$lytePurgeThreshold = 500;
+		$returnCode = "OK";
 		if (is_array($lyte_posts)){
 			foreach ($lyte_posts as $postID => $lyte_post) {
 				foreach ($lyte_post as $cachekey) {
 					delete_post_meta($postID, $cachekey);
 				}
+				unset ($lyte_posts[$postID]);
+				$lyteCacheIterator++;
+				if ($lyteCacheIterator > ($lytePurgeThreshold-1)) {
+					$returnCode = "PART";
+					break;
+				}
 			}
-			delete_option('lyte_cache_index');
+			update_option("lyte_cache_index",json_encode($lyte_posts));
 		}
-		update_option('lyte_widget_cache','');
-		return "OK";
+		return $returnCode;
 	} catch(Exception $e) {
 		return $e->getMessage();
 	}
