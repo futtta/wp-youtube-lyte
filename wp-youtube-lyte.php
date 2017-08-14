@@ -400,8 +400,8 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
 
 	if ( empty( $_thisLyte ) ) {
 		// get info from youtube
-       	// first get yt api key
-        $lyte_yt_api_key = get_option('lyte_yt_api_key','');
+       		// first get yt api key
+        	$lyte_yt_api_key = get_option('lyte_yt_api_key','');
 		$lyte_yt_api_key = apply_filters('lyte_filter_yt_api_key', $lyte_yt_api_key);
 		if (!empty($apiTestKey)) {
 			$lyte_yt_api_key=$apiTestKey;
@@ -414,13 +414,13 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
 				$_thisLyte['HQthumbUrl']="";
 			} else {
 				$_thisLyte['thumbUrl']="//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
-                        	$_thisLyte['HQthumbUrl']="//i.ytimg.com/vi/".$vid."/maxresdefault.jpg";
+               			$_thisLyte['HQthumbUrl']="//i.ytimg.com/vi/".$vid."/maxresdefault.jpg";
 			}
-                        $_thisLyte['dateField']="";
-                        $_thisLyte['duration']="";
-                        $_thisLyte['description']="";
-                        $_thisLyte['captions_data']="false";
-                        $_thisLyte['captions_timestamp']=strtotime("now");
+			$_thisLyte['dateField']="";
+			$_thisLyte['duration']="";
+			$_thisLyte['description']="";
+			$_thisLyte['captions_data']="false";
+			$_thisLyte['captions_timestamp']=strtotime("now");
 			return $_thisLyte;
 		} else {
 			// v3, feeling somewhat lonely now v2 has gently been put to sleep
@@ -500,6 +500,11 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
 			}
 		}
 	}
+        foreach (array("title","thumbUrl","HQthumbUrl","dateField","duration","description","captions_data","captions_timestamp") as $key) {
+                if (!array_key_exists($key,$_thisLyte)) {
+                        $_thisLyte[$key]="";
+                }
+        }
 	return $_thisLyte;
 }
 
