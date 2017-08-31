@@ -50,7 +50,8 @@ Up until WP YouTube Lyte 1.5.0 the v2 YouTube API was used, but [in September 20
 
 = OK, now how can get that API key? =
 
-1. Go to [Google Developer Console](https://console.developers.google.com/project/) and log in with your Google account.
+1. Go to [Google Developer Console](https://console.developers.google.com/projectselector/apis/library) and log in with your Google account.
+
 2. Click on 'Create Project' and:
  * Fill in a Project Name
  * Fill in a Project ID
