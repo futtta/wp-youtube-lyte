@@ -93,10 +93,32 @@ function lyte_parse($the_content,$doExcerpt=false) {
 	/** API: filter hook to preparse the_content, e.g. to force normal youtube links to be parsed */
 	$the_content = apply_filters( 'lyte_content_preparse',$the_content );
 
-	if (get_option('lyte_greedy','1')==="1"){
-		$the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/playlist\?list=/m','httpv://www.youtube.com/playlist?list=',$the_content);
-		$the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
+	if ( get_option('lyte_greedy','1')==="1" && strpos($the_content,"youtu") !== false ){
+                // only preg_replace if "youtu" (as part of youtube.com or youtu.be) if found
+                if (strpos($the_content,'/playlist?list=') !== false ) {
+                        // only preg_replace for playlists if there are playlists to be parsed
+                        $the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/playlist\?list=/m','httpv://www.youtube.com/playlist?list=',$the_content);
+                }
+                $the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
 	}
+
+        if (strpos($the_content,"wp:core/embed") !== false && strpos($the_content,"youtu") !== false ) {
+                /*
+                 * do Gutenberg stuff here, playlists if needed first and then single videos
+                 * 
+                 * having Gutenberg markup in HTML comments is ugly as hell
+                 * esp. for 3rd parties such as Lyte who have to parse info out of that
+                 * 
+                 * Luke Cavanagh; thanks for the Gutenbeard reference and for the funny animated gif :)
+                 * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
+                 */
+                if (strpos($the_content,'/playlist?list=') !== false ) {
+                        $gutenbeard_playlist_regex = '%<\!--\s?wp:core[-|/]embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"}\s?-->.*<\!--\s?/wp:core[-|/]embed(?:/youtube)?\s?-->%Us';
+                        $the_content = preg_replace($gutenbeard_playlist_regex, 'httpv://www.youtube.com/playlist?list=\1',$the_content);
+                }
+                $gutenbeard_single_regex = '%<\!--\s?wp:core[-|/]embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com|.be)/(?:watch\?v=)?(.*)"}\s?-->.*<\!--\s?/wp:core[-|/]embed(?:/youtube)?\s?-->%Us';
+                $the_content = preg_replace($gutenbeard_single_regex, 'httpv://www.youtube.com/watch?v=\1',$the_content);
+        }
 
 	if((strpos($the_content, "httpv")!==FALSE)||(strpos($the_content, "httpa")!==FALSE)) {
 		$char_codes = array('&#215;','&#8211;');
