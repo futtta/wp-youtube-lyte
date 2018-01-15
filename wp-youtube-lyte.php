@@ -121,6 +121,9 @@ function lyte_parse($the_content,$doExcerpt=false) {
         }
 
 	if((strpos($the_content, "httpv")!==FALSE)||(strpos($the_content, "httpa")!==FALSE)) {
+                if (apply_filters('lyte_remove_wpautop',true)) {
+                        remove_filter('the_content','wpautop');
+                }
 		$char_codes = array('&#215;','&#8211;');
 		$replacements = array("x", "--");
 		$the_content=str_replace($char_codes, $replacements, $the_content);
