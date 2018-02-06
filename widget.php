@@ -168,4 +168,8 @@ class WYLWidget extends WP_Widget {
     }
 } 
 
-add_action('widgets_init', create_function('', 'return register_widget("WYLWidget");'));
+function lyte_register_widget() {
+	register_widget('WYLWidget');
+}
+
+add_action('widgets_init', 'lyte_register_widget');
