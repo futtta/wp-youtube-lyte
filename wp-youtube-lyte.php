@@ -102,7 +102,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 $the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
 	}
 
-        if (strpos($the_content,"wp:core/embed") !== false && strpos($the_content,"youtu") !== false ) {
+        if ( ( strpos($the_content,"wp:core/embed") !== false || strpos($the_content,"wp:core-embed") !== false || strpos($the_content,"wp:embed") !== false ) && strpos($the_content,"youtu") !== false ) {
                 /*
                  * do Gutenberg stuff here, playlists if needed first and then single videos
                  * 
@@ -113,10 +113,10 @@ function lyte_parse($the_content,$doExcerpt=false) {
                  * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
                  */
                 if (strpos($the_content,'/playlist?list=') !== false ) {
-                        $gutenbeard_playlist_regex = '%<\!--\s?wp:core[-|/]embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"}\s?-->.*<\!--\s?/wp:core[-|/]embed(?:/youtube)?\s?-->%Us';
+                        $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"}\s?-->.*<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
                         $the_content = preg_replace($gutenbeard_playlist_regex, 'httpv://www.youtube.com/playlist?list=\1',$the_content);
                 }
-                $gutenbeard_single_regex = '%<\!--\s?wp:core[-|/]embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com|.be)/(?:watch\?v=)?(.*)"}\s?-->.*<\!--\s?/wp:core[-|/]embed(?:/youtube)?\s?-->%Us';
+                $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com|.be)/(?:watch\?v=)?(.*)"}\s?-->.*<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
                 $the_content = preg_replace($gutenbeard_single_regex, 'httpv://www.youtube.com/watch?v=\1',$the_content);
         }
 
