@@ -2,9 +2,9 @@
 Contributors: futtta, optimizingmatters
 Tags: youtube, video, lyte, lite youtube embeds, html5 video, widget, youtube audio, audio, playlist, performance, accessibility, sidebar, lazy load, responsive, microdata, videoobject
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
-Requires at least: 2.9
-Tested up to: 4.6
-Stable tag: 1.6.7
+Requires at least: 4.0
+Tested up to: 4.9
+Stable tag: 1.6.8
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -154,6 +154,12 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.6.8 =
+* new: support for Gutenberg blocks with embedded YouTube (tested with Gutenberg plugin version 2.3.0)
+* updated admin screen
+* misc bugfixes (see GitHub commit log for details)
+* confirmed working with WordPress 4.9.4
 
 = 1.6.7 =
 * fix for AMP-trouble as [reported by winderttal](https://wordpress.org/support/topic/error-in-amp-pages/)

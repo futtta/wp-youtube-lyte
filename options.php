@@ -1,6 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+require("lytePartners.php");
+
 $plugin_dir = basename(dirname(__FILE__)).'/languages';
 load_plugin_textdomain( 'wp-youtube-lyte', false, $plugin_dir );
 
@@ -57,12 +59,13 @@ function register_lyte_settings() {
 }
 
 function lyte_admin_scripts() {
-	wp_enqueue_script('jqzrssfeed', plugins_url('/external/jquery.zrssfeed.min.js', __FILE__), array('jquery'),null,true);
 	wp_enqueue_script('jqcookie', plugins_url('/external/jquery.cookie.min.js', __FILE__), array('jquery'),null,true);
-}
+        wp_enqueue_script('unslider', plugins_url('/external/unslider-min.js', __FILE__), array('jquery'),null,true);
+    }
 
 function lyte_admin_styles() {
-	wp_enqueue_style('zrssfeed', plugins_url('/external/jquery.zrssfeed.css', __FILE__));
+        wp_enqueue_style('unslider', plugins_url('/external/unslider.css', __FILE__));
+        wp_enqueue_style('unslider-dots', plugins_url('/external/unslider-dots.css', __FILE__));
 }
 
 function lyte_admin_nag_apikey() {
@@ -96,9 +99,75 @@ if (get_option('lyte_api_error','')!=='') {
 function lyte_settings_page() {
 	global $pSize, $pSizeOrder;
 ?>
+<style>
+/* rss block */
+#futtta_feed ul{list-style:outside;}
+#futtta_feed {font-size:medium; margin:0px 20px;} 
+
+/* banner + unslider */
+.lyte_banner {
+    margin: 0 38px;
+    padding-bottom: 5px;
+}
+.lyte_banner ul li {
+    font-size:medium;
+    text-align:center;
+}
+.unslider {
+    position:relative;
+}
+.unslider-arrow {
+    display: block;
+    left: unset;
+    margin-top: -35px;
+    margin-left: 7px;
+    margin-right: 7px;
+    border-radius: 32px;
+    background: rgba(0, 0, 0, 0.10) no-repeat 50% 50%;
+    color: rgba(255, 255, 255, 0.8);
+    font: normal 20px/1 dashicons;
+    speak: none;
+    padding: 3px 2px 3px 4px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.unslider-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.20);
+    color: #FFF;
+}
+.unslider-arrow.prev {
+    padding: 3px 4px 3px 2px;
+}
+.unslider-arrow.next {
+    right: 0px;
+}
+.unslider-arrow.prev::before {
+    content: "\f341";
+}
+.unslider-arrow.next::before {
+    content: "\f345";
+}
+/* responsive stuff: hide admin-feed on smaller screens */
+@media (min-width: 961px) {
+    #lyte_main {float:left;width:69%;}
+    #lyte_admin_feed{float:right;width:30%;display:block !important;}
+    }
+@media (max-width: 960px) {
+    #lyte_main {width:100%;}
+    #lyte_admin_feed {width:0%;display:none !important;}
+}
+@media (max-width: 782px) {
+    #lyte_hide_adv span, #lyte_show_adv span {display: none;}
+    #lyte_hide_adv,#lyte_show_adv {height: 34px;padding: 4px 12px 8px 8px;}
+    #lyte_hide_adv:before,#lyte_show_adv:before {font-size: 25px;}
+    #lyte_main input[type="checkbox"] {margin-left: 10px;}
+    #lyte_main .cb_label {display: block; padding-left: 45px; text-indent: -45px;}
+}
+</style>
 <div class="wrap">
 <h2><?php _e("WP YouTube Lyte Settings","wp-youtube-lyte") ?></h2>
 <div style="float:left;width:70%;">
+<?php echo lyte_admin_tabs(); ?>
 <form method="post" action="options.php">
     <?php settings_fields( 'lyte-settings-group' ); ?>
     <table class="form-table">
@@ -209,72 +278,100 @@ function lyte_settings_page() {
 
 </form>
 </div>
-<div style="float:right;width:30%" id="lyte_admin_feed">
-        <div style="margin:0px 15px 15px 15px;font-size:larger;"><?php _e("Need help? <a href='https://wordpress.org/plugins/wp-youtube-lyte/faq/' target='_blank'>Check out the FAQ</a> or post your question on <a href='http://wordpress.org/support/plugin/wp-youtube-lyte' target='_blank'>the support-forum</a>."); ?></div>
-	<div style="margin:0px 15px 15px 15px;font-size:larger;"><a href="<?php echo network_admin_url(); ?>plugin-install.php?tab=search&type=author&s=futtta"><?php _e("Happy with WP YouTube Lyte? Try my other plugins!"); ?></a></div>
-        <div style="margin-left:10px;margin-top:-5px;">
-                <h3>
-                        <?php _e("futtta about","wp-youtube-lyte") ?>
-                        <select id="feed_dropdown" >
-                                <option value="1"><?php _e("WP YouTube Lyte","wp-youtube-lyte") ?></option>
-                                <option value="2"><?php _e("WordPress","wp-youtube-lyte") ?></option>
-                                <option value="3"><?php _e("Web Technology","wp-youtube-lyte") ?></option>
-                        </select>
-                </h3>
-                <div id="futtta_feed"></div>
-		<div style="float:right;margin:50px 15px;"><a href="http://blog.futtta.be/2013/10/21/do-not-donate-to-me/" target="_blank"><img width="100px" height="85px" src="<?php echo content_url(); ?>/plugins/wp-youtube-lyte/external/do_not_donate_smallest.png" title="<?php _e("Do not donate for this plugin!"); ?>"></a></div>
+<div id="lyte_admin_feed" class="">
+    <div class="lyte_banner ">
+        <ul>
+        <?php
+        if (apply_filters('wp-youtube-lyte_settingsscreen_remotehttp',true)) {
+            $lyte_banner=get_transient("wp-youtube-lyte_banner");
+            if (empty($lyte_banner)) {
+                $banner_resp = wp_remote_get("http://misc.optimizingmatters.com/wp-youtube-lyte_news.html");
+                if (!is_wp_error($banner_resp)) {
+                    if (wp_remote_retrieve_response_code($banner_resp)=="200") {
+                        $lyte_banner = wp_kses_post(wp_remote_retrieve_body($banner_resp));
+                        set_transient("wp-youtube-lyte_banner",$lyte_banner,DAY_IN_SECONDS);
+                    }
+                }
+            }
+            echo $lyte_banner;
+        }
+        ?>
+        <li><?php _e("Need help? <a href='https://wordpress.org/plugins/wp-youtube-lyte/faq/'>Check out the FAQ here</a>.","wp-youtube-lyte"); ?></li>
+        <li><?php _e("Happy with wp-youtube-lyte?","wp-youtube-lyte"); ?><br /><a href="<?php echo network_admin_url(); ?>plugin-install.php?tab=search&type=author&s=optimizingmatters"><?php _e("Try my other plugins!","wp-youtube-lyte"); ?></a></li>
+        </ul>
+    </div>
+    <div style="margin-left:10px;margin-top:-5px;">
+        <h2>
+            <?php _e("futtta about","wp-youtube-lyte") ?>
+            <select id="feed_dropdown" >
+                <option value="1"><?php _e("WP YouTube Lyte","wp-youtube-lyte") ?></option>
+                <option value="2"><?php _e("WordPress","wp-youtube-lyte") ?></option>
+                <option value="3"><?php _e("Web Technology","wp-youtube-lyte") ?></option>
+            </select>
+        </h2>
+        <div id="futtta_feed">
+            <div id="wp-youtube-lytefeed">
+                <?php getFutttaFeeds("http://feeds.feedburner.com/futtta_wp-youtube-lyte"); ?>
+            </div>
+            <div id="wordpressfeed">
+                <?php getFutttaFeeds("http://feeds.feedburner.com/futtta_wordpress"); ?>
+            </div>
+            <div id="webtechfeed">
+                <?php getFutttaFeeds("http://feeds.feedburner.com/futtta_webtech"); ?>
+            </div>
         </div>
+    </div>
+    <div style="float:right;margin:50px 15px;"><a href="http://blog.futtta.be/2013/10/21/do-not-donate-to-me/" target="_blank"><img width="100px" height="85px" src="<?php echo plugins_url().'/'.plugin_basename(dirname(__FILE__)).'/external/do_not_donate_smallest.png'; ?>" title="<?php _e("Do not donate for this plugin!","wp-youtube-lyte"); ?>"></a></div>
 </div>
 
 <script type="text/javascript">
-	var feed = new Array;
-	feed[1]="http://feeds.feedburner.com/futtta_wp-youtube-lyte";
-	feed[2]="http://feeds.feedburner.com/futtta_wordpress";
-	feed[3]="http://feeds.feedburner.com/futtta_webtech";
-	cookiename="wp-youtube-lyte_feed";
+    var feed = new Array;
+    feed[1]="wp-youtube-lytefeed";
+    feed[2]="wordpressfeed";
+    feed[3]="webtechfeed";
+    cookiename="wp-youtube-lyte_feed";
 
-        jQuery(document).ready(function() {
-		jQuery( "#check_api_key" ).click(function() {
-			jQuery("#lyte_key_check_output").show();
-			jQuery("#lyte_key_check_output").append('<p><?php _e("Checking your key ..."); ?></p>');
+    jQuery(document).ready(function() {
+        jQuery( "#check_api_key" ).click(function() {
+                jQuery("#lyte_key_check_output").show();
+                jQuery("#lyte_key_check_output").append('<p><?php _e("Checking your key ..."); ?></p>');
+                lyte_yt_api_key=jQuery("input#lyte_yt_api_key").val();			
+                if ((lyte_yt_api_key.length>9) &&(lyte_yt_api_key.length<99)) {
+                        var data = {
+                                'action': 'lyte_check_yt_api_key',
+                                'lyte_nonce': '<?php echo wp_create_nonce( "lyte_check_api_key" );?>',
+                                'lyte_yt_api_key': jQuery("input#lyte_yt_api_key").val()
+                        };
+                        jQuery.post(ajaxurl, data, function(response) {
+                                jQuery("#lyte_key_check_output").append('<p>'+response+'</p>');
+                        });
+                } else {
+                        jQuery("#lyte_key_check_output").append('<p><?php _e("That does not seem to be a correct API key!"); ?></p>');
+                }		
+        })
+        jQuery('#lyte_admin_feed').fadeTo("slow",1).show();
+        jQuery('.lyte_banner').unslider({autoplay:true, delay:3500, infinite: false, arrows:{prev:'<a class="unslider-arrow prev"></a>', next:'<a class="unslider-arrow next"></a>'}}).fadeTo("slow",1).show();
 
-			lyte_yt_api_key=jQuery("input#lyte_yt_api_key").val();			
-			if ((lyte_yt_api_key.length>9) &&(lyte_yt_api_key.length<99)) {
-				var data = {
-					'action': 'lyte_check_yt_api_key',
-					'lyte_nonce': '<?php echo wp_create_nonce( "lyte_check_api_key" );?>',
-					'lyte_yt_api_key': jQuery("input#lyte_yt_api_key").val()
-				};
+        jQuery( "#feed_dropdown" ).change(function() {
+            jQuery("#futtta_feed").fadeTo(0,0);
+            jQuery("#futtta_feed").fadeTo("slow",1);
+        });
 
-				jQuery.post(ajaxurl, data, function(response) {
-					jQuery("#lyte_key_check_output").append('<p>'+response+'</p>');
-				});
-			} else {
-				jQuery("#lyte_key_check_output").append('<p><?php _e("That does not seem to be a correct API key!"); ?></p>');
-			}		
-		})
+        jQuery("#feed_dropdown").change(function() { show_feed(jQuery("#feed_dropdown").val()) });
+        feedid=jQuery.cookie(cookiename);
+        if(typeof(feedid) !== "string") feedid=1;
+        show_feed(feedid);
+    })
 
-		jQuery("#feed_dropdown").change(function() { show_feed(jQuery("#feed_dropdown").val()) });
-
-		feedid=jQuery.cookie(cookiename);
-		if(typeof(feedid) !== "string") feedid=1;
-
-		show_feed(feedid);
-		})
-
-	function show_feed(id) {
-  		jQuery('#futtta_feed').rssfeed(feed[id], {
-			<?php if ( is_ssl() ) echo "ssl: true,"; ?>
-    			limit: 4,
-			date: true,
-			header: false
-  		});
-		jQuery("#feed_dropdown").val(id);
-		jQuery.cookie(cookiename,id,{ expires: 365 });
-	}
+    function show_feed(id) {
+        jQuery('#futtta_feed').children().hide();
+        jQuery('#'+feed[id]).show();
+        jQuery("#feed_dropdown").val(id);
+        jQuery.cookie(cookiename,id,{ expires: 365 });
+    }
 </script>
-
 </div>
+
 <?php }
 
 // ajax receiver for YT API key check
@@ -327,5 +424,60 @@ function lyte_check_yt_api_key_callback() {
 		print_r($api_response);
 	}
 	wp_die();
+}
+
+function getFutttaFeeds($url) {
+if (apply_filters('lyte_settingsscreen_remotehttp',true)) {
+    $rss = fetch_feed( $url );
+    $maxitems = 0;
+
+    if ( ! is_wp_error( $rss ) ) {
+        $maxitems = $rss->get_item_quantity( 7 ); 
+        $rss_items = $rss->get_items( 0, $maxitems );
+    }
+    ?>
+    <ul>
+        <?php if ( $maxitems == 0 ) : ?>
+            <li><?php _e( 'No items', 'autoptimize' ); ?></li>
+        <?php else : ?>
+            <?php foreach ( $rss_items as $item ) : ?>
+                <li>
+                    <a href="<?php echo esc_url( $item->get_permalink() ); ?>"
+                        title="<?php printf( __( 'Posted %s', 'autoptimize' ), $item->get_date('j F Y | g:i a') ); ?>">
+                        <?php echo esc_html( $item->get_title() ); ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </ul>
+    <?php
+}
+}
+
+// based on http://wordpress.stackexchange.com/a/58826
+function lyte_admin_tabs(){
+        $tabs = apply_filters('wp-youtube-lyte_filter_settingsscreen_tabs',array('lyte_settings_page' => __('Main','wp-youtube-lyte')));
+        $tabContent="";
+        if (count($tabs) >= 1) {
+            if(isset($_GET['page'])){
+                $currentId = $_GET['page'];
+            } else {
+                $currentId = "wp-youtube-lyte";
+            }
+            $tabContent .= "<h2 class=\"nav-tab-wrapper\">";
+            foreach($tabs as $tabId => $tabName){
+                if($currentId == $tabId){
+                    $class = " nav-tab-active";
+                } else{
+                    $class = "";
+                }
+                $tabContent .= '<a class="nav-tab'.$class.'" href="?page='.$tabId.'">'.$tabName.'</a>';
+            }
+            $tabContent .= "</h2>";
+        } else {
+            $tabContent = "<hr/>";
+        }
+
+        return $tabContent;
 }
 ?>
