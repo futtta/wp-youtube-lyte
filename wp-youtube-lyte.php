@@ -102,7 +102,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 $the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
 	}
 
-        if ( ( strpos($the_content,"wp:core/embed") !== false || strpos($the_content,"wp:core-embed") !== false || strpos($the_content,"wp:embed") !== false ) && strpos($the_content,"youtu") !== false ) {
+        if ( strpos($the_content,"<!-- wp:") !== false  && strpos($the_content,"youtu") !== false ) {
                 /*
                  * do Gutenberg stuff here, playlists if needed first and then single videos
                  * 
