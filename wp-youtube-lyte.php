@@ -408,7 +408,7 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
 			$_thisLyte = json_decode(gzuncompress(base64_decode($cache_resp)),1);
 			// make sure there are not old APIv2 full responses in cache
 			if (array_key_exists('entry', $_thisLyte)) {
-				if ($_thisLyte['entry']['xmlns$yt']==="https://gdata.youtube.com/schemas/2007") {
+				if ($_thisLyte['entry']['xmlns$yt']==="http://gdata.youtube.com/schemas/2007") {
 					$_thisLyte = "";
 				}
 			}
