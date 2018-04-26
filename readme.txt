@@ -1,6 +1,6 @@
 === WP YouTube Lyte ===
 Contributors: futtta, optimizingmatters
-Tags: youtube, video, lyte, lite youtube embeds, html5 video, widget, youtube audio, audio, playlist, performance, accessibility, sidebar, lazy load, responsive, microdata, videoobject
+Tags: youtube, video, widget, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 4.9
@@ -154,6 +154,11 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.0 =
+* new: option to have thumbnail hosted locally to improve performance and privacy (gdpr anyone?)
+* removed option to add "easy youtube"-links (defunct)
+* make widgets not break HTTPS (thanks R33D3M33R)
 
 = 1.6.8 =
 * new: support for Gutenberg blocks with embedded YouTube (tested with Gutenberg plugin version 2.3.0)
