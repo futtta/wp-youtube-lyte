@@ -148,7 +148,11 @@ function lyte_get_thumb($thumbUrl) {
 }
 
 function lyte_thumb_fallback() {
+    global $origThumbURL;
     // if for any reason the caching does not work, we redirect to the original thumbnail
+    if ( strpos( $origThumbURL, "http" ) !== 0) {
+            $origThumbURL = "https:".$origThumbURL;              
+    }
     header("HTTP/1.1 301 Moved Permanently");
     header('Location:  '.  $origThumbURL );
 }
