@@ -31,11 +31,11 @@ class WYLWidget extends WP_Widget {
 	$WYLqs=substr(strstr($WYLurl,'?'),1);
 	parse_str($WYLqs,$WYLarr);
 
-    if (strpos($WYLurl,'youtu.be')) {
-        $WYLid=substr(parse_url($WYLurl,PHP_URL_PATH),1,11);
-		$PLClass="";
-		$WYLthumb="https://img.youtube.com/vi/".$WYLid."/mqdefault.jpg";
-    } else {
+        if (strpos($WYLurl,'youtu.be')) {
+                $WYLid=substr(parse_url($WYLurl,PHP_URL_PATH),1,11);
+                $PLClass="";
+                $WYLthumb="https://img.youtube.com/vi/".$WYLid."/mqdefault.jpg";
+        } else {
 		if (isset($WYLarr['v'])) {
 			$WYLid=$WYLarr['v'];
 			$PLClass="";
@@ -46,7 +46,14 @@ class WYLWidget extends WP_Widget {
 			$WYLthumb=$yt_resp["thumbUrl"];
 			$PLClass=" playlist";
 		}
-    }
+        }
+
+        // do we have to serve the thumbnail from local cache?
+        if (get_option('lyte_local_thumb','0') === '1') {
+                $WYLthumb = content_url() . "/plugins/wp-youtube-lyte/lyteThumbs.php?origThumbUrl=" . urlencode($WYLthumb);
+        }
+
+        // filter to alter the thumbnail
 	$WYLthumb = apply_filters( "lyte_filter_widget_thumb", $WYLthumb, $WYLid );
 
 	if (isset($WYLarr['start'])) $qsa="&amp;start=".$WYLarr['start'];

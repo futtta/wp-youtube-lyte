@@ -56,6 +56,7 @@ function register_lyte_settings() {
 	register_setting( 'lyte-settings-group', 'lyte_emptycache' );
 	register_setting( 'lyte-settings-group', 'lyte_greedy' );
 	register_setting( 'lyte-settings-group', 'lyte_yt_api_key' );
+	register_setting( 'lyte-settings-group', 'lyte_local_thumb' );
 }
 
 function lyte_admin_scripts() {
@@ -215,8 +216,7 @@ function lyte_settings_page() {
 			<td>
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php _e("Show links?","wp-youtube-lyte") ?></span></legend>
-					<label title="<?php _e('Show YouTube-link','wp-youtube-lyte');?>"><input type="radio" name="lyte_show_links" value="1" <?php if (get_option('lyte_show_links')==="1") echo "checked" ?> /><?php _e(" Add YouTube-link.","wp-youtube-lyte") ?></label><br />
-					<label title="<?php _e('Show YouTube and Ease YouTube link','wp-youtube-lyte');?>"><input type="radio" name="lyte_show_links" value="2" <?php if (get_option('lyte_show_links')==="2") echo "checked" ?> /><?php _e(" Add both a YouTube and an <a href=\"http://icant.co.uk/easy-youtube/docs/index.html\" target=\"_blank\">Easy YouTube</a>-link.","wp-youtube-lyte") ?></label><br />
+					<label title="<?php _e('Show YouTube-link','wp-youtube-lyte');?>"><input type="radio" name="lyte_show_links" value="1" <?php if (get_option('lyte_show_links')==="1" || get_option('lyte_show_links')==="2") echo "checked" ?> /><?php _e(" Add YouTube-link.","wp-youtube-lyte") ?></label><br />
 					<label title="<?php _e('Don\'t include links.','wp-youtube-lyte');?>"><input type="radio" name="lyte_show_links" value="0" <?php if ((get_option('lyte_show_links')!=="1") && (get_option('lyte_show_links')!=="2")) echo "checked" ?> /><?php _e(" Don't add any links.","wp-youtube-lyte") ?></label>
 				</fieldset>
 			</td>
@@ -260,6 +260,18 @@ function lyte_settings_page() {
                                 <label title="<?php _e('No, I\'ll stick to httpv or shortcodes.','wp-youtube-lyte');?>"><input type="radio" name="lyte_greedy" value="0" <?php if (get_option('lyte_greedy','1')!=="1") echo "checked" ?> /><?php _e("No thanks.","wp-youtube-lyte") ?></label>
                         </fieldset>
                 </td>
+        </tr>
+        <tr valign="top">
+            <th scope="row"><?php _e("Cache thumbnails locally?","wp-youtube-lyte") ?></th>
+            <td>
+                    <fieldset>
+                            <legend class="screen-reader-text"><span><?php _e("Cache thumbnails locally?","wp-youtube-lyte") ?></span></legend>
+                            <label title="<?php _e('That would be great!','wp-youtube-lyte');?>"><input type="radio" name="lyte_local_thumb" value="1" <?php if (get_option('lyte_local_thumb','0')==="1") echo "checked" ?> /><?php _e("Yes.","wp-youtube-lyte") ?></label><br />
+                            <label title="<?php _e('No, I\'ll stick to httpv or shortcodes.','wp-youtube-lyte');?>"><input type="radio" name="lyte_local_thumb" value="0" <?php if (get_option('lyte_local_thumb','0')!=="1") echo "checked" ?> /><?php _e("No (default).","wp-youtube-lyte") ?></label>
+                            <br />
+                            <?php _e("Having the thumbnails cached locally can improve performance and will enhance visitor privacy as by default no requests will be sent to YouTube unless the video is played.","wp-youtube-lyte"); ?>
+                    </fieldset>
+            </td>
         </tr>
 	<tr valign="top">
                 <th scope="row"><?php _e("Empty WP YouTube Lyte's cache","wp-youtube-lyte") ?></th>

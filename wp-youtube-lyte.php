@@ -230,10 +230,6 @@ function lyte_parse($the_content,$doExcerpt=false) {
 						$noscript_post="<br />".__("Watch this video on YouTube","wp-youtube-lyte");
 						$lytelinks_txt="<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\"></div>";
 						break;
-					case "2":
-						$noscript_post="";
-						$lytelinks_txt="<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\">".__("Watch this video","wp-youtube-lyte")." <a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\">".__("on YouTube","wp-youtube-lyte")."</a> ".__("or on","wp-youtube-lyte")." <a href=\"http://icant.co.uk/easy-youtube/?https://www.youtube.com/watch?v=".$vid."\">Easy Youtube</a>.</div>";
-						break;
 					default:
 						$noscript_post="";
 						$lytelinks_txt="<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\">".__("Watch this video","wp-youtube-lyte")." <a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\">".__("on YouTube","wp-youtube-lyte")."</a>.</div>";
@@ -313,7 +309,12 @@ function lyte_parse($the_content,$doExcerpt=false) {
 			// same fallback
 			$thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
 		}
-	
+
+                // do we have to serve the thumbnail from local cache?
+                if (get_option('lyte_local_thumb','0') === '1') {
+                        $thumbUrl = content_url() . "/plugins/wp-youtube-lyte/lyteThumbs.php?origThumbUrl=" . urlencode($thumbUrl);
+                }
+
 	        /** API: filter hook to override thumbnail URL */
 		$thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl );
 
