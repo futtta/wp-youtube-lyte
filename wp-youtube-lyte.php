@@ -312,7 +312,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
 
                 // do we have to serve the thumbnail from local cache?
                 if (get_option('lyte_local_thumb','0') === '1') {
-                        $thumbUrl = content_url() . "/plugins/wp-youtube-lyte/lyteThumbs.php?origThumbUrl=" . urlencode($thumbUrl);
+                        $thumbUrl = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
                 }
 
 	        /** API: filter hook to override thumbnail URL */
