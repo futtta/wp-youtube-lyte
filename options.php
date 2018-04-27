@@ -232,7 +232,7 @@ function lyte_settings_page() {
                 </td>
          </tr>
          <tr valign="top">
-                <th scope="row"><?php _e("Try to force HD (experimental)?","wp-youtube-lyte") ?></th>
+                <th scope="row"><?php _e("Try to force HD?","wp-youtube-lyte") ?></th>
                 <td>
                         <fieldset>
                                 <legend class="screen-reader-text"><span><?php _e("HD or not?","wp-youtube-lyte"); ?></span></legend>
@@ -262,7 +262,7 @@ function lyte_settings_page() {
                 </td>
         </tr>
         <tr valign="top">
-            <th scope="row"><?php _e("Cache thumbnails locally?","wp-youtube-lyte") ?></th>
+            <th scope="row"><?php _e("Cache thumbnails locally?","wp-youtube-lyte"); ?> (beta)</th>
             <td>
                     <fieldset>
                             <legend class="screen-reader-text"><span><?php _e("Cache thumbnails locally?","wp-youtube-lyte") ?></span></legend>
