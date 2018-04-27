@@ -1,6 +1,6 @@
 === WP YouTube Lyte ===
 Contributors: futtta, optimizingmatters
-Tags: youtube, video, widget, performance, gdpr, lazy load
+Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 4.9
@@ -10,9 +10,9 @@ High performance YouTube video, playlist and audio-only embeds which don't slow 
 
 == Description ==
 
-WP YouTube Lyte allows you to "lazy load" your video's, by inserting responsive "Lite YouTube Embeds". These look and feel like normal embedded YouTube, but only call the actual "fat" Flash or HTML5-player when clicked on, thereby [reducing download size & rendering time substantially](http://blog.futtta.be/2012/04/03/speed-matters-re-evaluating-wp-youtube-lytes-performance/) when embedding YouTube occasionally and improving page performance dramatically when you've got multiple YouTube video's on one and the same page.
+WP YouTube Lyte allows you to "lazy load" your video's, by inserting responsive "Lite YouTube Embeds". These look and feel like normal embedded YouTube, but only call the "fat" YouTube-player when clicked on, thereby [reducing download size & rendering time substantially](http://blog.futtta.be/2012/04/03/speed-matters-re-evaluating-wp-youtube-lytes-performance/) when embedding YouTube occasionally and improving page performance dramatically when you've got multiple YouTube video's on one and the same page. The plugin can be configured to cache YouTube thumbnails locally, improving both performance and privacy. As such LYTE embedded YouTube videos do not require requests to the YouTube servers, probably (I am not a lawyer) allowing for better GDPR-compliance.
 
-Just add a YouTube-link for a video or [an entire playlist](http://blog.futtta.be/2011/10/11/wp-youtube-lyte-support-for-playlists-almost-included/) with "httpv" (or "httpa" to [embed YouTube's audio](http://blog.futtta.be/2011/04/19/audio-only-youtube-embedding-with-wp-youtube-lyte-0-7/) only) instead of "http" or add a Lyte widget to your sidebar and WP YouTube Lyte replaces that link with the correct performance-optimized code. When a visitor clicks the play-button, WP YouTube Lyte seamlessly initiates [YouTube's new embedded player](http://apiblog.youtube.com/2010/07/new-way-to-embed-youtube-videos.html). Some examples:
+The plugin picks up on normal YouTube links, taking over from WordPress core's oEmbed. Alternatively you can add a YouTube-link for a video or [an entire playlist](http://blog.futtta.be/2011/10/11/wp-youtube-lyte-support-for-playlists-almost-included/) with "httpv" instead of "http(s)" or add a Lyte widget to your sidebar and WP YouTube Lyte replaces that link with the correct performance-optimized code. Some examples:
 
 * httpv://www.youtube.com/watch?v=_SQkWbRublY (normal video embed)
 * httpv://youtu.be/_SQkWbRublY (video embed with youtube-shortlink)
@@ -25,8 +25,6 @@ Or using shortcodes:
 `[lyte id="_SQkWbRublY" /]`
 `[lyte id="_SQkWbRublY" audio="true" /]`
 `[lyte id="A486E741B25F8E00" playlist="true" /]`
-
-As from 1.5.0 WP YouTube Lyte can also parse normal YouTube links (i.e. without httpv or not using lyte shortcodes). This feature can be enabled and disabled in the settings-page.
 
 WP YouTube Lyte has been written with optimal performance as primary goal, but has been tested for maximum browser-compatibility (iPad included) while keeping an eye on accessibility. Starting with version 1.2.0 lyte embeds are fully responsive and can automatically embed [videoObject microdata](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=2413309) as well. The plugin is fully multi-language, with support for Catalan, Dutch, English, French, German, Hebrew, Romanian, Spanish and Slovene.
 
@@ -87,7 +85,7 @@ When playing, HTML5 video will not be visible for everyone (see requirements). I
 * Browsers that don't support those codecs will, upon playing, fall back to Flash.
 
 = Does WP YouTube Lyte protect my visitor's privacy? =
-As opposed to some of the [most important](http://blog.futtta.be/2010/12/15/wordpress-com-stats-trojan-horse-for-quantcast-tracking/) [plugins](http://blog.futtta.be/2010/01/22/add-to-any-removed-from-here/) there is no 3rd party tracking code in WP YouTube Lyte, but YouTube off course does see visitor requests coming in (see also the youtube-nocookie.com remark in Bugs/Issues below) for the thumbnails.
+As opposed to some of the [most important](http://blog.futtta.be/2010/12/15/wordpress-com-stats-trojan-horse-for-quantcast-tracking/) [plugins](http://blog.futtta.be/2010/01/22/add-to-any-removed-from-here/) there is no 3rd party tracking code in WP YouTube Lyte, but YouTube off course does see visitor requests coming in for the thumbnails unless the option to cache thumbnails locally is enabled. If thumbnails are cached locally, no request will be sent to YouTube by your visitor's browser until/ unless the video is played.
 
 = Can I use WP YouTube Lyte for a custom field? =
 Just pass the httpv url of such a field to lyte_preparse like this: 
@@ -120,9 +118,6 @@ Yes, starting with version 1.5.0 normal YouTube links are automatically transfer
 = What can I do with the API? =
 A whole lot; there are filters to pre-parse the_content, to change settings, to change the CSS, to change the HTML of the LYTE-div, ... There are examples for all filters (and one action) in lyte_helper.php_example
 
-= How can I use/ activate lyte_helper.php_example? =
-Copy it to /wp-content/plugins/lyte_helper.php and activate it in WordPress' plugin page. After that you can simple remove the one of the comment-sequences (double-slash) to activate one (or more) of the functions in there.
-
 = Problem with All In One Seo Pack =
 All in One SEO Pack be default generates a description which still has httpv-links in it. To remove those, you'll have to use (example code in) lyte_helper.php (see above) and add lyte_filter_aioseop_description to the aioseop-filter in there.
 
@@ -130,7 +125,7 @@ All in One SEO Pack be default generates a description which still has httpv-lin
 You probably added a link around the httpv-url. No link is needed, just the httpv-url.
 
 = My video's seem to load slower on mobile devices? =
-By default WP YouTube Lyte will indeed load slower normal YouTube video's instead of Lyte ones, as Lyte video's require would require two clicks from the user to play a video (once to load the YouTube video and once to start it) because there is no autoplay-support on mobile. If you want to, you can force WP YouTube Lyte to make video's Lyte on mobile with this code (add it in your child theme's functions.php, in a seperate helper plugin or using the [code snippets plugin](https://wordpress.org/plugins/code-snippets/);
+By default (unless "cache thumbnail locally" is active) WP YouTube Lyte will indeed load slower normal YouTube video's instead of Lyte ones, as Lyte video's require would require two clicks from the user to play a video (once to load the YouTube video and once to start it) because there is no autoplay-support on mobile. If you want to, you can force WP YouTube Lyte to make video's Lyte on mobile with this code (add it in your child theme's functions.php, in a seperate helper plugin or using the [code snippets plugin](https://wordpress.org/plugins/code-snippets/);
 
 `
 add_filter('lyte_do_mobile','lyte_on_mobile',10,0);
@@ -139,11 +134,9 @@ function lyte_on_mobile(){
 }
 `
 
-= Any bugs/ issues should I know about? =
+= Any other issues should I know about? =
 * Although the widget is available in (very) small sizes, these do not display that great and might, in the near future, be disabled by YouTube as their Terms of Service state that the smallest available embedded player is 200X200 pixels. Use the deprecated smaller sizes at your own risk.
 * Having the same YouTube-video on one page can cause WP YouTube Lyte to malfunction (as the YouTube id is used as the div's id in the DOM, and DOM id's are supposed to be unique)
-* When using the Firefox plugin Karma Blocker, the [video isn't visible when clicking "play", with a warning message being shown instead](http://blog.futtta.be/?p=7584). This is expected behavior and should be solved by tweaking Karma Blocker's configuration.
-* The translations have not been updated entirely for version 1.2.0 and later. Help with translations is high on my wish-list, [contact me if you are interested to help](http://blog.futtta.be/contact)!
 
 = I found a bug/ I would like a feature to be added! =
 Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog.futtta.be/contact/), [leave a comment in a post about wp-youtube-lyte](http://blog.futtta.be/tag/wp-youtube-lyte/) or [create a new topic on the wordpress.org forum](http://wordpress.org/tags/wp-youtube-lyte?forum_id=10#postform).
@@ -156,7 +149,7 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 == Changelog ==
 
 = 1.7.0 =
-* new: option to have thumbnail hosted locally to improve performance and privacy (gdpr anyone?)
+* new: option to have thumbnail hosted locally to improve performance and privacy (I am not a lawyer, but this could make embedded YouTube GDPR compliant as not requests are sent to YouTube unless/ until the video is played).
 * removed option to add "easy youtube"-links (defunct)
 * make widgets not break HTTPS (thanks R33D3M33R)
 
