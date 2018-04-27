@@ -134,15 +134,14 @@ function lyte_get_thumb($thumbUrl) {
         $str = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
-        if (!$err) {
+        if ( !$err && $str != "" ) {
             return $str;
-        } else {
-            return false;
         }
-    } else {
-        $resp = file_get_contents($thumbUrl);
-        return $resp;
     }
+
+    // if no curl or if curl error
+    $resp = file_get_contents($thumbUrl);
+    return $resp;
 }
 
 function lyte_thumb_fallback() {
