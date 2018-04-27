@@ -550,8 +550,9 @@ function lyte_init() {
 
 	// by default show lyte vid on mobile (requiring user clicking play two times)
 	// but can be overruled by this filter
+        // also "do lyte mobile" when option to cache thumbnails is on to ensure privacy (gdpr)
 	$mobLyte = apply_filters( 'lyte_do_mobile', false );
-	if ($mobLyte) {
+	if ( $mobLyte || get_option( 'lyte_local_thumb', 0 ) ) {
 		$mobJS = "var mOs=null;";
 	} else {
 		$mobJS = "var mOs=navigator.userAgent.match(/(iphone|ipad|ipod|android)/i);";
