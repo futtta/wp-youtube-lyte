@@ -10,20 +10,32 @@
  * 
  */
 
+// no error reporting, those break header() output
+error_reporting(0);
+
 /* 
- * step 0: set constant for dir where thumbs are stored
+ * step 0: set constant for dir where thumbs are stored + declaring some variables
  */
 
 if ( ! defined( 'LYTE_CACHE_DIR' ) ) {
-    define( 'WP_CONTENT_DIR', dirname( __DIR__ , 2 ) );
+    define( 'WP_CONTENT_DIR', dirname( dirname( __DIR__ ) ) );
     define( 'LYTE_CACHE_CHILD_DIR', 'cache/lyteThumbs' );
     define( 'LYTE_CACHE_DIR', WP_CONTENT_DIR .'/'. LYTE_CACHE_CHILD_DIR );
 }
 
+$lyte_thumb_error = "";
+$lyte_thumb_dontsave = "";
+$thumbContents = "";
+$lyte_thumb_report_err = false;
 
 /*
  * step 1: get vid ID (or full thumbnail URL) from request and validate
  */
+
+// should we output debug info in a header?
+if ( array_key_exists("reportErr", $_GET) ) {
+    $lyte_thumb_report_err = true;
+}
 
 // get thumbnail-url from request
 if ( array_key_exists("origThumbUrl", $_GET) && $_GET["origThumbUrl"] !== "" ) {
@@ -55,6 +67,7 @@ if ( lyte_str_ends_in( $origThumbPath, ".jpg" ) !== true ) {
 
 if ( lyte_check_cache_dir(LYTE_CACHE_DIR) === false ) {
     $lyte_thumb_dontsave = true;
+    $lyte_thumb_error .= "checkcache fail/ ";
 }
 
 /* 
@@ -77,12 +90,18 @@ if ( !file_exists($localThumb) || $lyte_thumb_dontsave ) {
 
 if ( $thumbContents == "" && file_exists($localThumb) && mime_content_type($localThumb) === "image/jpeg" ) {
     $thumbContents = file_get_contents( $localThumb );
+} else {
+    $lyte_thumb_error .= "cachefetch fail/ ";
 }
 
 if ( $thumbContents != "") {
+    if ( $lyte_thumb_error !== "" && $lyte_thumb_report_err ) {
+        header('X-lyte-error:  '.$lyte_thumb_error);
+    }
     header('Content-type:image/jpeg');
     echo $thumbContents;
 } else {
+    $lyte_thumb_error .= "no thumbContent/ ";
     lyte_thumb_fallback();
 }
 
@@ -125,6 +144,7 @@ function lyte_str_ends_in($haystack,$needle) {
 }
 
 function lyte_get_thumb($thumbUrl) {
+    global $lyte_thumb_error;
     if (function_exists("curl_init")) {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $thumbUrl);
@@ -136,7 +156,11 @@ function lyte_get_thumb($thumbUrl) {
         curl_close($curl);
         if ( !$err && $str != "" ) {
             return $str;
+        } else {
+            $lyte_thumb_error .= "curl err/ ";
         }
+    } else {
+        $lyte_thumb_error .= "no curl/ ";
     }
 
     // if no curl or if curl error
@@ -145,11 +169,14 @@ function lyte_get_thumb($thumbUrl) {
 }
 
 function lyte_thumb_fallback() {
-    global $origThumbURL;
+    global $origThumbURL, $lyte_thumb_error;
     // if for any reason the caching does not work, we redirect to the original thumbnail
     if ( strpos( $origThumbURL, "http" ) !== 0) {
             $origThumbURL = "https:".$origThumbURL;              
     }
-    header("HTTP/1.1 301 Moved Permanently");
+    if ( $lyte_thumb_report_err ) {
+        header('X-lyte-error:  '.$lyte_thumb_error);
+    }
+    header('HTTP/1.1 301 Moved Permanently');
     header('Location:  '.  $origThumbURL );
 }
