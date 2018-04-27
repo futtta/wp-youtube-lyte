@@ -54,7 +54,7 @@ if ( lyte_str_ends_in( $origThumbPath, ".jpg" ) !== true ) {
  */
 
 if ( lyte_check_cache_dir(LYTE_CACHE_DIR) === false ) {
-    lyte_thumb_fallback();
+    $lyte_thumb_dontsave = true;
 }
 
 /* 
@@ -63,11 +63,11 @@ if ( lyte_check_cache_dir(LYTE_CACHE_DIR) === false ) {
 
 $localThumb = LYTE_CACHE_DIR . '/' . md5($origThumbURL) . ".jpg";
 
-if ( !file_exists($localThumb) ) {
-    $thumb = lyte_get_thumb($origThumbURL);
+if ( !file_exists($localThumb) || $lyte_thumb_dontsave ) {
+    $thumbContents = lyte_get_thumb($origThumbURL);
     
-    if ($thumb != "") {
-        file_put_contents($localThumb, $thumb);
+    if ( $thumbContents != "" && !$lyte_thumb_dontsave ) {
+        file_put_contents($localThumb, $thumbContents);
     }
 }
 
@@ -75,15 +75,13 @@ if ( !file_exists($localThumb) ) {
  * step 4: serve img
  */
 
-if ( file_exists($localThumb) && mime_content_type($localThumb) === "image/jpeg" ) {
+if ( $thumbContents == "" && file_exists($localThumb) && mime_content_type($localThumb) === "image/jpeg" ) {
     $thumbContents = file_get_contents( $localThumb );
+}
 
-    if ( $thumbContents != "") {
-        header('Content-type:image/jpeg');
-        echo $thumbContents;
-    } else {
-        lyte_thumb_fallback();
-    }
+if ( $thumbContents != "") {
+    header('Content-type:image/jpeg');
+    echo $thumbContents;
 } else {
     lyte_thumb_fallback();
 }
