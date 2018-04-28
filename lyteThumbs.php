@@ -88,10 +88,10 @@ if ( !file_exists($localThumb) || $lyte_thumb_dontsave ) {
  * step 4: serve img
  */
 
-if ( $thumbContents == "" && file_exists($localThumb) && mime_content_type($localThumb) === "image/jpeg" ) {
+if ( $thumbContents == "" && !$lyte_thumb_dontsave && file_exists($localThumb) && mime_content_type($localThumb) === "image/jpeg" ) {
     $thumbContents = file_get_contents( $localThumb );
 } else {
-    $lyte_thumb_error .= "cachefetch fail/ ";
+    $lyte_thumb_error .= "not from cache/ ";
 }
 
 if ( $thumbContents != "") {
@@ -170,7 +170,7 @@ function lyte_get_thumb($thumbUrl) {
 
 function lyte_thumb_fallback() {
     global $origThumbURL, $lyte_thumb_error;
-    // if for any reason the caching does not work, we redirect to the original thumbnail
+    // if for any reason we can't show a local thumbnail, we redirect to the original one
     if ( strpos( $origThumbURL, "http" ) !== 0) {
             $origThumbURL = "https:".$origThumbURL;              
     }
