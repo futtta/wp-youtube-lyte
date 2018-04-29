@@ -316,8 +316,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 }
 
 	        /** API: filter hook to override thumbnail URL */
-		$thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl );
-
+		$thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl, $vid );
 
 			if ($audio===true) {
 				$wrapper="<div class=\"lyte-wrapper-audio\" style=\"width:".$lyteSettings[2]."px;max-width:100%;overflow:hidden;height:38px;".$lyteSettings['pos']."\">";
