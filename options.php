@@ -267,7 +267,7 @@ function lyte_settings_page() {
                     <fieldset>
                             <legend class="screen-reader-text"><span><?php _e("Cache thumbnails locally?","wp-youtube-lyte") ?></span></legend>
                             <label title="<?php _e('That would be great!','wp-youtube-lyte');?>"><input type="radio" name="lyte_local_thumb" value="1" <?php if (get_option('lyte_local_thumb','0')==="1") echo "checked" ?> /><?php _e("Yes.","wp-youtube-lyte") ?></label><br />
-                            <label title="<?php _e('No, I\'ll stick to httpv or shortcodes.','wp-youtube-lyte');?>"><input type="radio" name="lyte_local_thumb" value="0" <?php if (get_option('lyte_local_thumb','0')!=="1") echo "checked" ?> /><?php _e("No (default).","wp-youtube-lyte") ?></label>
+                            <label title="<?php _e('No, keep on using YouTube hosted thumbnails.','wp-youtube-lyte');?>"><input type="radio" name="lyte_local_thumb" value="0" <?php if (get_option('lyte_local_thumb','0')!=="1") echo "checked" ?> /><?php _e("No (default).","wp-youtube-lyte") ?></label>
                             <br />
                             <?php _e("Having the thumbnails cached locally can improve performance and will enhance visitor privacy as by default no requests will be sent to YouTube unless the video is played.","wp-youtube-lyte"); ?>
                     </fieldset>
