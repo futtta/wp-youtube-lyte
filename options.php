@@ -393,7 +393,7 @@ function lyte_check_yt_api_key_callback() {
 	$api_key = strip_tags($_POST['lyte_yt_api_key']);
 
 	// use random video to make sure a cache is not spoiling things
-	$vidToCheck=array("jLOnUWJTCG0","ZmnZHudtzXg","2_7oQcAkyl8","nOvv80wkSgI","pBCt5nfsZ30","KHw7gdJ14uQ","qJ_PMvjmC6M","DVwHCGAr_OE","LtOGa5M8AuU","VHO9uZX9FNU");
+	$vidToCheck=array("ZmnZHudtzXg","2_7oQcAkyl8","nOvv80wkSgI","pBCt5nfsZ30","KHw7gdJ14uQ","qJ_PMvjmC6M","DVwHCGAr_OE","LtOGa5M8AuU","VHO9uZX9FNU");
 	$randVidIndex=array_rand($vidToCheck);
 	
 	$api_response = lyte_get_YT_resp($vidToCheck[$randVidIndex],false,"",$api_key);
@@ -402,33 +402,38 @@ function lyte_check_yt_api_key_callback() {
 		if (!empty($api_response["title"])) {
 			_e("API seems OK, you can Save Changes below now.");
 		} else if (!empty($api_response["reason"])) {
-			_e("API key not OK, your key seems to ");
+			$all_but_one = __("API key not OK, your key seems to ");
 			switch ($api_response["reason"]) {
 				case "keyInvalid":
+                    echo $all_but_one;
 					_e("be invalid.",'wp-youtube-lyte');
 					break;
 				case "ipRefererBlocked":
+                    echo $all_but_one;
 					_e("be valid, but restricted to an IP-address which is not your server's.",'wp-youtube-lyte');
 					_e("Try changing the allowed IP for your API key to include this one: ",'wp-youtube-lyte');
 					echo $_SERVER["SERVER_ADDR"];
 					break;
 				case "keyExpired":
+                    echo $all_but_one;
 					_e("have expired, please check in the Google Developer Console.",'wp-youtube-lyte');
 					break;
 				case "limitExceeded":
 				case "quotaExceeded":
 				case "rateLimitExceeded":
 				case "userRateLimitExceeded":
+                    echo $all_but_one;
 					_e("be correct, but seems to have exceeded the number of requests that can be made with it.",'wp-youtube-lyte');
 					break;
 				case "videoNotFound":
+                    echo $all_but_one;
 					_e("probably work, but as the video with id ",'wp-youtube-lyte');
 					echo $vidToCheck[$randVidIndex];
 					_e(" was not found we cannot be sure, please try again.",'wp-youtube-lyte');
 					break;
 				default:
-					_e("be faulty, with YouTube API returning reason: ",'wp-youtube-lyte');
-					echo $api_response["reason"];
+					_e("Your API key might be OK, but the API response was not entirely expected. You can check your browser's console for more informatoin or just Save Changes below.",'wp-youtube-lyte');
+					echo "<script>console.log('". json_encode($api_response) . "');</script>";
 				}
 		}
 	} else {
