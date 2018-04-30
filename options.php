@@ -432,8 +432,8 @@ function lyte_check_yt_api_key_callback() {
                     _e(" was not found we cannot be sure, please try again.",'wp-youtube-lyte');
                     break;
                 default:
-                    _e("Your API key might be OK, but the API response was not entirely expected. You can check your browser's console for more informatoin or just Save Changes below.",'wp-youtube-lyte');
-                    echo "<script>console.log('". json_encode($api_response) . "');</script>";
+                    _e("Your API key might be OK, but the API call did not succeed or the response was not entirely expected. Technical error: ",'wp-youtube-lyte');
+                    echo $api_response["reason"];
                 }
         }
     } else {

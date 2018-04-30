@@ -462,8 +462,14 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
         $yt_resp = wp_remote_get($yt_api_url);
 
         // check if we got through
-        if (is_wp_error($yt_resp)) {
-            $_thisLyte = "";
+        if ( is_wp_error($yt_resp) ) {
+            $_thisLyte = array();
+            $yt_error['code']=408;
+            $yt_error['reason']=$yt_resp->get_error_message();;
+            $yt_error['timestamp']=strtotime("now");
+            if (!empty($apiTestKey)) {
+                return $yt_error;
+            }
         } else {
             $yt_resp_array=json_decode(wp_remote_retrieve_body($yt_resp),true);                            
             if(is_array($yt_resp_array)) {
