@@ -439,7 +439,7 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
                 $_thisLyte['HQthumbUrl']="";
             } else {
                 $_thisLyte['thumbUrl']="//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
-                           $_thisLyte['HQthumbUrl']="//i.ytimg.com/vi/".$vid."/maxresdefault.jpg";
+                $_thisLyte['HQthumbUrl']="//i.ytimg.com/vi/".$vid."/maxresdefault.jpg";
             }
             $_thisLyte['dateField']="";
             $_thisLyte['duration']="";
