@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.6.8
+Stable tag: 1.7.1
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -147,6 +147,9 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.1 =
+* Finally fixed a nasty bug that caused API key validation to fail on PHP 7.1 and higher. A big thank you to @emilyatal, @mkalina, @nicolaottomano, @aminech, @partounian, @nicksws who all provided valuable input in [the WordPress LYTE support forum](https://wordpress.org/support/topic/youtube-api-got-error-1-2/) and tested multiple debug-versions to help fix this.
 
 = 1.7.0 =
 * new: option to have thumbnail hosted locally to improve performance and privacy (I am not a lawyer, but this could make embedded YouTube GDPR compliant as not requests are sent to YouTube unless/ until the video is played).
