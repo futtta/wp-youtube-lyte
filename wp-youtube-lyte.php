@@ -423,8 +423,6 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
             $widget_cache = json_decode(gzuncompress(base64_decode($cache_resp)),1);
             $_thisLyte = $widget_cache[$vid];
         }
-    } else {
-        $_thisLyte = "";
     }
 
     if ( empty( $_thisLyte ) ) {
