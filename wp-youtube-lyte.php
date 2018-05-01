@@ -402,8 +402,12 @@ function captions_lookup($postID, $cachekey, $vid) {
 function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidget=false) {
     /** logic to get video info from cache or get it from YouTube and set it */
     global $postID, $cachekey, $toCache_index;
+    
+    $_thisLyte = array();
+    $yt_error = array();                    
+
     if ( $postID && empty($apiTestKey) && !$isWidget ) {
-            $cache_resp = get_post_meta( $postID, $cachekey, true );
+        $cache_resp = get_post_meta( $postID, $cachekey, true );
         if (!empty($cache_resp)) {
             $_thisLyte = json_decode(gzuncompress(base64_decode($cache_resp)),1);
             // make sure there are not old APIv2 full responses in cache
@@ -463,15 +467,14 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
 
         // check if we got through
         if ( is_wp_error($yt_resp) ) {
-            $_thisLyte = array();
             $yt_error['code']=408;
-            $yt_error['reason']=$yt_resp->get_error_message();;
+            $yt_error['reason']=$yt_resp->get_error_message();
             $yt_error['timestamp']=strtotime("now");
             if (!empty($apiTestKey)) {
                 return $yt_error;
             }
         } else {
-            $yt_resp_array=json_decode(wp_remote_retrieve_body($yt_resp),true);                            
+            $yt_resp_array = (array) json_decode(wp_remote_retrieve_body($yt_resp),true);                            
             if(is_array($yt_resp_array)) {
                 // extract relevant data
                 // v3
@@ -484,7 +487,6 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
                     } else {
                         return $yt_error;
                     }
-                    $_thisLyte = "";
                 } else {
                     if ($playlist) {
                         $_thisLyte['title']="Playlist: ".esc_attr(sanitize_text_field(@$yt_resp_array['items'][0]['snippet']['title']));
