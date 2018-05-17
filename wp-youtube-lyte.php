@@ -347,6 +347,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
             }
 
             /** API: filter hook to parse template before being applied */
+            $lytetemplate = str_replace('$','&#36;',$lytetemplate);
             $lytetemplate = apply_filters( 'lyte_match_postparse_template',$lytetemplate,$templateType );
             $the_content = preg_replace($lytes_regexp, $lytetemplate, $the_content, 1);
         }
