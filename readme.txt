@@ -43,9 +43,6 @@ Just install form your Wordpress "Plugins|Add New" screen and all will be well. 
 = Why does WP YouTube Lyte need to access the YouTube API? What is an API anyway? =
 An API is a way to have two pieces of software talk to each other to exchange information. In this case WP YouTube Lyte contacts YouTube to ask it for the thumbnail, the title and the description of the video you added. The thumbnail and title are visible on the webpage (in the Lyte player) while the description is in the HTML as microdata for search engines optimization reasons (see below).
 
-= What is an API key and why does WP YouTube Lyte need one all of a sudden? =
-Up until WP YouTube Lyte 1.5.0 the v2 YouTube API was used, but [in September 2014 Google announced it was going to decommission that version, forcing the switch to v3](http://youtube-eng.blogspot.be/2014/09/have-you-migrated-to-data-api-v3-yet.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+YouTubeEngDevBlog+%28YouTube+Engineering+and+Developers+Blog%29). A big difference between v2 and v3 is that, whereas v2 allowed "anonymous" requests, this is not the case for v3 any more. This means any request to the YouTube API v3 has to be identified with a key (a string with seamingly random letters & numbers). You can get such a key from Google for free (see below) and you have to enter that in WP YouTube Lyte's settings page.
-
 = OK, now how can get that API key? =
 
 1. Go to [Google Developer Console](https://console.developers.google.com/projectselector/apis/library) and log in with your Google account.
@@ -76,16 +73,11 @@ Yes, with some exceptions; WP YouTube Lyte will continue to work, rendering Lyte
 = I don't want an API key, how can I get rid of the "API key"-notice? =
 Just enter "none" (without the quotes) in the API key field and Lyte will stop nagging you.
 
-= What does "html5 video support" mean? =
-When playing, HTML5 video will not be visible for everyone (see requirements). Indeed some visitors will see the fallback Flash video instead.
-
-= What are the requirements to see embedded YouTube HTML5 video? =
-* Beginning 2015 YouTube announced it would switch to HTML5 video by default.
-* This will work in browsers that support the h264 or WebM video codecs, most modern browser should work.
-* Browsers that don't support those codecs will, upon playing, fall back to Flash.
-
 = Does WP YouTube Lyte protect my visitor's privacy? =
 As opposed to some of the [most important](http://blog.futtta.be/2010/12/15/wordpress-com-stats-trojan-horse-for-quantcast-tracking/) [plugins](http://blog.futtta.be/2010/01/22/add-to-any-removed-from-here/) there is no 3rd party tracking code in WP YouTube Lyte, but YouTube off course does see visitor requests coming in for the thumbnails unless the option to cache thumbnails locally is enabled. If thumbnails are cached locally, no request will be sent to YouTube by your visitor's browser until/ unless the video is played.
+
+= I use a page builder and LYTE does not seem active on the YouTube video's I add there? =
+LYTE by default uses WordPress' "the_content"-filter. Page builders don't apply that filter to their content and thus LYTE does not get triggered on those. As a workaround you can the LYTE video using the shortcode in your page-builder Text-block, this works in most page-builders.
 
 = Can I use WP YouTube Lyte for a custom field? =
 Just pass the httpv url of such a field to lyte_preparse like this: 
@@ -94,9 +86,6 @@ and you're good to go!
 
 = Does WP YouTube Lyte work with Infinite Scroll? =
 Starting from version 1.1.0 it does; in [Infinite Scroll](http://wordpress.org/extend/plugins/infinite-scroll/)'s configuration you just have to add "ly.te()" in the  "Javascript to be called after the next posts are fetched"-box.
-
-= Can I still integrate with YouTube's JS API? =
-This was added as a beta feature in version 1.1.0; add ?enablejsapi=1 to the httpv URL. WP YouTube Lyte will pick this up, and add ?enablejsapi=1&origin=<hostname-of-blog> to the URL of the iFrame with the iFrame id being set to iF_<youtube-video-id>. As soon as your visitors plays the video, you should be able to hook up with the video.
 
 = How does WP YouTube Lyte support microdata? =
 * There is a [specific microdata scheme for "videoObject"](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=2413309) which WP YouTube Lyte can add to your page, which Google can use to display the video thumbnail next to the search-result
