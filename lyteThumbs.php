@@ -74,6 +74,10 @@ if ( lyte_check_cache_dir(LYTE_CACHE_DIR) === false ) {
  * step 3: if not in cache: fetch from YT and store in cache
  */
 
+if ( strpos($origThumbURL,'http') !== 0 && strpos($origThumbURL,'//') === 0 ) {
+    $origThumbURL = 'https:'.$origThumbURL;
+}
+
 $localThumb = LYTE_CACHE_DIR . '/' . md5($origThumbURL) . ".jpg";
 
 if ( !file_exists($localThumb) || $lyte_thumb_dontsave ) {
@@ -157,7 +161,7 @@ function lyte_get_thumb($thumbUrl) {
         if ( !$err && $str != "" ) {
             return $str;
         } else {
-            $lyte_thumb_error .= "curl err/ ";
+            $lyte_thumb_error .= "curl err: ".$err."/ ";
         }
     } else {
         $lyte_thumb_error .= "no curl/ ";
@@ -169,7 +173,7 @@ function lyte_get_thumb($thumbUrl) {
 }
 
 function lyte_thumb_fallback() {
-    global $origThumbURL, $lyte_thumb_error;
+    global $origThumbURL, $lyte_thumb_error, $lyte_thumb_report_err;
     // if for any reason we can't show a local thumbnail, we redirect to the original one
     if ( strpos( $origThumbURL, "http" ) !== 0) {
             $origThumbURL = "https:".$origThumbURL;              
