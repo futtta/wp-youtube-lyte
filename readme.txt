@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -60,9 +60,9 @@ An API is a way to have two pieces of software talk to each other to exchange in
 
 4. In the sidebar on the left:
  * Click on 'Credentials'
- * Click on 'Create new Key'
- * Click on 'Server Key'
- * Leave the box with whitelisted IP's empty
+ * Click on 'Create Credential'
+ * Click on 'API key'
+ * Set as little restrictions as possible, most problems with getting this working are caused by these settings.
  * Click on 'Create'
 
 5. Copy your API key to WP YouTube Lyte settings page.
@@ -77,7 +77,7 @@ Just enter "none" (without the quotes) in the API key field and Lyte will stop n
 As opposed to some of the [most important](http://blog.futtta.be/2010/12/15/wordpress-com-stats-trojan-horse-for-quantcast-tracking/) [plugins](http://blog.futtta.be/2010/01/22/add-to-any-removed-from-here/) there is no 3rd party tracking code in WP YouTube Lyte, but YouTube off course does see visitor requests coming in for the thumbnails unless the option to cache thumbnails locally is enabled. If thumbnails are cached locally, no request will be sent to YouTube by your visitor's browser until/ unless the video is played.
 
 = I use a page builder and LYTE does not seem active on the YouTube video's I add there? =
-LYTE by default uses WordPress' "the_content"-filter. Page builders don't apply that filter to their content and thus LYTE does not get triggered on those. As a workaround you can the LYTE video using the shortcode in your page-builder Text-block, this works in most page-builders.
+LYTE by default uses WordPress' "the_content"-filter. Page builders don't apply that filter to their content and thus LYTE does not get triggered on those. As a workaround you can add the LYTE video using the shortcode in your page-builder Text-block, this works in most page-builders.
 
 = Can I use WP YouTube Lyte for a custom field? =
 Just pass the httpv url of such a field to lyte_preparse like this: 
@@ -136,6 +136,10 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.2 =
+* new: you can add a text underneath each video (e.g. for privacy disclaimer purposes, think GDPR) by adding it on the settings-page
+* fix: thumbnails from LYTE without API key can now also be cached locally
 
 = 1.7.1 =
 * Finally fixed a nasty bug that caused API key validation to fail on PHP 7.1 and higher. A big thank you to @emilyatal, @mkalina, @nicolaottomano, @aminech, @partounian, @nicksws who all provided valuable input in [the WordPress LYTE support forum](https://wordpress.org/support/topic/youtube-api-got-error-1-2/) and tested multiple debug-versions to help fix this.
