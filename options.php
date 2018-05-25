@@ -57,6 +57,7 @@ function register_lyte_settings() {
     register_setting( 'lyte-settings-group', 'lyte_greedy' );
     register_setting( 'lyte-settings-group', 'lyte_yt_api_key' );
     register_setting( 'lyte-settings-group', 'lyte_local_thumb' );
+    register_setting( 'lyte-settings-group', 'lyte_disclaimer' );
 }
 
 function lyte_admin_scripts() {
@@ -194,20 +195,20 @@ function lyte_settings_page() {
             <th scope="row"><?php _e("Player size","wp-youtube-lyte") ?>:</th>
             <td>
                 <fieldset><legend class="screen-reader-text"><span><?php _e("Player size","wp-youtube-lyte") ?></span></legend>
-        <?php
-            $sel = !is_bool(get_option('lyte_size')) ? (int) get_option('lyte_size') : 0;
-            foreach (array("169","43") as $f) {
-                foreach ($pSizeOrder[$f] as $i) {
-                    $pS=$pSize[$i];
-                    if ($pS['a']===true) {
-                        ?>
-                        <label title="<?php echo $pS['w']."X".$pS['h']; ?>"><input type="radio" name="lyte_size" class="l_size" value="<?php echo $i."\"";if($i===$sel) echo " checked";echo " /> ".$pS['w']."X".$pS['h']." (".$pS['t'];?>)</label><br />
-                        <?php
+                <?php
+                    $sel = !is_bool(get_option('lyte_size')) ? (int) get_option('lyte_size') : 0;
+                    foreach (array("169","43") as $f) {
+                        foreach ($pSizeOrder[$f] as $i) {
+                            $pS=$pSize[$i];
+                            if ($pS['a']===true) {
+                                ?>
+                                <label title="<?php echo $pS['w']."X".$pS['h']; ?>"><input type="radio" name="lyte_size" class="l_size" value="<?php echo $i."\"";if($i===$sel) echo " checked";echo " /> ".$pS['w']."X".$pS['h']." (".$pS['t'];?>)</label><br />
+                                <?php
+                            }
+                        }
+                        ?><br /><?php
                     }
-                }
-                ?><br /><?php
-            }
-        ?>
+                ?>
                 </fieldset>
              </td>
          </tr>
@@ -240,7 +241,7 @@ function lyte_settings_page() {
                                 <label title="<?php _e('Don\'t enable HD playback','wp-youtube-lyte');?>"><input type="radio" name="lyte_hidef" value="0" <?php if (get_option('lyte_hidef','0')!=="1") echo "checked" ?> /><?php _e("No HD (default)","wp-youtube-lyte") ?></label>
                         </fieldset>
                 </td>
-    </tr>
+        </tr>
          <tr valign="top">
                 <th scope="row"><?php _e("Add microdata?","wp-youtube-lyte") ?></th>
                 <td>
@@ -273,7 +274,18 @@ function lyte_settings_page() {
                     </fieldset>
             </td>
         </tr>
-    <tr valign="top">
+        <tr valign="top">
+            <th scope="row"><?php _e("Text to be added under every LYTE video.","wp-youtube-lyte"); ?></th>
+            <td>
+                <fieldset>
+                    <legend class="screen-reader-text"><span><?php _e("Text (e.g. for disclaimer) to be added under every LYTE video.","wp-youtube-lyte") ?></span></legend>
+                    <input type="text" style="width:100%;" name="lyte_disclaimer" placeholder="" value="<?php echo esc_textarea(get_option('lyte_disclaimer','')); ?>" /><br />
+                    <br />
+                    <?php _e("If you want to add e.g. a privacy disclaimer under every LYTE embedded video, you can do so here. Some HTML is allowed. Simply leave empty not to show anything.","wp-youtube-lyte"); ?>
+                </fieldset>
+            </td>
+        </tr>
+        <tr valign="top">
                 <th scope="row"><?php _e("Empty WP YouTube Lyte's cache","wp-youtube-lyte") ?></th>
                 <td>
                         <fieldset>

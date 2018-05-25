@@ -237,7 +237,16 @@ function lyte_parse($the_content,$doExcerpt=false) {
 
                 $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"".$lyteSettings['scheme']."://i.ytimg.com/vi/".$vid."/0.jpg\" alt=\"\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
             }
-
+            
+            // add disclaimer to lytelinks
+            $disclaimer = wp_kses_data( get_option( 'lyte_disclaimer', '') );
+            
+            if ( $disclaimer && empty( $lytelinks_txt ) ) {
+                $lytelinks_txt = "<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\">".$diclaimer."</div>";
+            } else if ( $disclaimer ) {
+                $lytelinks_txt = str_replace('</div>','<br/>'.$disclaimer.'</div>',$lytelinks_txt);
+            }
+            
             // fetch data from YT api (v2 or v3)
             $isPlaylist=false;
             if ($plClass===" playlist") {
