@@ -69,9 +69,9 @@ ly.play = function(id) {
     if (tH.className.indexOf("hidef") !== -1) { hidef="1&amp;vq=hd720" }
 
     if (tH.className.indexOf("playlist") === -1) {
-    	eU=sch+"://www.youtube.com/embed/" + vid + "?"
+    	eU=sch+"://www.youtube-nocookie.com/embed/" + vid + "?"
     } else {
-    	eU=sch+"://www.youtube.com/embed/videoseries?list=" + vid + "&"
+    	eU=sch+"://www.youtube-nocookie.com/embed/videoseries?list=" + vid + "&"
     }
 
     qsa=ly.getQ(tH);
