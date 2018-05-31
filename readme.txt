@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -136,6 +136,10 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.3 =
+* switched YouTube to youtube-nocookie.com.
+* added span around description to ensure it can be styled separately.
 
 = 1.7.2 =
 * new: you can add a text underneath each video (e.g. for privacy disclaimer purposes, think GDPR) by adding it on the settings-page
