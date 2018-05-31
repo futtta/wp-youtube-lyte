@@ -102,8 +102,25 @@ if ( $thumbContents != "") {
     if ( $lyte_thumb_error !== "" && $lyte_thumb_report_err ) {
         header('X-lyte-error:  '.$lyte_thumb_error);
     }
-    header('Content-type:image/jpeg');
-    echo $thumbContents;
+
+    $modTime=filemtime($localThumb);
+
+    date_default_timezone_set("UTC");
+    $modTimeMatch = (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) === $modTime);
+
+    if ( $modTimeMatch ) {
+        header('HTTP/1.1 304 Not Modified');
+        header('Connection: close');
+    } else {
+        // send all sorts of headers
+        $expireTime=60*60*24*7; // 1w
+        header('Content-Length: '.strlen($thumbContents));
+        header('Cache-Control: max-age='.$expireTime.', public, immutable');
+        header('Expires: '.gmdate('D, d M Y H:i:s', time() + $expireTime).' GMT');
+        header('Last-Modified: '.gmdate('D, d M Y H:i:s', $modTime).' GMT');
+        header('Content-type:image/jpeg');
+        echo $thumbContents;
+    }
 } else {
     $lyte_thumb_error .= "no thumbContent/ ";
     lyte_thumb_fallback();
