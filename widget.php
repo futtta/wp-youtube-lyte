@@ -31,14 +31,14 @@ class WYLWidget extends WP_Widget {
         if (strpos($WYLurl,'youtu.be')) {
             $WYLid=substr(parse_url($WYLurl,PHP_URL_PATH),1,11);
             $PLClass="";
-            $WYLthumb="https://img.youtube.com/vi/".$WYLid."/mqdefault.jpg";
+            $WYLthumb="https://img.youtube.com/vi/".$WYLid."/hqdefault.jpg";
         } else {
             if (isset($WYLarr['v'])) {
                 $WYLid=$WYLarr['v'];
                 $PLClass="";
-                $WYLthumb="https://img.youtube.com/vi/".$WYLid."/mqdefault.jpg";
+                $WYLthumb="https://img.youtube.com/vi/".$WYLid."/hqdefault.jpg";
             } else if (isset($WYLarr['list'])) {
-                   $WYLid=$WYLarr['list'];
+                $WYLid=$WYLarr['list'];
                 $yt_resp=lyte_get_YT_resp($WYLid,true,"","",true);
                 $WYLthumb=$yt_resp["thumbUrl"];
                 $PLClass=" playlist";

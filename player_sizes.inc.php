@@ -85,4 +85,15 @@ $wSize[6]['depr']=false;
 $wSize[7]['h']=300;
 $wSize[7]['w']=400;
 $wSize[7]['depr']=false;
+
+// bigger widgets, for use in pagebuilders rather then sidebars
+$wSize[8]['h']=400;
+$wSize[8]['w']=711;
+$wSize[8]['depr']=false;
+$wSize[9]['h']=500;
+$wSize[9]['w']=889;
+$wSize[9]['depr']=false;
+$wSize[10]['h']=600;
+$wSize[10]['w']=1066;
+$wSize[10]['depr']=false;
 ?>
