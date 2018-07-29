@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -101,8 +101,8 @@ In January 2014 [Benetech](http://benetech.org/), a U.S. nonprofit that develops
 * Widgets are not responsive.
 * if the content div width gets to around 200 pixels, the LYTE UI will become garbled (YouTube requires the minimum embed width to be 200px as well).
 
-= Can I use WP YouTube Lyte on normal YouTube links? =
-Yes, starting with version 1.5.0 normal YouTube links are automatically transferred in Lyte embeds as well. You will automagically also get a (non-Lyte) preview of the video in your visual post edit screen. 
+= Can I use WP YouTube Lyte on normal YouTube links or iframes? =
+Yes, starting with version 1.5.0 normal YouTube links are automatically transferred in Lyte embeds as well. You will automagically also get a (non-Lyte) preview of the video in your visual post edit screen. Starting from LYTE 1.7.5 YouTube iframes can be automatically converted as well.
 
 = What can I do with the API? =
 A whole lot; there are filters to pre-parse the_content, to change settings, to change the CSS, to change the HTML of the LYTE-div, ... There are examples for all filters (and one action) in lyte_helper.php_example
@@ -124,7 +124,6 @@ function lyte_on_mobile(){
 `
 
 = Any other issues should I know about? =
-* Although the widget is available in (very) small sizes, these do not display that great and might, in the near future, be disabled by YouTube as their Terms of Service state that the smallest available embedded player is 200X200 pixels. Use the deprecated smaller sizes at your own risk.
 * Having the same YouTube-video on one page can cause WP YouTube Lyte to malfunction (as the YouTube id is used as the div's id in the DOM, and DOM id's are supposed to be unique)
 
 = I found a bug/ I would like a feature to be added! =
@@ -136,6 +135,10 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.5 =
+* improvement: also act on YouTube iframe code if "also act on YouTube links" is on.
+* improvement: if extracted from Gutenburg YouTube embed blocks keep the figure-tag with all relevant CSS classes and keep the caption (if set).
 
 = 1.7.4 =
 * improvement: make sure locally cached thumbnails are served with good HTTP response headers (allowing HTTP 304 responses and allowing images to be cached in browser).
