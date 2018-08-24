@@ -77,7 +77,7 @@ Just enter "none" (without the quotes) in the API key field and Lyte will stop n
 As opposed to some of the [most important](http://blog.futtta.be/2010/12/15/wordpress-com-stats-trojan-horse-for-quantcast-tracking/) [plugins](http://blog.futtta.be/2010/01/22/add-to-any-removed-from-here/) there is no 3rd party tracking code in WP YouTube Lyte, but YouTube off course does see visitor requests coming in for the thumbnails unless the option to cache thumbnails locally is enabled. If thumbnails are cached locally, no request will be sent to YouTube by your visitor's browser until/ unless the video is played.
 
 = I use a page builder and LYTE does not seem active on the YouTube video's I add there? =
-LYTE by default uses WordPress' "the_content"-filter. Page builders don't apply that filter to their content and thus LYTE does not get triggered on those. As a workaround you can add the LYTE video using the shortcode in your page-builder Text-block, this works in most page-builders.
+LYTE by default uses WordPress' "the_content"-filter. Page builders don't apply that filter to their content and thus LYTE does not get triggered on those. As a workaround you can either add the LYTE widget or add the LYTE video using the shortcode in your page-builder Text-block, this works in most page-builders.
 
 = Can I use WP YouTube Lyte for a custom field? =
 Just pass the httpv url of such a field to lyte_preparse like this: 
