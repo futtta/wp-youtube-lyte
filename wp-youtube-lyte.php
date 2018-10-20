@@ -102,7 +102,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
         $the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
 
         // new: also replace original YT embed code (iframes)
-        if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all('#<iframe(?:.*)?\ssrc=["|\']https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER)) {
+        if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all('#<iframe(?:[^<]*)?\ssrc=["|\']https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 $the_content = str_replace($match[0], 'httpv://youtu.be/'.$match[1], $the_content);
             }
