@@ -53,14 +53,13 @@ An API is a way to have two pieces of software talk to each other to exchange in
  * Click on 'Create'
 
 3. On the next page (or when there is no next page, click on your Project's name):
- * Click on 'Enable an API'
  * Scroll down to YouTube Data API v3 and click on it
- * Click on 'OFF' at the top to enable the API
+ * Click on 'ENABLE' at the top to enable the API
  * Optionally disable other API's
 
 4. In the sidebar on the left:
  * Click on 'Credentials'
- * Click on 'Create Credential'
+ * Click on 'Create Credential' at the top.
  * Click on 'API key'
  * Set as little restrictions as possible, most problems with getting this working are caused by these settings.
  * Click on 'Create'
