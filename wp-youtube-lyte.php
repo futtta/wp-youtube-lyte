@@ -645,6 +645,16 @@ function lyte_not_greedy() {
 
 /** function to flush YT responses from cache */
 function lyte_rm_cache() {
+    // remove thumbnail cache
+    if (get_option('lyte_local_thumb','0') === '1') {
+        if ( ! defined( 'LYTE_CACHE_DIR' ) ) {
+            define( 'LYTE_CACHE_CHILD_DIR', 'cache/lyteThumbs' );
+            define( 'LYTE_CACHE_DIR', WP_CONTENT_DIR .'/'. LYTE_CACHE_CHILD_DIR );
+        }
+        array_map('unlink', glob(LYTE_CACHE_DIR . "/*"));
+    }
+
+    // and remove cached YT data from postmeta
     try {
         ini_set('max_execution_time',90); // give PHP some more time for this, post-meta can be sloooooow
         
