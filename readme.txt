@@ -140,6 +140,7 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * improvement: extra parameters for shortcode (start, showinfo, stepsize and hqthumb).
 * improvement: also turn youtube-nocookie.com iframes into LYTE's as proposed by Maxim.
 * improvement: also remove cached thumbnails when clearing cache.
+* improvement: also set image in noscript tag to local hosted thumbnail if that option is active.
 * bugfix: when multiple iframes were on one page, the ones after the LYTE got lost (reported by Daniel Pardella, thanks).
 
 = 1.7.5 =

@@ -240,9 +240,12 @@ function lyte_parse($the_content,$doExcerpt=false) {
                     default:
                         $noscript_post="";
                         $lytelinks_txt="<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\">".__("Watch this video","wp-youtube-lyte")." <a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\">".__("on YouTube","wp-youtube-lyte")."</a>.</div>";
-                    }
-
-                $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"".$lyteSettings['scheme']."://i.ytimg.com/vi/".$vid."/0.jpg\" alt=\"\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
+                }
+                $thumbUrl = $lyteSettings['scheme']."://i.ytimg.com/vi/".$vid."/0.jpg";
+                if (get_option('lyte_local_thumb','0') === '1') {
+                        $thumbUrl = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
+                }
+                $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"" . $thumbUrl . "\" alt=\"\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
             }
             
             // add disclaimer to lytelinks
@@ -331,7 +334,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
 
             // do we have to serve the thumbnail from local cache?
             if (get_option('lyte_local_thumb','0') === '1') {
-                    $thumbUrl = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
+                $thumbUrl = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
             }
 
             /** API: filter hook to override thumbnail URL */
