@@ -83,7 +83,10 @@ add_action('after_setup_theme','lyte_settings_enforcer');
 function lyte_parse($the_content,$doExcerpt=false) {
     /** bail if amp */
     if ( is_amp()) { return str_replace( 'httpv://', 'https://', $the_content ); }
-    
+
+    /** bail if LYTE feed disabled and is_feed */
+    if ( apply_filters( 'lyte_filter_dofeed', true ) === false && is_feed() ) { return str_replace( 'httpv://', 'https://', $the_content ); }
+
     /** main function to parse the content, searching and replacing httpv-links */
     global $lyteSettings, $toCache_index, $postID, $cachekey;
     $lyteSettings['path']=plugins_url() . "/" . dirname(plugin_basename(__FILE__)) . '/lyte/';
