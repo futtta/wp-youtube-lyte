@@ -92,7 +92,7 @@ if ( !file_exists($localThumb) || $lyte_thumb_dontsave ) {
  * step 4: serve img
  */
 
-if ( $thumbContents == "" && !$lyte_thumb_dontsave && file_exists($localThumb) && mime_content_type($localThumb) === "image/jpeg" ) {
+if ( $thumbContents == "" && !$lyte_thumb_dontsave && file_exists($localThumb) && is_jpeg($localThumb) ) {
     $thumbContents = file_get_contents( $localThumb );
 } else {
     $lyte_thumb_error .= "not from cache/ ";
@@ -129,6 +129,15 @@ if ( $thumbContents != "") {
 /*
  * helper functions
  */
+function is_jpeg( $in ) {
+    if ( function_exists( 'mime_content_type' ) && mime_content_type($in) === "image/jpeg" ) {
+        return true;
+    } elseif ( strpos( $in, '.jpg' ) === strlen( $in ) -4 ) {
+        return true;
+    } else {
+        return false;
+    }    
+}
 
 function lyte_check_cache_dir( $dir ) {
     // Try creating the dir if it doesn't exist.
