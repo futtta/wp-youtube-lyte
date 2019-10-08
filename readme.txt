@@ -53,14 +53,13 @@ An API is a way to have two pieces of software talk to each other to exchange in
  * Click on 'Create'
 
 3. On the next page (or when there is no next page, click on your Project's name):
- * Click on 'Enable an API'
  * Scroll down to YouTube Data API v3 and click on it
- * Click on 'OFF' at the top to enable the API
+ * Click on 'ENABLE' at the top to enable the API
  * Optionally disable other API's
 
 4. In the sidebar on the left:
  * Click on 'Credentials'
- * Click on 'Create Credential'
+ * Click on 'Create Credential' at the top.
  * Click on 'API key'
  * Set as little restrictions as possible, most problems with getting this working are caused by these settings.
  * Click on 'Create'
@@ -80,7 +79,7 @@ As opposed to some of the [most important](http://blog.futtta.be/2010/12/15/word
 LYTE by default uses WordPress' "the_content"-filter. Page builders don't apply that filter to their content and thus LYTE does not get triggered on those. As a workaround you can either add the LYTE widget or add the LYTE video using the shortcode in your page-builder Text-block, this works in most page-builders.
 
 = Can I use WP YouTube Lyte for a custom field? =
-Just pass the httpv url of such a field to lyte_preparse like this: 
+Just pass the httpv url of such a field to lyte_preparse like this:
 `if(function_exists('lyte_preparse')) { echo lyte_preparse($video); }`
 and you're good to go!
 
@@ -94,7 +93,7 @@ Starting from version 1.1.0 it does; in [Infinite Scroll](http://wordpress.org/e
 * Google will not always display the thumbnail, this presumably depends of the relevance of the video to the rest of the page.
 
 = How does captions-support get added to the microdata? =
-In January 2014 [Benetech](http://benetech.org/), a U.S. nonprofit that develops and uses technology to create positive social change, offered a patch that adds the [accessibilityFeature property](http://schema.org/accessibilityFeature) to the microdata for videos that have captions. If you have microdata enabled, WP YouTube Lyte will automatically try to check (in a seperate, asynchronous call via a proxy-webservice, as YouTube only offers captions in their API v3 which requires authentication) if captions are available and if so, adds the accessibilityFeature property with value captions to the microdata. This can be disabled by either disabling microdata or, if you want microdata but not the accessibilityFeature-property by using the "lyte_docaptions"-filter to set captions to false (example-code is in lyte_helper.php_example). 
+In January 2014 [Benetech](http://benetech.org/), a U.S. nonprofit that develops and uses technology to create positive social change, offered a patch that adds the [accessibilityFeature property](http://schema.org/accessibilityFeature) to the microdata for videos that have captions. If you have microdata enabled, WP YouTube Lyte will automatically try to check (in a seperate, asynchronous call via a proxy-webservice, as YouTube only offers captions in their API v3 which requires authentication) if captions are available and if so, adds the accessibilityFeature property with value captions to the microdata. This can be disabled by either disabling microdata or, if you want microdata but not the accessibilityFeature-property by using the "lyte_docaptions"-filter to set captions to false (example-code is in lyte_helper.php_example).
 
 = Responsive LYTE embeds =
 * The video width in posts and pages will adapt to the width of the container (the div) in which your blogposts/ pages are shown. This means that if your theme is responsive, WP YouTube Lyte will follow.
