@@ -343,10 +343,18 @@ function lyte_parse($the_content,$doExcerpt=false) {
             /** API: filter hook to override thumbnail URL */
             $thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl, $vid );
 
-            if ($audio===true) {
-                $wrapper="<div class=\"lyte-wrapper-audio\" style=\"width:".$lyteSettings[2]."px;max-width:100%;overflow:hidden;height:38px;".$lyteSettings['pos']."\">";
+            if (isset($yt_resp_array) && !empty($yt_resp_array) && !empty($yt_resp_array["title"])) {
+                $_this_title     = $yt_resp_array["title"];
+                $_this_title_tag = ' title="'.htmlentities( $_this_title ).'"';
             } else {
-                $wrapper="<div class=\"lyte-wrapper".$lyteSettings['ratioClass']."\" style=\"width:".$lyteSettings[2]."px;max-width: 100%;".$lyteSettings['pos']."\">";
+                $_this_title     = false;
+                $_this_title_tag = '';
+            }
+
+            if ($audio===true) {
+                $wrapper="<div class=\"lyte-wrapper-audio\"".$_this_title_tag." style=\"width:".$lyteSettings[2]."px;max-width:100%;overflow:hidden;height:38px;".$lyteSettings['pos']."\">";
+            } else {
+                $wrapper="<div class=\"lyte-wrapper".$lyteSettings['ratioClass']."\"".$_this_title_tag." style=\"width:".$lyteSettings[2]."px;max-width: 100%;".$lyteSettings['pos']."\">";
             }
 
             if ($doExcerpt) {
@@ -363,8 +371,8 @@ function lyte_parse($the_content,$doExcerpt=false) {
             } else {
                 $lytetemplate = $wrapper."<div class=\"lyMe".$audioClass.$hidefClass.$plClass.$qsaClass."\" id=\"WYL_".$vid."\"><div id=\"lyte_".$vid."\" data-src=\"".$thumbUrl."\" class=\"pL\">";
 
-                if (isset($yt_resp_array) && !empty($yt_resp_array) && !empty($yt_resp_array["title"])) {
-                    $lytetemplate .= "<div class=\"tC".$titleClass."\"><div class=\"tT\">".$yt_resp_array['title']."</div></div>";
+                if ( isset( $_this_title ) ) {
+                    $lytetemplate .= "<div class=\"tC".$titleClass."\"><div class=\"tT\">".$_this_title."</div></div>";
                 }
                 
                 $lytetemplate .= "<div class=\"play\"></div><div class=\"ctrl\"><div class=\"Lctrl\"></div><div class=\"Rctrl\"></div></div></div>".$noscript."</div></div>".$lytelinks_txt;
@@ -532,7 +540,13 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
                         $_thisLyte['captions_timestamp'] = strtotime("now");
                     }
                 }
-                    
+
+                // try to ensure description is never empty to avoid Google structured data test tool complaining about it missing.
+                if ( ! array_key_exists( 'description', $_thisLyte ) || empty( $_thisLyte['description'] ) ) {
+                    $_thisLyte['description'] = $_thisLyte['title'];
+                }
+                $_thisLyte['description'] = apply_filters( 'lyte_ytapi_description', $_thisLyte['description'] );
+
                 // try to cache the result
                 if ( (($postID) || ($isWidget)) && !empty($_thisLyte) && empty($apiTestKey) ) {
                     $_thisLyte['lyte_date_added']=time();
