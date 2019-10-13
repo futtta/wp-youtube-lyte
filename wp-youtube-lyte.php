@@ -357,14 +357,20 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 $wrapper="<div class=\"lyte-wrapper".$lyteSettings['ratioClass']."\"".$_this_title_tag." style=\"width:".$lyteSettings[2]."px;max-width: 100%;".$lyteSettings['pos']."\">";
             }
 
-            // do we have a YT API key (if not; no microdata below).
-            $lyte_yt_api_key = apply_filters( 'lyte_filter_yt_api_key', get_option( 'lyte_yt_api_key', '' ) );
-            if ( $lyte_yt_api_key === "none" || empty( $lyte_yt_api_key ) ) {
-                $yt_api_key_present = false;
-            } else {
-                $yt_api_key_present = true;
+            // do we have usable microdata fiels from the YT API, if not no microdata below.
+            foreach ( array( 'title', 'description','dateField' ) as $resp_key ) {
+                if ( empty( $yt_resp_array[$resp_key] ) ) {
+                    $noMicroData = '1';
+                    break;
+                }
             }
 
+            // do we have a YT API key, if not; no microdata below.
+            $lyte_yt_api_key = apply_filters( 'lyte_filter_yt_api_key', get_option( 'lyte_yt_api_key', '' ) );
+            if ( $lyte_yt_api_key === "none" || empty( $lyte_yt_api_key ) ) {
+                $noMicroData = '1';
+            }
+            
             if ($doExcerpt) {
                 $lytetemplate="";
                 $templateType="excerpt";
@@ -373,7 +379,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 $textLink = ($lyteSettings['links']===0)? "" : "<br />".strip_tags($lytelinks_txt, '<a>')."<br />";
                 $lytetemplate = "<a href=\"".$postURL."\"><img src=\"".$thumbUrl."\" alt=\"YouTube Video\"></a>".$textLink;
                 $templateType="feed";
-            } elseif ( $audio !== true && $plClass !== " playlist" && $yt_api_key_present && ( $lyteSettings['microdata'] === "1" && $noMicroData !== "1" ) ) {
+            } elseif ( $audio !== true && $plClass !== " playlist" && $lyteSettings['microdata'] === "1" && $noMicroData !== "1" ) {
                 $lytetemplate = $wrapper."<div class=\"lyMe".$audioClass.$hidefClass.$plClass.$qsaClass."\" id=\"WYL_".$vid."\" itemprop=\"video\" itemscope itemtype=\"https://schema.org/VideoObject\"><div><meta itemprop=\"thumbnailUrl\" content=\"".$thumbUrl."\" /><meta itemprop=\"embedURL\" content=\"https://www.youtube.com/embed/".$vid."\" /><meta itemprop=\"uploadDate\" content=\"".$yt_resp_array["dateField"]."\" /></div>".$captionsMeta."<div id=\"lyte_".$vid."\" data-src=\"".$thumbUrl."\" class=\"pL\"><div class=\"tC".$titleClass."\"><div class=\"tT\" itemprop=\"name\">".$yt_resp_array["title"]."</div></div><div class=\"play\"></div><div class=\"ctrl\"><div class=\"Lctrl\"></div><div class=\"Rctrl\"></div></div></div>".$noscript."<meta itemprop=\"description\" content=\"".$yt_resp_array["description"]."\"></div></div>".$lytelinks_txt;
                 $templateType="postMicrodata";
             } else {
