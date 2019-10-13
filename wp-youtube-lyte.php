@@ -97,12 +97,12 @@ function lyte_parse($the_content,$doExcerpt=false) {
     $the_content = apply_filters( 'lyte_content_preparse',$the_content );
 
     if ( get_option('lyte_greedy','1')==="1" && strpos($the_content,"youtu") !== false ){
-        // only preg_replace if "youtu" (as part of youtube.com or youtu.be) if found
+        // only preg_replace if "youtu" (as part of youtube.com or youtu.be) is found
         if (strpos($the_content,'/playlist?list=') !== false ) {
             // only preg_replace for playlists if there are playlists to be parsed
-            $the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/playlist\?list=/m','httpv://www.youtube.com/playlist?list=',$the_content);
+            $the_content=preg_replace('/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/playlist\?list=/m','httpv://www.youtube.com/playlist?list=',$the_content);
         }
-        $the_content=preg_replace('/^https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
+        $the_content=preg_replace('/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
 
         // new: also replace original YT embed code (iframes)
         if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all('#<iframe(?:[^<]*)?\ssrc=["|\']https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER)) {
@@ -326,14 +326,14 @@ function lyte_parse($the_content,$doExcerpt=false) {
                             $thumbUrl="//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
                         } 
                     }
+                } else {
+                    // no useable result from youtube, fallback on video thumbnail (doesn't work on playlist)
+                    $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
+                }
             } else {
-                // no useable result from youtube, fallback on video thumbnail (doesn't work on playlist)
+                // same fallback
                 $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
             }
-        } else {
-            // same fallback
-            $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
-        }
 
             // do we have to serve the thumbnail from local cache?
             if (get_option('lyte_local_thumb','0') === '1') {
@@ -357,8 +357,8 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 $wrapper="<div class=\"lyte-wrapper".$lyteSettings['ratioClass']."\"".$_this_title_tag." style=\"width:".$lyteSettings[2]."px;max-width: 100%;".$lyteSettings['pos']."\">";
             }
 
-            $lyte_yt_api_key = get_option( 'lyte_yt_api_key', '' );
-            $lyte_yt_api_key = apply_filters( 'lyte_filter_yt_api_key', $lyte_yt_api_key );
+            // do we have a YT API key (if not; no microdata below).
+            $lyte_yt_api_key = apply_filters( 'lyte_filter_yt_api_key', get_option( 'lyte_yt_api_key', '' ) );
             if ( $lyte_yt_api_key === "none" || empty( $lyte_yt_api_key ) ) {
                 $yt_api_key_present = false;
             } else {
