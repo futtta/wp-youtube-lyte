@@ -3,8 +3,8 @@ Contributors: futtta, optimizingmatters
 Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
-Tested up to: 5.1
-Stable tag: 1.7.7
+Tested up to: 5.3
+Stable tag: 1.7.8
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -134,6 +134,11 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.8 =
+* misc. improvements to prevent structured data warnings from Google.
+* fix breaking locally cached thumbnails when mime_content_type function is not available.
+* tested with WordPress 5.3 (beta 3).
 
 = 1.7.7 =
 * bugfix: avoid having to click play twice in Chrome (due to autoplay not working)
