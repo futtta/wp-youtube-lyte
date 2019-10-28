@@ -123,10 +123,10 @@ function lyte_parse($the_content,$doExcerpt=false) {
          * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
          */
         if (strpos($the_content,'/playlist?list=') !== false ) {
-            $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
+            $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
             $the_content = preg_replace($gutenbeard_playlist_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/playlist?list=\1<figcaption>\2</figcaption></figure>',$the_content);
         }
-        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com|.be)/(?:watch\?v=)?(.*)"}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
+        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
         $the_content = preg_replace($gutenbeard_single_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/watch?v=\1<figcaption>\2</figcaption></figure>',$the_content);
     }
 
