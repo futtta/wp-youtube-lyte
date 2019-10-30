@@ -208,7 +208,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
             }
 
             if ($match[1]!=="a") {
-                 $divHeight=$lyteSettings[3];
+                $divHeight=$lyteSettings[3];
                 $audioClass="";
                 $audio=false;
             } else {
@@ -248,6 +248,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 if (get_option('lyte_local_thumb','0') === '1') {
                         $thumbUrl = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
                 }
+                $thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl, $vid );
                 $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"" . $thumbUrl . "\" alt=\"\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
             }
             
