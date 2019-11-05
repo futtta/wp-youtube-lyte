@@ -91,7 +91,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
     global $lyteSettings, $toCache_index, $postID, $cachekey;
     $lyteSettings['path']=plugins_url() . "/" . dirname(plugin_basename(__FILE__)) . '/lyte/';
     $urlArr=parse_url($lyteSettings['path']);
-    $origin=$urlArr['scheme']."://".$urlArr['host']."/";
+    $origin=$urlArr['scheme']."://".$urlArr['host'];
 
     /** API: filter hook to preparse the_content, e.g. to force normal youtube links to be parsed */
     $the_content = apply_filters( 'lyte_content_preparse',$the_content );

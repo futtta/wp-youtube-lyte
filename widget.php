@@ -56,7 +56,7 @@ class WYLWidget extends WP_Widget {
         if (isset($WYLarr['start'])) $qsa="&amp;start=".$WYLarr['start'];
         if (isset($WYLarr['enablejsapi'])) {
             $urlArr=parse_url($lyteSettings['path']);
-            $origin=$urlArr[scheme]."://".$urlArr[host]."/";
+            $origin=$urlArr[scheme]."://".$urlArr[host];
             $qsa.="&amp;enablejsapi=".$WYLarr['enablejsapi']."&amp;origin=".$origin;
         }
 
