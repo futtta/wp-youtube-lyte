@@ -749,7 +749,7 @@ if ( is_admin() ) {
     require_once(dirname(__FILE__).'/options.php');
     add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'lyte_add_action_link' );
 } else {
-    add_filter('the_content', 'lyte_parse', 4);
+    add_filter('the_content', 'lyte_parse', 10);
     add_shortcode("lyte", "shortcode_lyte");
     remove_filter('get_the_excerpt', 'wp_trim_excerpt');
     add_filter('get_the_excerpt', 'lyte_trim_excerpt');
