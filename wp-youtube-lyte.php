@@ -736,7 +736,11 @@ function lyte_add_action_link($links) {
 /** is_amp, but I shouldn't have to do this, should I? */
 if (!function_exists("is_amp")) {
     function is_amp() {
-        if ((strpos($_SERVER['REQUEST_URI'],'?amp')!==false) || (strpos($_SERVER['REQUEST_URI'],'/amp/')!==false)) {
+        if ( function_exists('is_amp_endpoint') ) { 
+            return is_amp_endpoint();
+        } else if ( function_exists('ampforwp_is_amp_endpoint') ) {
+            return ampforwp_is_amp_endpoint();
+        } else if ((strpos($_SERVER['REQUEST_URI'],'?amp')!==false) || (strpos($_SERVER['REQUEST_URI'],'/amp/')!==false)) {
             return true;
         } else {
             return false;
