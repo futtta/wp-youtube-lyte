@@ -112,24 +112,6 @@ function lyte_parse($the_content,$doExcerpt=false) {
         }
     }
 
-    if ( strpos($the_content,"<!-- wp:") !== false  && strpos($the_content,"youtu") !== false && apply_filters( 'lyte_filter_do_gutenberg', '__return_true' ) ) {
-        /*
-         * do Gutenberg stuff here, playlists if needed first and then single videos
-         * 
-         * having Gutenberg markup in HTML comments is ugly as hell
-         * esp. for 3rd parties such as Lyte who have to parse info out of that
-         * 
-         * Luke Cavanagh; thanks for the Gutenbeard reference and for the funny animated gif :)
-         * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
-         */
-        if (strpos($the_content,'/playlist?list=') !== false ) {
-            $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
-            $the_content = preg_replace($gutenbeard_playlist_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/playlist?list=\1<figcaption>\2</figcaption></figure>',$the_content);
-        }
-        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
-        $the_content = preg_replace($gutenbeard_single_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/watch?v=\1<figcaption>\2</figcaption></figure>',$the_content);
-    }
-
     if((strpos($the_content, "httpv")!==FALSE)||(strpos($the_content, "httpa")!==FALSE)) {
         if (apply_filters('lyte_remove_wpautop',false)) {
             remove_filter('the_content','wpautop');
@@ -748,11 +730,35 @@ if (!function_exists("is_amp")) {
     }
 }
 
+function lyte_do_gutenberg( $the_content ) {
+    if ( strpos( $the_content, "<!-- wp:" ) !== false  && strpos( $the_content, "youtu" ) !== false ) {
+        /*
+         * do Gutenberg stuff here, playlists if needed first and then single videos
+         * 
+         * having Gutenberg markup in HTML comments is ugly as hell
+         * esp. for 3rd parties such as Lyte who have to parse info out of that
+         * 
+         * Luke Cavanagh; thanks for the Gutenbeard reference and for the funny animated gif :)
+         * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
+         */
+        if ( strpos( $the_content, '/playlist?list=' ) !== false ) {
+            $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
+            $the_content = preg_replace($gutenbeard_playlist_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/playlist?list=\1<figcaption>\2</figcaption></figure>',$the_content);
+        }
+        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
+        $the_content = preg_replace($gutenbeard_single_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/watch?v=\1<figcaption>\2</figcaption></figure>',$the_content);
+    }
+    return $the_content;
+}
+
 /** hooking it all up to wordpress */
 if ( is_admin() ) {
     require_once(dirname(__FILE__).'/options.php');
     add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'lyte_add_action_link' );
 } else {
+    if ( apply_filters( 'lyte_filter_do_gutenberg', true ) ) {
+        add_filter('the_content', 'lyte_do_gutenberg', 4);
+    }
     add_filter('the_content', 'lyte_parse', 10);
     add_shortcode("lyte", "shortcode_lyte");
     remove_filter('get_the_excerpt', 'wp_trim_excerpt');
