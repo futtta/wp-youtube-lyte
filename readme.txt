@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 5.3
-Stable tag: 1.7.9
+Stable tag: 1.7.10
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -134,6 +134,9 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.10 =
+* fix regression for YouTube embed WordPress block (https://wordpress.org/support/topic/errors-caused-by-upgrading-to-version-1-7-9/) due to changed priority in 1.7.9.
 
 = 1.7.9 =
 * improved AMP checking (LYTE should never be active on AMP pages)
