@@ -94,20 +94,13 @@ function lyte_parse($the_content,$doExcerpt=false) {
     $origin=$urlArr['scheme']."://".$urlArr['host'];
 
     /** API: filter hook to preparse the_content, e.g. to force normal youtube links to be parsed */
-    $the_content = apply_filters( 'lyte_content_preparse',$the_content );
+    $the_content = apply_filters( 'lyte_content_preparse', $the_content );
 
-    if ( get_option('lyte_greedy','1')==="1" && strpos($the_content,"youtu") !== false ){
-        // only preg_replace if "youtu" (as part of youtube.com or youtu.be) is found
-        if (strpos($the_content,'/playlist?list=') !== false ) {
-            // only preg_replace for playlists if there are playlists to be parsed
-            $the_content=preg_replace('/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/playlist\?list=/m','httpv://www.youtube.com/playlist?list=',$the_content);
-        }
-        $the_content=preg_replace('/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m','httpv://www.youtube.com/watch?v=',$the_content);
-
+    if ( get_option( 'lyte_greedy', '1' ) === "1" && strpos( $the_content, "youtu" ) !== false ){
         // new: also replace original YT embed code (iframes)
-        if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all('#<iframe(?:[^<]*)?\ssrc=["|\']https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER)) {
-            foreach ($matches as $match) {
-                $the_content = str_replace($match[0], 'httpv://youtu.be/'.$match[1], $the_content);
+        if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all( '#<iframe(?:[^<]*)?\ssrc=["|\']https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER ) ) {
+            foreach ( $matches as $match ) {
+                $the_content = str_replace( $match[0], 'httpv://youtu.be/'.$match[1], $the_content );
             }
         }
     }
@@ -730,8 +723,9 @@ if (!function_exists("is_amp")) {
     }
 }
 
-function lyte_do_gutenberg( $the_content ) {
-    if ( strpos( $the_content, "<!-- wp:" ) !== false  && strpos( $the_content, "youtu" ) !== false ) {
+function lyte_prepare( $the_content ) {
+    // catch gutenberg blocks before being rendered.
+    if ( apply_filters( 'lyte_filter_do_gutenberg', true ) && strpos( $the_content, "<!-- wp:" ) !== false  && strpos( $the_content, "youtu" ) !== false ) {
         /*
          * do Gutenberg stuff here, playlists if needed first and then single videos
          * 
@@ -748,6 +742,17 @@ function lyte_do_gutenberg( $the_content ) {
         $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
         $the_content = preg_replace($gutenbeard_single_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/watch?v=\1<figcaption>\2</figcaption></figure>',$the_content);
     }
+    
+    // do the most of the greedy part early.
+    if ( get_option( 'lyte_greedy', '1' ) === "1" && strpos( $the_content, "youtu" ) !== false ){
+        // only preg_replace if "youtu" (as part of youtube.com or youtu.be) is found.
+        if ( strpos( $the_content, '/playlist?list=' ) !== false ) {
+            // only preg_replace for playlists if there are playlists to be parsed.
+            $the_content = preg_replace( '/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/playlist\?list=/m', 'httpv://www.youtube.com/playlist?list=', $the_content );
+        }
+        // and lastly normal single embeds.
+        $the_content = preg_replace( '/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m', 'httpv://www.youtube.com/watch?v=', $the_content );
+    }    
     return $the_content;
 }
 
@@ -756,9 +761,7 @@ if ( is_admin() ) {
     require_once(dirname(__FILE__).'/options.php');
     add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'lyte_add_action_link' );
 } else {
-    if ( apply_filters( 'lyte_filter_do_gutenberg', true ) ) {
-        add_filter('the_content', 'lyte_do_gutenberg', 4);
-    }
+    add_filter('the_content', 'lyte_prepare', 4);
     add_filter('the_content', 'lyte_parse', 10);
     add_shortcode("lyte", "shortcode_lyte");
     remove_filter('get_the_excerpt', 'wp_trim_excerpt');
