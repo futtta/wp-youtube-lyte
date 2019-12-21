@@ -81,11 +81,8 @@ function lyte_settings_enforcer() {
 add_action('after_setup_theme','lyte_settings_enforcer');
 
 function lyte_parse($the_content,$doExcerpt=false) {
-    /** bail if amp */
-    if ( is_amp()) { return str_replace( 'httpv://', 'https://', $the_content ); }
-
-    /** bail if LYTE feed disabled and is_feed */
-    if ( apply_filters( 'lyte_filter_dofeed', true ) === false && is_feed() ) { return str_replace( 'httpv://', 'https://', $the_content ); }
+    /** bail if AMP or if LYTE feed disabled and is_feed */
+    if ( is_amp() || ( apply_filters( 'lyte_filter_dofeed', true ) === false && is_feed() ) ) { return str_replace( 'httpv://', 'https://', $the_content ); }
 
     /** main function to parse the content, searching and replacing httpv-links */
     global $lyteSettings, $toCache_index, $postID, $cachekey;
@@ -724,6 +721,9 @@ if (!function_exists("is_amp")) {
 }
 
 function lyte_prepare( $the_content ) {
+    /** bail if AMP or if LYTE feed disabled and is_feed */
+    if ( is_amp() || ( apply_filters( 'lyte_filter_dofeed', true ) === false && is_feed() ) ) { return str_replace( 'httpv://', 'https://', $the_content ); }
+
     // catch gutenberg blocks before being rendered.
     if ( apply_filters( 'lyte_filter_do_gutenberg', true ) && strpos( $the_content, "<!-- wp:" ) !== false  && strpos( $the_content, "youtu" ) !== false ) {
         /*
@@ -742,7 +742,7 @@ function lyte_prepare( $the_content ) {
         $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:<figcaption>(.*)</figcaption>)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
         $the_content = preg_replace($gutenbeard_single_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/watch?v=\1<figcaption>\2</figcaption></figure>',$the_content);
     }
-    
+
     // do the most of the greedy part early.
     if ( get_option( 'lyte_greedy', '1' ) === "1" && strpos( $the_content, "youtu" ) !== false ){
         // only preg_replace if "youtu" (as part of youtube.com or youtu.be) is found.
