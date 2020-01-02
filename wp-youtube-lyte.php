@@ -97,7 +97,11 @@ function lyte_parse($the_content,$doExcerpt=false) {
         // new: also replace original YT embed code (iframes)
         if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all( '#<iframe(?:[^<]*)?\ssrc=["|\']https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER ) ) {
             foreach ( $matches as $match ) {
-                $the_content = str_replace( $match[0], 'httpv://youtu.be/'.$match[1], $the_content );
+                if ( strpos( $match[1], 'videoseries' ) === false) {
+                    $the_content = str_replace( $match[0], 'httpv://youtu.be/'.$match[1], $the_content );
+                } else {
+                    $the_content = str_replace( $match[0], 'httpv://youtube.com/playlist?list=' . str_replace( 'videoseries?list=', '', $match[1] ), $the_content );
+                }
             }
         }
     }
