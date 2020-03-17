@@ -260,7 +260,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                         $doCaptions = apply_filters( 'lyte_docaptions', $doCaptions );
     
                         if(($lyteSettings['microdata'] === "1")&&($noMicroData !== "1" )&&($doCaptions === true)) {
-                            if (array_key_exists('captions_data',$yt_resp_array)) {
+                            if ( array_key_exists( 'captions_data', $yt_resp_array ) && is_int( $yt_resp_array["captions_timestamp"] ) ) {
                                 if ($yt_resp_array["captions_data"]=="true") {
                                     $captionsMeta="<meta itemprop=\"accessibilityFeature\" content=\"captions\" />";
                                     $forceCaptionsUpdate=false;
