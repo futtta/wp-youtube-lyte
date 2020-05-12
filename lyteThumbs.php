@@ -83,8 +83,14 @@ $localThumb = LYTE_CACHE_DIR . '/' . md5($origThumbURL) . ".jpg";
 if ( !file_exists($localThumb) || $lyte_thumb_dontsave ) {
     $thumbContents = lyte_get_thumb($origThumbURL);
     
-    if ( $thumbContents != "" && !$lyte_thumb_dontsave ) {
-        file_put_contents($localThumb, $thumbContents);
+    if ( $thumbContents != '' && ! $lyte_thumb_dontsave ) {
+        // save file but immediately check if it is a jpeg and delete if not.
+        file_put_contents( $localThumb, $thumbContents );
+        if ( ! is_jpeg( $localThumb ) ) {
+            unlink( $localThumb );
+            $thumbContents = '';
+            $lyte_thumb_error .= 'deleted as not jpeg/ ';
+        }
     }
 }
 
@@ -130,9 +136,15 @@ if ( $thumbContents != "") {
  * helper functions
  */
 function is_jpeg( $in ) {
-    if ( function_exists( 'mime_content_type' ) && mime_content_type($in) === "image/jpeg" ) {
+    // reliable checks based on exif/ mime type.
+    if ( function_exists( 'exif_imagetype' ) && exif_imagetype( $in ) === IMAGETYPE_JPEG ) {
         return true;
-    } elseif ( strpos( $in, '.jpg' ) === strlen( $in ) -4 ) {
+    } else if ( function_exists( 'mime_content_type' ) && mime_content_type( $in ) === 'image/jpeg' ) {
+        return true;
+    }
+
+    // only rely on file extension if exif/mime functions are not available.
+    if ( ! function_exists( 'exif_imagetype' ) && ! function_exists( 'mime_content_type' ) && ( strpos( $in, '.jpg' ) === strlen( $in ) -4 ) ) {
         return true;
     } else {
         return false;
