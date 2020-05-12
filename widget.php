@@ -47,7 +47,7 @@ class WYLWidget extends WP_Widget {
 
         // do we have to serve the thumbnail from local cache?
         if (get_option('lyte_local_thumb','0') === '1') {
-                $WYLthumb = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($WYLthumb) , __FILE__   );
+                $WYLthumb = plugins_url( 'lyteCache.php?origThumbUrl=' . urlencode($WYLthumb) , __FILE__   );
         }
 
         // filter to alter the thumbnail

@@ -19,7 +19,7 @@ error_reporting(0);
 
 if ( ! defined( 'LYTE_CACHE_DIR' ) ) {
     define( 'WP_CONTENT_DIR', dirname( dirname( __DIR__ ) ) );
-    define( 'LYTE_CACHE_CHILD_DIR', 'cache/lyteThumbs' );
+    define( 'LYTE_CACHE_CHILD_DIR', 'cache/lyteCache' );
     define( 'LYTE_CACHE_DIR', WP_CONTENT_DIR .'/'. LYTE_CACHE_CHILD_DIR );
 }
 

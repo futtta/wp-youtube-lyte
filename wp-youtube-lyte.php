@@ -13,7 +13,7 @@ Domain Path: /languages
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $debug=false;
-$lyte_version="1.7.11";
+$lyte_version="1.7.12";
 $lyte_db_version=get_option('lyte_version','none');
 
 /** have we updated? */
@@ -27,6 +27,20 @@ if ($lyte_db_version !== $lyte_version) {
         case "1.4.0":
             lyte_rm_cache();
             lyte_not_greedy();
+            break;
+        case "1.7.0":
+        case "1.7.1":
+        case "1.7.2":
+        case "1.7.3":
+        case "1.7.4":
+        case "1.7.5":
+        case "1.7.6":
+        case "1.7.7":
+        case "1.7.8":
+        case "1.7.9":
+        case "1.7.10":
+        case "1.7.11":
+            lyte_mv_cache();
             break;
     }
     update_option('lyte_version',$lyte_version);
@@ -222,7 +236,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 }
                 $thumbUrl = $lyteSettings['scheme']."://i.ytimg.com/vi/".$vid."/0.jpg";
                 if (get_option('lyte_local_thumb','0') === '1') {
-                        $thumbUrl = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
+                        $thumbUrl = plugins_url( 'lyteCache.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
                 }
                 $thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl, $vid );
                 $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"" . $thumbUrl . "\" alt=\"\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
@@ -314,7 +328,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
 
             // do we have to serve the thumbnail from local cache?
             if (get_option('lyte_local_thumb','0') === '1') {
-                $thumbUrl = plugins_url( 'lyteThumbs.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
+                $thumbUrl = plugins_url( 'lyteCache.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
             }
 
             /** API: filter hook to override thumbnail URL */
@@ -659,7 +673,7 @@ function lyte_rm_cache() {
     // remove thumbnail cache
     if (get_option('lyte_local_thumb','0') === '1') {
         if ( ! defined( 'LYTE_CACHE_DIR' ) ) {
-            define( 'LYTE_CACHE_CHILD_DIR', 'cache/lyteThumbs' );
+            define( 'LYTE_CACHE_CHILD_DIR', 'cache/lyteCache' );
             define( 'LYTE_CACHE_DIR', WP_CONTENT_DIR .'/'. LYTE_CACHE_CHILD_DIR );
         }
         array_map('unlink', glob(LYTE_CACHE_DIR . "/*"));
@@ -696,6 +710,25 @@ function lyte_rm_cache() {
     } catch(Exception $e) {
         return $e->getMessage();
     }
+}
+
+// updating LYTE thumbnail cache directory to avoid blocking by firewalls.
+function lyte_mv_cache() {
+    if ( get_option( 'lyte_local_thumb', '0' ) === '1' ) {
+        $old_cache_dir = WP_CONTENT_DIR . '/cache/lyteThumbs';
+        $new_cache_dir = WP_CONTENT_DIR . '/cache/lyteCache';
+        if ( file_exists( $old_cache_dir ) ) {
+            rename( $old_cache_dir, $new_cache_dir );
+        }
+        add_action( 'admin_notices', 'lyte_thumbcache_moved' );
+    }
+}
+
+// notice to ask people to purge page caches.
+function lyte_thumbcache_moved() {
+    echo '<div class="notice notice-warning"><p>';
+    _e( 'WP YouTube Lyte: the name of the thumbnail cache script has changed, clear any page cache(s) you might have.', 'wp-youtube-lyte' );
+    echo '</p></div>';
 }
 
 /** function to call from within themes */
