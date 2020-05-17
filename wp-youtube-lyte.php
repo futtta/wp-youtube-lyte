@@ -124,8 +124,8 @@ function lyte_parse($the_content,$doExcerpt=false) {
         if (apply_filters('lyte_remove_wpautop',false)) {
             remove_filter('the_content','wpautop');
         }
-        $char_codes = array('&#215;','&#8211;');
-        $replacements = array("x", "--");
+        $char_codes = array('&#215;','&#8211;','\u002d');
+        $replacements = array("x", "--", "-");
         $the_content=str_replace($char_codes, $replacements, $the_content);
         $lyte_feed=is_feed();
         
@@ -401,6 +401,9 @@ function lyte_parse($the_content,$doExcerpt=false) {
             lyte_initer();
         }
     }
+
+    // replace remaining double dash
+    $the_content = str_replace( array( ' -- ', '-- ', ' --' ), ' &#8211 ', $the_content );
 
     /** API: filter hook to postparse the_content before returning */
     $the_content = apply_filters( 'lyte_content_postparse',$the_content );
