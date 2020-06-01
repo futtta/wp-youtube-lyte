@@ -139,6 +139,14 @@ function lyte_parse($the_content,$doExcerpt=false) {
         preg_match_all($lytes_regexp, $the_content, $matches, PREG_SET_ORDER);
 
         foreach($matches as $match) {
+            // fetch data from YT api (v2 or v3)
+            $isPlaylist=false;
+            if ($plClass===" playlist") {
+                $isPlaylist=true;
+            }
+            $cachekey = '_lyte_' . $vid;
+            $yt_resp_array=lyte_get_YT_resp($vid,$isPlaylist,$cachekey);
+
             /** API: filter hook to preparse fragment in a httpv-url, e.g. to force hqThumb=1 or showinfo=0 */
             $match[12] = apply_filters( 'lyte_match_preparse_fragment',$match[12] );
 
@@ -239,7 +247,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                         $thumbUrl = plugins_url( 'lyteCache.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
                 }
                 $thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl, $vid );
-                $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"" . $thumbUrl . "\" alt=\"\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
+                $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"" . $thumbUrl . "\" alt=\"".$yt_resp_array["title"]."\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
             }
 
             // add disclaimer to lytelinks
@@ -253,14 +261,6 @@ function lyte_parse($the_content,$doExcerpt=false) {
             } else if ( $disclaimer ) {
                 $lytelinks_txt = str_replace('</div>','<br/>'.$disclaimer.'</div>',$lytelinks_txt);
             }
-
-            // fetch data from YT api (v2 or v3)
-            $isPlaylist=false;
-            if ($plClass===" playlist") {
-                $isPlaylist=true;
-            }
-            $cachekey = '_lyte_' . $vid;
-            $yt_resp_array=lyte_get_YT_resp($vid,$isPlaylist,$cachekey);
 
             // If there was a result from youtube or from cache, use it
             if ( $yt_resp_array ) {
