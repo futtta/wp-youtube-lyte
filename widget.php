@@ -79,7 +79,7 @@ class WYLWidget extends WP_Widget {
         lyte_initer();
     }
 
-    function update($new_instance, $old_instance) {                
+    function update($new_instance, $old_instance) {
         $instance = $old_instance;
         $instance['WYLtitle'] = strip_tags($new_instance['WYLtitle']);
         $instance['WYLurl'] = strip_tags($new_instance['WYLurl']);
@@ -141,7 +141,7 @@ class WYLWidget extends WP_Widget {
                     } else {
                         $selected="";
                     }
-                    
+
                     if ($wSize[$x]['depr']!==true) {
                         echo "<option value=\"".$x."\"".$selected.">".$wSize[$x]['w']."X".$wSize[$x]['h']."</option>";
                     }
@@ -167,9 +167,9 @@ class WYLWidget extends WP_Widget {
             </label></p>
         <p><label for="<?php echo $this->get_field_id('WYLurl'); ?>"><?php _e("Youtube-URL:","wp-youtube-lyte") ?> <input class="widefat" id="<?php echo $this->get_field_id('WYLurl'); ?>" name="<?php echo $this->get_field_name('WYLurl'); ?>" type="text" value="<?php echo $WYLurl; ?>" /></label></p>
         <p><label for="<?php echo $this->get_field_id('WYLtext'); ?>"><?php _e("Text:","wp-youtube-lyte") ?> <textarea class="widefat" id="<?php echo $this->get_field_id('WYLtext'); ?>" name="<?php echo $this->get_field_name('WYLtext'); ?>" rows="16" cols="20"><?php echo $WYLtext; ?></textarea></label></p>
-        <?php 
+        <?php
     }
-} 
+}
 
 function lyte_register_widget() {
     register_widget('WYLWidget');
