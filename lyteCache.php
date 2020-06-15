@@ -79,8 +79,10 @@ if ( strpos($origThumbURL,'http') !== 0 && strpos($origThumbURL,'//') === 0 ) {
 }
 
 $localThumb = LYTE_CACHE_DIR . '/' . md5($origThumbURL) . ".jpg";
+$expiryTime = filemtime( $localThumb ) + 7*24*60*60; // images can be cached for 1 week.
+$now        = time();
 
-if ( !file_exists($localThumb) || $lyte_thumb_dontsave ) {
+if ( !file_exists( $localThumb ) || $lyte_thumb_dontsave || ( file_exists( $localThumb ) && $expiryTime < $now ) ) {
     $thumbContents = lyte_get_thumb($origThumbURL);
     
     if ( $thumbContents != '' && ! $lyte_thumb_dontsave ) {
@@ -186,6 +188,7 @@ function lyte_str_ends_in($haystack,$needle) {
 }
 
 function lyte_get_thumb($thumbUrl) {
+    error_log('getting '.$thumbUrl);
     global $lyte_thumb_error;
     if (function_exists("curl_init")) {
         $curl = curl_init();
