@@ -79,7 +79,7 @@ if ( strpos($origThumbURL,'http') !== 0 && strpos($origThumbURL,'//') === 0 ) {
 }
 
 $localThumb = LYTE_CACHE_DIR . '/' . md5($origThumbURL) . ".jpg";
-$expiryTime = filemtime( $localThumb ) + 1*24*60*60; // images can be cached for 1 day.
+$expiryTime = filemtime( $localThumb ) + 3*24*60*60; // images can be cached for 3 days.
 $now        = time();
 
 if ( !file_exists( $localThumb ) || $lyte_thumb_dontsave || ( file_exists( $localThumb ) && $expiryTime < $now ) ) {
