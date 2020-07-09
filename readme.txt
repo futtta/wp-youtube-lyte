@@ -22,9 +22,9 @@ The plugin picks up on normal YouTube links, taking over from WordPress core's o
 * httpv://www.youtube.com/watch?v=_SQkWbRublY?start=20&showinfo=0 (video player, start playing at 20 seconds and don't show title)
 
 Or using shortcodes:
-`[lyte id="_SQkWbRublY" /]`
-`[lyte id="_SQkWbRublY" audio="true" /]`
-`[lyte id="A486E741B25F8E00" playlist="true" /]`
+`[lyte id='_SQkWbRublY' /]`
+`[lyte id='_SQkWbRublY' audio='true' /]`
+`[lyte id='A486E741B25F8E00' playlist='true' /]`
 
 WP YouTube Lyte has been written with optimal performance as primary goal, but has been tested for maximum browser-compatibility (iPad included) while keeping an eye on accessibility. Starting with version 1.2.0 lyte embeds are fully responsive and can automatically embed [videoObject microdata](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=2413309) as well. The plugin is fully multi-language, with support for Catalan, Dutch, English, French, German, Hebrew, Romanian, Spanish and Slovene.
 
