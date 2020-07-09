@@ -405,8 +405,10 @@ function lyte_parse($the_content,$doExcerpt=false) {
         }
     }
 
-    // replace remaining double dash
-    $the_content = str_replace( array( ' -- ', '-- ', ' --' ), ' &#8211 ', $the_content );
+    // replace remaining double dash but restore it in comment tags (this is getting ugly though).
+    $the_content = str_replace( array( ' -- ', '-- ', ' --' ), ' &#8211; ', $the_content );
+    $the_content = str_replace( '<! &#8211;', '<!--', $the_content );
+    $the_content = str_replace( '&#8211; >', '-->', $the_content );
 
     /** API: filter hook to postparse the_content before returning */
     $the_content = apply_filters( 'lyte_content_postparse',$the_content );
