@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 5.5
-Stable tag: 1.7.12
+Stable tag: 1.7.13
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -135,11 +135,14 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 
 == Changelog ==
 
+= 1.7.13 =
+* fix regression causing HTML comments to break
+
 = 1.7.12 =
 * fix for dash becoming double dash
 * move lyteThumbs.php to lyteCache.php because security solutions generally are traumatized by all things thumbs
 * add expiry for cached thumbnails (3 days) to ensure they are updated if the original image got changed
-* some other smaller changes, see https://github.com/futtta/wp-youtube-lyte/commits/master
+* some other smaller changes, see https://github.com/futtta/wp-youtube-lyte/commits/main
 
 = 1.7.11 =
 * fix playlist that got broken due to the priority change (from 4 to 10)
