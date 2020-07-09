@@ -188,7 +188,6 @@ function lyte_str_ends_in($haystack,$needle) {
 }
 
 function lyte_get_thumb($thumbUrl) {
-    error_log('getting '.$thumbUrl);
     global $lyte_thumb_error;
     if (function_exists("curl_init")) {
         $curl = curl_init();
