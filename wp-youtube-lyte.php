@@ -290,7 +290,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
                                 $captionsMeta="";
                                 $threshold = 30;
                                 if (array_key_exists('captions_timestamp',$yt_resp_array)) {
-                                    $cache_timestamp = $yt_resp_array["captions_timestamp"];
+                                    $cache_timestamp = (int) $yt_resp_array["captions_timestamp"];
                                     $interval = (strtotime("now") - $cache_timestamp)/60/60/24;
                                 } else {
                                     $cache_timestamp = false;
