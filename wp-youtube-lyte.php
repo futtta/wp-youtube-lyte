@@ -7,7 +7,6 @@ Author: Frank Goossens (futtta)
 Version: 1.7.13
 Author URI: http://blog.futtta.be/
 Text Domain: wp-youtube-lyte
-Domain Path: /languages
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -624,26 +623,24 @@ function lyte_init() {
 }
 
 /** override default wp_trim_excerpt to have lyte_parse remove the httpv-links */
-function lyte_trim_excerpt($text) {
-    global $post;
-    $raw_excerpt = $text;
-    if ( '' == $text ) {
-        $text = get_the_content('');
+function lyte_trim_excerpt($text = '', $post = null) {
+	$raw_excerpt = $text;
+
+	if ( '' === trim( $text ) ) {
+		$post = get_post( $post );
+		$text = get_the_content( '', false, $post );
         $text = lyte_parse($text, true);
         $text = strip_shortcodes( $text );
-        $text = apply_filters('the_content', $text);
-        $text = str_replace(']]>', ']]&gt;', $text);
-        $excerpt_length = apply_filters('excerpt_length', 55);
-        $excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
-        if (function_exists('wp_trim_words')) {
-            $text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
-        } else {
-            $length = $excerpt_length*6;
-            $text = substr( strip_tags(trim(preg_replace('/\s+/', ' ', $text))), 0, $length );
-            $text .= $excerpt_more;
-        }
-    }
-    return apply_filters('wp_trim_excerpt', $text, $raw_excerpt);
+		$text = excerpt_remove_blocks( $text );
+		$text = apply_filters( 'the_content', $text );
+		$text = str_replace( ']]>', ']]&gt;', $text );
+		$excerpt_length = intval( _x( '55', 'excerpt_length' ) );
+		$excerpt_length = (int) apply_filters( 'excerpt_length', $excerpt_length );
+		$excerpt_more = apply_filters( 'excerpt_more', ' ' . '[&hellip;]' );
+		$text         = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+	}
+
+	return apply_filters( 'wp_trim_excerpt', $text, $raw_excerpt );
 }
 
 /** Lyte shortcode */
