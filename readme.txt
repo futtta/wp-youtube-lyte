@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 5.5
-Stable tag: 1.7.13
+Stable tag: 1.7.14
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -22,9 +22,10 @@ The plugin picks up on normal YouTube links, taking over from WordPress core's o
 * httpv://www.youtube.com/watch?v=_SQkWbRublY?start=20&showinfo=0 (video player, start playing at 20 seconds and don't show title)
 
 Or using shortcodes:
-`[lyte id='_SQkWbRublY' /]`
-`[lyte id='_SQkWbRublY' audio='true' /]`
-`[lyte id='A486E741B25F8E00' playlist='true' /]`
+
+ `[lyte id='_SQkWbRublY' /]`
+ `[lyte id='_SQkWbRublY' audio='true' /]`
+ `[lyte id='A486E741B25F8E00' playlist='true' /]`
 
 WP YouTube Lyte has been written with optimal performance as primary goal, but has been tested for maximum browser-compatibility (iPad included) while keeping an eye on accessibility. Starting with version 1.2.0 lyte embeds are fully responsive and can automatically embed [videoObject microdata](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=2413309) as well. The plugin is fully multi-language, with support for Catalan, Dutch, English, French, German, Hebrew, Romanian, Spanish and Slovene.
 
@@ -115,12 +116,16 @@ You probably added a link around the httpv-url. No link is needed, just the http
 = My video's seem to load slower on mobile devices? =
 By default (unless "cache thumbnail locally" is active) WP YouTube Lyte will indeed load slower normal YouTube video's instead of Lyte ones, as Lyte video's require would require two clicks from the user to play a video (once to load the YouTube video and once to start it) because there is no autoplay-support on mobile. If you want to, you can force WP YouTube Lyte to make video's Lyte on mobile with this code (add it in your child theme's functions.php, in a seperate helper plugin or using the [code snippets plugin](https://wordpress.org/plugins/code-snippets/);
 
-`
-add_filter('lyte_do_mobile','lyte_on_mobile',10,0);
-function lyte_on_mobile(){
-	return true;
-}
-`
+`add_filter( 'lyte_do_mobile', '__return_true' );`
+
+= lyteCache.php is using a lot of resources =
+lyteCache.php is a standalone file (it does not rely on WordPress) that is used when local thumbnail caching is active, which means requests for those thumbnails are handled by PHP.  In WP YouTube Lyte 1.7.14 logic was added to prevent lyteCache.php doing thumbnail caching when being called directy without "local thumbnail caching" being active.
+
+Moreover if you want to ensure the thumbnails can only be used on your own site (and not hotlinked) you can use this code snippet:
+
+`add_filter( 'lyte_filter_local_thumb_doublecheck', '__return_true' );`
+
+This will have WP YouTube Lyte set (in JavaScript in the HTML) and check (in the request for the thumbnail) a cookie. If the cookie is not set, the image request will be redirected to the YouTube origin URL.
 
 = Any other issues should I know about? =
 * Having the same YouTube-video on one page can cause WP YouTube Lyte to malfunction (as the YouTube id is used as the div's id in the DOM, and DOM id's are supposed to be unique)
@@ -134,6 +139,12 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.14 =
+* fix WordPress core blocks "recent posts block" breaking when summary or full article were shown.
+* remove old language-files (translations are now entirely handled via https://translate.wordpress.org/projects/wp-plugins/wp-youtube-lyte/
+* add logic to lyteCache.php to prevent (ab)use like e.g. hotlinking (needs to be enabled with `lyte_filter_local_thumb_doublecheck` filter) or lyteCache caching even if local thumbnail caching is off.
+* some smaller fixes.
 
 = 1.7.13 =
 * fix regression causing HTML comments to break
