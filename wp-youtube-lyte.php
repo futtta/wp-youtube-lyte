@@ -123,9 +123,11 @@ function lyte_parse($the_content,$doExcerpt=false) {
         if (apply_filters('lyte_remove_wpautop',false)) {
             remove_filter('the_content','wpautop');
         }
-        $char_codes = array('&#215;','&#8211;','\u002d');
-        $replacements = array("x", "--", "-");
-        $the_content=str_replace($char_codes, $replacements, $the_content);
+        if ( apply_filters( 'lyte_kinda_textureize', true ) ) {
+            $char_codes = array('&#215;','&#8211;','\u002d');
+            $replacements = array("x", "--", "-");
+            $the_content=str_replace($char_codes, $replacements, $the_content);
+        }
         $lyte_feed=is_feed();
 
         $hidefClass = ($lyteSettings['hidef']==="1") ? " hidef" : "";
@@ -404,10 +406,12 @@ function lyte_parse($the_content,$doExcerpt=false) {
         }
     }
 
-    // replace remaining double dash but restore it in comment tags (this is getting ugly though).
-    $the_content = str_replace( array( ' -- ', '-- ', ' --' ), ' &#8211; ', $the_content );
-    $the_content = str_replace( '<! &#8211;', '<!--', $the_content );
-    $the_content = str_replace( '&#8211; >', '-->', $the_content );
+    if ( apply_filters( 'lyte_kinda_textureize', true ) ) {
+        // replace remaining double dash but restore it in comment tags (this is getting ugly though).
+        $the_content = str_replace( array( ' -- ', '-- ', ' --' ), ' &#8211; ', $the_content );
+        $the_content = str_replace( '<! &#8211;', '<!--', $the_content );
+        $the_content = str_replace( '&#8211; >', '-->', $the_content );
+    }
 
     /** API: filter hook to postparse the_content before returning */
     $the_content = apply_filters( 'lyte_content_postparse',$the_content );
