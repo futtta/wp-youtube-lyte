@@ -475,8 +475,12 @@ function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidge
         }
     }
 
-    if ( empty( $_thisLyte ) ) {
-        // get info from youtube
+    // set caching duration used to check if data is fresh enough, default max cachetime is 2 months.
+    $_lyte_cache_gracetime    = apply_filters( 'lyte_ytapi_cache_gracetime', 2 * 30 * 24 * 60 * 60 );
+    $_lyte_cache_time_expired = time() - $_lyte_cache_gracetime;
+
+    if ( empty( $_thisLyte ) || ( apply_filters( 'lyte_ytapi_check_cache', true ) && $_thisLyte['lyte_date_added'] < $_lyte_cache_time_expired ) ) {
+        // no result from cache or expired so fetch info from youtube
         // first get yt api key
         $lyte_yt_api_key = get_option('lyte_yt_api_key','');
         $lyte_yt_api_key = apply_filters('lyte_filter_yt_api_key', $lyte_yt_api_key);
