@@ -449,7 +449,7 @@ function captions_lookup($postID, $cachekey, $vid) {
     }
 }
 
-function lyte_get_YT_resp($vid,$playlist=false,$cachekey,$apiTestKey="",$isWidget=false) {
+function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', $isWidget=false ) {
     /** logic to get video info from cache or get it from YouTube and set it */
     global $postID, $cachekey, $toCache_index;
 
