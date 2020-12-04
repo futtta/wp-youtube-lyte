@@ -646,7 +646,9 @@ function lyte_trim_excerpt($text = '', $post = null) {
 		$text = get_the_content( '', false, $post );
         $text = lyte_parse($text, true);
         $text = strip_shortcodes( $text );
-		$text = excerpt_remove_blocks( $text );
+        if ( function_exists( 'excerpt_remove_blocks' ) {
+            $text = excerpt_remove_blocks( $text );
+        }
 		$text = apply_filters( 'the_content', $text );
 		$text = str_replace( ']]>', ']]&gt;', $text );
 		$excerpt_length = intval( _x( '55', 'excerpt_length' ) );
