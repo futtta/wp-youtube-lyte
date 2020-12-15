@@ -108,7 +108,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
 
     if ( get_option( 'lyte_greedy', '1' ) === "1" && strpos( $the_content, "youtu" ) !== false ){
         // new: also replace original YT embed code (iframes)
-        if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all( '#<iframe(?:[^<]*)?\ssrc=["|\']https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER ) ) {
+        if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all( '#<iframe(?:[^<]*)?\ssrc=["|\'](?:http(?:s)?:)?\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER ) ) {
             foreach ( $matches as $match ) {
                 if ( strpos( $match[1], 'videoseries' ) === false) {
                     $the_content = str_replace( $match[0], 'httpv://youtu.be/'.$match[1], $the_content );
