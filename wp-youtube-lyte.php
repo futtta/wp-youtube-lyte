@@ -83,6 +83,7 @@ $lyteSettings['selSize']=$selSize;
 $lyteSettings['links']=get_option('lyte_show_links');
 $lyteSettings['file']=$wyl_file."?wyl_version=".$wyl_version;
 $lyteSettings['file_lazyload']=$wyl_file_lazyload."?wyl_version=".$wyl_version;
+$lyteSettings['lyte_use_internal_lazyloader']=apply_filters('lyte_use_internal_lazyloader', false );
 $lyteSettings['ratioClass']= ( $pSizeFormat==="43" ) ? " fourthree" : "";
 $lyteSettings['pos']= ( get_option('lyte_position','0')==="1" ) ? "margin:5px auto;" : "margin:5px;";
 $lyteSettings['microdata']=get_option('lyte_microdata','1');
@@ -378,10 +379,10 @@ function lyte_parse($the_content,$doExcerpt=false) {
                 $lytetemplate = "<a href=\"".$postURL."\"><img src=\"".$thumbUrl."\" alt=\"YouTube Video\"></a>".$textLink;
                 $templateType="feed";
             } elseif ( $audio !== true && $plClass !== " playlist" && $lyteSettings['microdata'] === "1" && $noMicroData !== "1" ) {
-                $lytetemplate = $wrapper."<div class=\"lyMe".$audioClass.$hidefClass.$plClass.$qsaClass."\" id=\"WYL_".$vid."\" itemprop=\"video\" itemscope itemtype=\"https://schema.org/VideoObject\"><div><meta itemprop=\"thumbnailUrl\" content=\"".$thumbUrl."\" /><meta itemprop=\"embedURL\" content=\"https://www.youtube.com/embed/".$vid."\" /><meta itemprop=\"duration\" content=\"" . $yt_resp_array['duration'] . "\" /><meta itemprop=\"uploadDate\" content=\"".$yt_resp_array["dateField"]."\" /></div>".$captionsMeta."<div id=\"lyte_".$vid."\" data-src=\"".$thumbUrl."\" class=\"pL".(apply_filters('lyte_use_internal_lazyloader',true) ? " wyl-lazy" : "")."\"><div class=\"tC".$titleClass."\"><div class=\"tT\" itemprop=\"name\">".$yt_resp_array["title"]."</div></div><div class=\"play\"></div><div class=\"ctrl\"><div class=\"Lctrl\"></div><div class=\"Rctrl\"></div></div></div>".$noscript."<meta itemprop=\"description\" content=\"".$yt_resp_array["description"]."\"></div></div>".$lytelinks_txt;
+                $lytetemplate = $wrapper."<div class=\"lyMe".$audioClass.$hidefClass.$plClass.$qsaClass."\" id=\"WYL_".$vid."\" itemprop=\"video\" itemscope itemtype=\"https://schema.org/VideoObject\"><div><meta itemprop=\"thumbnailUrl\" content=\"".$thumbUrl."\" /><meta itemprop=\"embedURL\" content=\"https://www.youtube.com/embed/".$vid."\" /><meta itemprop=\"duration\" content=\"" . $yt_resp_array['duration'] . "\" /><meta itemprop=\"uploadDate\" content=\"".$yt_resp_array["dateField"]."\" /></div>".$captionsMeta."<div id=\"lyte_".$vid."\" data-src=\"".$thumbUrl."\" class=\"pL".($lyteSettings['lyte_use_internal_lazyloader'] ? " wyl-lazy" : "")."\"><div class=\"tC".$titleClass."\"><div class=\"tT\" itemprop=\"name\">".$yt_resp_array["title"]."</div></div><div class=\"play\"></div><div class=\"ctrl\"><div class=\"Lctrl\"></div><div class=\"Rctrl\"></div></div></div>".$noscript."<meta itemprop=\"description\" content=\"".$yt_resp_array["description"]."\"></div></div>".$lytelinks_txt;
                 $templateType="postMicrodata";
             } else {
-                $lytetemplate = $wrapper."<div class=\"lyMe".$audioClass.$hidefClass.$plClass.$qsaClass."\" id=\"WYL_".$vid."\"><div id=\"lyte_".$vid."\" data-src=\"".$thumbUrl."\" class=\"pL".(apply_filters('lyte_use_internal_lazyloader',true) ? " wyl-lazy" : "")."\">";
+                $lytetemplate = $wrapper."<div class=\"lyMe".$audioClass.$hidefClass.$plClass.$qsaClass."\" id=\"WYL_".$vid."\"><div id=\"lyte_".$vid."\" data-src=\"".$thumbUrl."\" class=\"pL".($lyteSettings['lyte_use_internal_lazyloader'] ? " wyl-lazy" : "")."\">";
 
                 if ( isset( $_this_title ) ) {
                     $lytetemplate .= "<div class=\"tC".$titleClass."\"><div class=\"tT\">".$_this_title."</div></div>";
@@ -638,7 +639,7 @@ function lyte_init() {
 
     echo "<script type=\"text/javascript\">var bU='" . $lyteSettings['path'] . "';" . $mobJS . $doublecheck_thumb_cookie . "style = document.createElement('style');style.type = 'text/css';rules = document.createTextNode(\"".$lyte_css."\" );if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName('head')[0].appendChild(style);</script>";
     echo "<script type=\"text/javascript\" async src=\"".$lyteSettings['path'].$lyteSettings['file']."\"></script>";
-    if ( apply_filters( 'lyte_use_internal_lazyloader', true ) ) {
+    if ( $lyteSettings['lyte_use_internal_lazyloader'] ) {
         echo "<script type=\"text/javascript\" async src=\"".$lyteSettings['path'].$lyteSettings['file_lazyload']."\"></script>";
     }
 }
@@ -846,19 +847,6 @@ function lytecache_doublecheck_activator() {
     }
 }
 
-/* this function will alter the HTML in order to utilize an existing external lazy loader, if available */
-function lyte_try_set_bgimg($html) {
-    if ( apply_filters( 'lyte_thumb_as_bgimg', false ) ) {
-        // don't run if our internal lazy loader is in use
-        if ( apply_filters('lyte_use_internal_lazyloader', true ) ) {
-            return $html;
-        } else {
-            // set style attribute with background image url based on data-src attribute, to allow external lazy loader plugin to make this image lazy loaded
-            return preg_replace( '/(<div id="lyte_[^"]*"\sdata-src="([^"]*)"\s)/', '\1 style="background-image:url(\'\2\')" ', $html );
-        }
-    } else return $html;
-}
-
 /** hooking it all up to wordpress */
 if ( is_admin() ) {
     require_once(dirname(__FILE__).'/options.php');
@@ -870,7 +858,6 @@ if ( is_admin() ) {
     add_shortcode("lyte", "shortcode_lyte");
     remove_filter('get_the_excerpt', 'wp_trim_excerpt');
     add_filter('get_the_excerpt', 'lyte_trim_excerpt');
-    add_filter('lyte_match_postparse_template','lyte_try_set_bgimg');
     add_action('schedule_captions_lookup', 'captions_lookup', 1, 3);
     add_action( 'init', 'lytecache_doublecheck_activator' );
 
