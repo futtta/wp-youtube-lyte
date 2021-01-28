@@ -95,6 +95,15 @@ if ( $thumbContents == '' && ! $lyte_thumb_dontsave && file_exists( $localThumb 
 }
 
 if ( $thumbContents != '') {
+    lyte_output_image($thumbContents);
+} else {
+    $lyte_thumb_error .= 'no thumbContent/ ';
+    lyte_thumb_fallback();
+}
+
+function lyte_output_image($thumbContents) {
+    global $lyte_thumb_error, $lyte_thumb_report_err;
+
     if ( $lyte_thumb_error !== '' && $lyte_thumb_report_err ) {
         header('X-lyte-error:  '.$lyte_thumb_error);
     }
@@ -117,9 +126,7 @@ if ( $thumbContents != '') {
         header( 'Content-type:image/jpeg' );
         echo $thumbContents;
     }
-} else {
-    $lyte_thumb_error .= 'no thumbContent/ ';
-    lyte_thumb_fallback();
+    exit;
 }
 
 /*
@@ -211,6 +218,12 @@ function get_origThumbURL() {
 function lyte_thumb_fallback() {
     global $origThumbURL, $lyte_thumb_error, $lyte_thumb_report_err;
     // if for any reason we can't show a local thumbnail, we redirect to the original one
+
+    if ( file_exists( LYTE_CACHE_DIR . '/disableThumbFallback.txt' ) ) {
+        $thumb_error =  __DIR__ . '/lyte/error.jpg';
+        lyte_output_image(file_get_contents($thumb_error));
+    }
+
     if ( strpos( $origThumbURL, 'http' ) !== 0) {
             $origThumbURL = 'https:' . $origThumbURL;              
     }
@@ -219,4 +232,5 @@ function lyte_thumb_fallback() {
     }
     header('HTTP/1.1 301 Moved Permanently');
     header('Location:  '.  $origThumbURL );
+    exit;
 }
