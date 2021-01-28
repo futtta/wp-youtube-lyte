@@ -50,7 +50,7 @@ if ( ! file_exists( LYTE_CACHE_DIR ) || ( file_exists( LYTE_CACHE_DIR . '/double
 }
 
 /*
- * step 3: check for and if need be create wp-content/cache/lyte_thumbs
+ * step 3: check for directory wp-content/cache/lyteCache
  */
 
 if ( lyte_check_cache_dir( LYTE_CACHE_DIR ) === false ) {
@@ -149,7 +149,7 @@ function is_jpeg( $in ) {
 }
 
 function lyte_check_cache_dir( $dir ) {
-    // Try creating the dir if it doesn't exist.
+
     if ( ! file_exists( $dir ) || ! is_writable( $dir ) ) {
         return false;
     }
