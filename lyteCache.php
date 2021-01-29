@@ -101,7 +101,7 @@ if ( $thumbContents != '') {
     lyte_thumb_fallback();
 }
 
-function lyte_output_image($thumbContents) {
+function lyte_output_image($thumbContents, $contentType = 'image/jpeg') {
     global $lyte_thumb_error, $lyte_thumb_report_err;
 
     if ( $lyte_thumb_error !== '' && $lyte_thumb_report_err ) {
@@ -123,7 +123,7 @@ function lyte_output_image($thumbContents) {
         header( 'Cache-Control: max-age=' . $expireTime . ', public, immutable' );
         header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + $expireTime).' GMT' );
         header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $modTime) . ' GMT' );
-        header( 'Content-type:image/jpeg' );
+        header( 'Content-Type: ' . $contentType );
         echo $thumbContents;
     }
     exit;
@@ -220,8 +220,9 @@ function lyte_thumb_fallback() {
     // if for any reason we can't show a local thumbnail, we redirect to the original one
 
     if ( file_exists( LYTE_CACHE_DIR . '/disableThumbFallback.txt' ) ) {
-        $thumb_error =  __DIR__ . '/lyte/error.jpg';
-        lyte_output_image(file_get_contents($thumb_error));
+        // This is a 10x10 Pixel GIF with grey background
+        $thumb_error =  base64_decode('R0lGODdhCgAKAIABAMzMzP///ywAAAAACgAKAAACCISPqcvtD2MrADs=');
+        lyte_output_image($thumb_error, 'image/gif');
     }
 
     if ( strpos( $origThumbURL, 'http' ) !== 0) {
