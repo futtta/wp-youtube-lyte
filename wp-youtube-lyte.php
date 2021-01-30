@@ -838,6 +838,17 @@ function lytecache_doublecheck_activator() {
         // file exists but not needed (any more), delete it.
         @unlink( $_doublecheck_activator_file );
     }
+
+    $_disable_thumb_fallback_file = LYTE_CACHE_DIR . '/disableThumbFallback.txt';
+     if ( ( get_option( 'lyte_local_thumb', '0' ) === '1' && apply_filters( 'lyte_filter_disable_thumb_fallback', false ) ) || get_option( 'lyte_local_thumb', '0' ) !== '1' ) {
+        if ( ! file_exists( $_disable_thumb_fallback_file ) ) {
+            // file needed but not found, create it.
+            @file_put_contents( $_disable_thumb_fallback_file, 'This file is used to ensure lyteCache.php will never redirect the client to the YouTube servers, even if there is an error serving or caching the thumbnail).' );
+        }
+    } elseif ( file_exists( $_disable_thumb_fallback_file ) ) {
+        // file exists but not needed (any more), delete it.
+        @unlink( $_disable_thumb_fallback_file );
+    }
 }
 
 /** hooking it all up to wordpress */
