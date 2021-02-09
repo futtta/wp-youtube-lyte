@@ -50,7 +50,7 @@ if ( ! file_exists( LYTE_CACHE_DIR ) || ( file_exists( LYTE_CACHE_DIR . '/double
 }
 
 /*
- * step 3: check for and if need be create wp-content/cache/lyte_thumbs
+ * step 3: check for directory wp-content/cache/lyteCache
  */
 
 if ( lyte_check_cache_dir( LYTE_CACHE_DIR ) === false ) {
@@ -95,6 +95,15 @@ if ( $thumbContents == '' && ! $lyte_thumb_dontsave && file_exists( $localThumb 
 }
 
 if ( $thumbContents != '') {
+    lyte_output_image($thumbContents);
+} else {
+    $lyte_thumb_error .= 'no thumbContent/ ';
+    lyte_thumb_fallback();
+}
+
+function lyte_output_image($thumbContents, $contentType = 'image/jpeg') {
+    global $lyte_thumb_error, $lyte_thumb_report_err;
+
     if ( $lyte_thumb_error !== '' && $lyte_thumb_report_err ) {
         header('X-lyte-error:  '.$lyte_thumb_error);
     }
@@ -114,12 +123,10 @@ if ( $thumbContents != '') {
         header( 'Cache-Control: max-age=' . $expireTime . ', public, immutable' );
         header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + $expireTime).' GMT' );
         header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $modTime) . ' GMT' );
-        header( 'Content-type:image/jpeg' );
+        header( 'Content-Type: ' . $contentType );
         echo $thumbContents;
     }
-} else {
-    $lyte_thumb_error .= 'no thumbContent/ ';
-    lyte_thumb_fallback();
+    exit;
 }
 
 /*
@@ -142,7 +149,7 @@ function is_jpeg( $in ) {
 }
 
 function lyte_check_cache_dir( $dir ) {
-    // Try creating the dir if it doesn't exist.
+
     if ( ! file_exists( $dir ) || ! is_writable( $dir ) ) {
         return false;
     }
@@ -211,6 +218,13 @@ function get_origThumbURL() {
 function lyte_thumb_fallback() {
     global $origThumbURL, $lyte_thumb_error, $lyte_thumb_report_err;
     // if for any reason we can't show a local thumbnail, we redirect to the original one
+
+    if ( file_exists( LYTE_CACHE_DIR . '/disableThumbFallback.txt' ) ) {
+        // This is a 10x10 Pixel GIF with grey background
+        $thumb_error =  base64_decode('R0lGODdhCgAKAIABAMzMzP///ywAAAAACgAKAAACCISPqcvtD2MrADs=');
+        lyte_output_image($thumb_error, 'image/gif');
+    }
+
     if ( strpos( $origThumbURL, 'http' ) !== 0) {
             $origThumbURL = 'https:' . $origThumbURL;              
     }
@@ -219,4 +233,5 @@ function lyte_thumb_fallback() {
     }
     header('HTTP/1.1 301 Moved Permanently');
     header('Location:  '.  $origThumbURL );
+    exit;
 }
