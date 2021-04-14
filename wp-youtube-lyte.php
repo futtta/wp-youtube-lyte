@@ -636,7 +636,7 @@ function lyte_init( $echo = true ) {
     $inline_js = "<script type=\"text/javascript\" data-cfasync=\"false\">var bU='" . $lyteSettings['path'] . "';" . $mobJS . $doublecheck_thumb_cookie . "style = document.createElement('style');style.type = 'text/css';rules = document.createTextNode(\"".$lyte_css."\" );if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName('head')[0].appendChild(style);</script>";
     $linked_js = "<script type=\"text/javascript\" data-cfasync=\"false\" async src=\"".$lyteSettings['path'].$lyteSettings['file']."\"></script>";
     
-    if ( $echo ) {
+    if ( false !== $echo ) {
         echo $inline_js . $linked_js;
     } else {
         return $inline_js . $linked_js;
