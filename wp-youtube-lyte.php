@@ -264,69 +264,36 @@ function lyte_parse($the_content,$doExcerpt=false) {
             $yt_resp_array=lyte_get_YT_resp($vid,$isPlaylist,$cachekey);
 
             // If there was a result from youtube or from cache, use it
-            if ( $yt_resp_array ) {
-                if (is_array($yt_resp_array)) {
-                    if ($isPlaylist!==true) {
-                        // captions, thanks to Benetech
-                        $captionsMeta="";
-                        $doCaptions=true;
+            if ( $yt_resp_array && is_array( $yt_resp_array ) ) {
+                if ($isPlaylist!==true) {
+                    // captions
+                    $captionsMeta="";
+                    $doCaptions=true;
 
-                        /** API: filter hook to disable captions */
-                        $doCaptions = apply_filters( 'lyte_docaptions', $doCaptions );
+                    /** API: filter hook to disable captions */
+                    $doCaptions = apply_filters( 'lyte_docaptions', $doCaptions );
 
-                        if(($lyteSettings['microdata'] === "1")&&($noMicroData !== "1" )&&($doCaptions === true)) {
-                            if ( array_key_exists( 'captions_data', $yt_resp_array ) && is_int( $yt_resp_array["captions_timestamp"] ) ) {
-                                if ($yt_resp_array["captions_data"]=="true") {
-                                    $captionsMeta="<meta itemprop=\"accessibilityFeature\" content=\"captions\" />";
-                                    $forceCaptionsUpdate=false;
-                                } else {
-                                    $forceCaptionsUpdate=true;
-                                }
-                            } else {
-                                $forceCaptionsUpdate=true;
-                                $yt_resp_array["captions_data"]=false;
-                            }
-
-                            if ($forceCaptionsUpdate===true) {
-                                $captionsMeta="";
-                                $threshold = 30;
-                                if (array_key_exists('captions_timestamp',$yt_resp_array)) {
-                                    $cache_timestamp = (int) $yt_resp_array["captions_timestamp"];
-                                    $interval = (strtotime("now") - $cache_timestamp)/60/60/24;
-                                } else {
-                                    $cache_timestamp = false;
-                                    $interval = $threshold+1;
-                                }
-
-                                if(!is_int($cache_timestamp) || ($interval > $threshold && !is_null( $yt_resp_array["captions_data"]))) {
-                                    $yt_resp_array['captions_timestamp'] = strtotime("now");
-                                    wp_schedule_single_event(strtotime("now") + 60*60, 'schedule_captions_lookup', array($postID, $cachekey, $vid));
-                                    $yt_resp_precache=json_encode($yt_resp_array);
-                                    $toCache=base64_encode(gzcompress($yt_resp_precache));
-                                    update_post_meta($postID, $cachekey, $toCache);
-                                }
-                              }
+                    if(($lyteSettings['microdata'] === "1")&&($noMicroData !== "1" )&&($doCaptions === true)) {
+                        if ( array_key_exists( 'captions_data', $yt_resp_array ) && $yt_resp_array["captions_data"]=="true") {
+                            $captionsMeta="<meta itemprop=\"accessibilityFeature\" content=\"captions\" />";
                         }
                     }
-                    $thumbUrl="";
-                    if (($thumb==="highres") && (!empty($yt_resp_array["HQthumbUrl"]))){
-                        $thumbUrl=$yt_resp_array["HQthumbUrl"];
-                    } else {
-                        if (!empty($yt_resp_array["thumbUrl"])) {
-                            $thumbUrl=$yt_resp_array["thumbUrl"];
-                        } else {
-                            $thumbUrl="//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
-                        }
-                    }
-                    if ( strpos( $noscript, 'alt=""' ) !== false && array_key_exists( 'title', $yt_resp_array ) ) {
-                        $noscript = str_replace( 'alt=""', 'alt="' . htmlentities( $yt_resp_array["title"] ). '"', $noscript );
-                    }
+                }
+
+                $thumbUrl="";
+                if (($thumb==="highres") && (!empty($yt_resp_array["HQthumbUrl"]))){
+                    $thumbUrl=$yt_resp_array["HQthumbUrl"];
                 } else {
-                    // no useable result from youtube, fallback on video thumbnail (doesn't work on playlist)
-                    $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
+                    if (!empty($yt_resp_array["thumbUrl"])) {
+                        $thumbUrl=$yt_resp_array["thumbUrl"];
+                    } else {
+                        $thumbUrl="//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
+                    }
+                }
+                if ( strpos( $noscript, 'alt=""' ) !== false && array_key_exists( 'title', $yt_resp_array ) ) {
+                    $noscript = str_replace( 'alt=""', 'alt="' . htmlentities( $yt_resp_array["title"] ). '"', $noscript );
                 }
             } else {
-                // same fallback
                 $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
             }
 
@@ -353,7 +320,7 @@ function lyte_parse($the_content,$doExcerpt=false) {
             }
 
             // do we have usable microdata fiels from the YT API, if not no microdata below.
-            foreach ( array( 'title', 'description','dateField' ) as $resp_key ) {
+            foreach ( array( 'title', 'description', 'dateField' ) as $resp_key ) {
                 if ( empty( $yt_resp_array[$resp_key] ) ) {
                     $noMicroData = '1';
                     break;
@@ -419,36 +386,6 @@ function lyte_parse($the_content,$doExcerpt=false) {
     return $the_content;
 }
 
-function captions_lookup($postID, $cachekey, $vid) {
-    // captions lookup at YouTube via a11ymetadata.org
-    $response = wp_remote_request("http://api.a11ymetadata.org/captions/youtubeid=".$vid."/youtube");
-
-    if(!is_wp_error($response)) {
-        $rawJson = wp_remote_retrieve_body($response);
-        $decodeJson = json_decode($rawJson, true);
-
-        $yt_resp = get_post_meta($postID, $cachekey, true);
-
-        if (!empty($yt_resp)) {
-            $yt_resp = gzuncompress(base64_decode($yt_resp));
-            if($yt_resp) {
-                $yt_resp_array=json_decode($yt_resp,true);
-
-                if ($decodeJson['status'] == 'success' && $decodeJson['data']['captions'] == '1') {
-                    $yt_resp_array['captions_data'] = true;
-                } else {
-                    $yt_resp_array['captions_data'] = false;
-                }
-
-                $yt_resp_array['captions_timestamp'] = strtotime("now");
-                $yt_resp_precache=json_encode($yt_resp_array);
-                $toCache=base64_encode(gzcompress($yt_resp_precache));
-                update_post_meta($postID, $cachekey, $toCache);
-            }
-        }
-    }
-}
-
 function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', $isWidget=false ) {
     /** logic to get video info from cache or get it from YouTube and set it */
     global $postID, $cachekey, $toCache_index;
@@ -501,7 +438,6 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
             $_thisLyte['duration']="";
             $_thisLyte['description']="";
             $_thisLyte['captions_data']="false";
-            $_thisLyte['captions_timestamp']=strtotime("now");
             return $_thisLyte;
         } else {
             // v3, feeling somewhat lonely now v2 has gently been put to sleep
@@ -548,7 +484,6 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
                         $_thisLyte['duration']="";
                         $_thisLyte['description']=esc_attr(sanitize_text_field(@$yt_resp_array['items'][0]['snippet']['description']));
                         $_thisLyte['captions_data']="false";
-                        $_thisLyte['captions_timestamp'] = "";
                     } else {
                         $_thisLyte['title']=esc_attr(sanitize_text_field(@$yt_resp_array['items'][0]['snippet']['title']));
                         $_thisLyte['thumbUrl']=esc_url(@$yt_resp_array['items'][0]['snippet']['thumbnails']['high']['url']);
@@ -557,7 +492,6 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
                         $_thisLyte['duration']=sanitize_text_field(@$yt_resp_array['items'][0]['contentDetails']['duration']);
                         $_thisLyte['description']=esc_attr(sanitize_text_field(@$yt_resp_array['items'][0]['snippet']['description']));
                         $_thisLyte['captions_data']=sanitize_text_field(@$yt_resp_array['items'][0]['contentDetails']['caption']);
-                        $_thisLyte['captions_timestamp'] = strtotime("now");
                     }
                 }
 
@@ -591,9 +525,9 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
             }
         }
     }
-    foreach (array("title","thumbUrl","HQthumbUrl","dateField","duration","description","captions_data","captions_timestamp") as $key) {
-            if (!array_key_exists($key,$_thisLyte)) {
-                    $_thisLyte[$key]="";
+    foreach ( array( 'title', 'thumbUrl', 'HQthumbUrl', 'dateField', 'duration', 'description', 'captions_data' ) as $key ) {
+            if ( ! array_key_exists( $key, $_thisLyte ) ) {
+                    $_thisLyte[$key] = "";
             }
     }
     return $_thisLyte;
@@ -868,7 +802,6 @@ if ( is_admin() ) {
     add_shortcode("lyte", "shortcode_lyte");
     remove_filter('get_the_excerpt', 'wp_trim_excerpt');
     add_filter('get_the_excerpt', 'lyte_trim_excerpt');
-    add_action('schedule_captions_lookup', 'captions_lookup', 1, 3);
     add_action( 'init', 'lytecache_doublecheck_activator' );
 
     /** API: action hook to allow extra actions or filters to be added */
