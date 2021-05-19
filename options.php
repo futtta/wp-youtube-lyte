@@ -51,7 +51,6 @@ function register_lyte_settings() {
     register_setting( 'lyte-settings-group', 'lyte_size' );
     register_setting( 'lyte-settings-group', 'lyte_hidef' );
     register_setting( 'lyte-settings-group', 'lyte_position' );
-    register_setting( 'lyte-settings-group', 'lyte_notification' );
     register_setting( 'lyte-settings-group', 'lyte_microdata' );
     register_setting( 'lyte-settings-group', 'lyte_emptycache' );
     register_setting( 'lyte-settings-group', 'lyte_greedy' );
@@ -173,7 +172,6 @@ function lyte_settings_page() {
 <form method="post" action="options.php">
     <?php settings_fields( 'lyte-settings-group' ); ?>
     <table class="form-table">
-    <input type="hidden" name="lyte_notification" value="<?php echo get_option('lyte_notification','0'); ?>" />
         <tr valign="top">
             <th scope="row"><?php _e("Your YouTube API key.","wp-youtube-lyte") ?></th>
             <td>
@@ -182,7 +180,7 @@ function lyte_settings_page() {
             if (empty($filter_key)) { ?>
                 <fieldset>
                     <legend class="screen-reader-text"><span><?php _e("Please enter your YouTube API key.","wp-youtube-lyte") ?></span></legend>
-                    <label title="<?php _e('API key','wp-youtube-lyte'); ?>"><input type="text" size="28" name="lyte_yt_api_key" id="lyte_yt_api_key" value="<?php echo get_option('lyte_yt_api_key',''); ?>"><span id="check_api_key" class="submit button-secondary" style="margin:0px 5px;"><?php _e("Test Key"); ?></span></label><br />
+                    <label title="<?php _e('API key','wp-youtube-lyte'); ?>"><input type="text" size="28" name="lyte_yt_api_key" id="lyte_yt_api_key" value="<?php echo wp_strip_all_tags( get_option('lyte_yt_api_key','') ); ?>"><span id="check_api_key" class="submit button-secondary" style="margin:0px 5px;"><?php _e("Test Key"); ?></span></label><br />
                     <div id="lyte_key_check_output" style="display:none;margin-bottom:5px;background-color:white;border-left:solid;border-width:4px;border-color:#2ea2cc;padding:5px 5px 5px 15px;"></div>
                     <?php _e("WP YouTube Lyte uses YouTube's API to fetch information on each video. For your site to use that API, you will have to <a href=\"https://console.developers.google.com/project/\" target=\"_blank\">register your site as a new application</a>, enable the YouTube API for it and get a server key and fill it out here.","wp-youtube-lyte"); ?>
                 </fieldset>
