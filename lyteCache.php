@@ -11,7 +11,7 @@
  */
 
 // no error reporting, those break header() output
-error_reporting(0);
+error_reporting( 0 );
 
 /* 
  * step 0: set constant for dir where thumbs are stored + declaring some variables
@@ -23,9 +23,9 @@ if ( ! defined( 'LYTE_CACHE_DIR' ) ) {
     define( 'LYTE_CACHE_DIR', WP_CONTENT_DIR .'/'. LYTE_CACHE_CHILD_DIR );
 }
 
-$lyte_thumb_error = '';
-$lyte_thumb_dontsave = '';
-$thumbContents = '';
+$lyte_thumb_error      = '';
+$lyte_thumb_dontsave   = '';
+$thumbContents         = '';
 $lyte_thumb_report_err = false;
 
 /*
@@ -55,22 +55,22 @@ if ( ! file_exists( LYTE_CACHE_DIR ) || ( file_exists( LYTE_CACHE_DIR . '/double
 
 if ( lyte_check_cache_dir( LYTE_CACHE_DIR ) === false ) {
     $lyte_thumb_dontsave = true;
-    $lyte_thumb_error .= 'checkcache fail/ ';
+    $lyte_thumb_error   .= 'checkcache fail/ ';
 }
 
 /* 
  * step 4: if not in cache: fetch from YT and store in cache
  */
 
-if ( strpos($origThumbURL,'http') !== 0 && strpos($origThumbURL,'//') === 0 ) {
-    $origThumbURL = 'https:'.$origThumbURL;
+if ( strpos( $origThumbURL, 'http' ) !== 0 && strpos( $origThumbURL, '//' ) === 0 ) {
+    $origThumbURL = 'https:' . $origThumbURL;
 }
 
-$localThumb = LYTE_CACHE_DIR . '/' . md5($origThumbURL) . '.jpg';
-$expiryTime = filemtime( $localThumb ) + 3*24*60*60; // images can be cached for 3 days.
+$localThumb = LYTE_CACHE_DIR . '/' . md5( $origThumbURL ) . '.jpg';
+$expiryTime = filemtime( $localThumb ) + 3 * 24 * 60 * 60; // images can be cached for 3 days.
 $now        = time();
 
-if ( !file_exists( $localThumb ) || $lyte_thumb_dontsave || ( file_exists( $localThumb ) && $expiryTime < $now ) ) {
+if ( ! file_exists( $localThumb ) || $lyte_thumb_dontsave || ( file_exists( $localThumb ) && $expiryTime < $now ) ) {
     $thumbContents = lyte_get_thumb( $origThumbURL );
     
     if ( $thumbContents != '' && ! $lyte_thumb_dontsave ) {
@@ -78,7 +78,7 @@ if ( !file_exists( $localThumb ) || $lyte_thumb_dontsave || ( file_exists( $loca
         file_put_contents( $localThumb, $thumbContents );
         if ( ! is_jpeg( $localThumb ) ) {
             unlink( $localThumb );
-            $thumbContents = '';
+            $thumbContents     = '';
             $lyte_thumb_error .= 'deleted as not jpeg/ ';
         }
     }
@@ -95,34 +95,34 @@ if ( $thumbContents == '' && ! $lyte_thumb_dontsave && file_exists( $localThumb 
 }
 
 if ( $thumbContents != '') {
-    lyte_output_image($thumbContents);
+    lyte_output_image( $thumbContents );
 } else {
     $lyte_thumb_error .= 'no thumbContent/ ';
     lyte_thumb_fallback();
 }
 
-function lyte_output_image($thumbContents, $contentType = 'image/jpeg') {
+function lyte_output_image( $thumbContents, $contentType = 'image/jpeg' ) {
     global $lyte_thumb_error, $lyte_thumb_report_err;
 
     if ( $lyte_thumb_error !== '' && $lyte_thumb_report_err ) {
         header('X-lyte-error:  '.$lyte_thumb_error);
     }
 
-    $modTime = filemtime($localThumb);
+    $modTime = filemtime( $localThumb );
 
-    date_default_timezone_set('UTC');
+    date_default_timezone_set( 'UTC' );
     $modTimeMatch = ( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) && strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) === $modTime );
 
     if ( $modTimeMatch ) {
-        header('HTTP/1.1 304 Not Modified');
-        header('Connection: close');
+        header( 'HTTP/1.1 304 Not Modified' );
+        header( 'Connection: close' );
     } else {
         // send all sorts of headers
         $expireTime = 60 * 60 * 24 * 7; // 1w
         header( 'Content-Length: '. strlen( $thumbContents) );
         header( 'Cache-Control: max-age=' . $expireTime . ', public, immutable' );
-        header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + $expireTime).' GMT' );
-        header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $modTime) . ' GMT' );
+        header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + $expireTime ).' GMT' );
+        header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $modTime ) . ' GMT' );
         header( 'Content-Type: ' . $contentType );
         echo $thumbContents;
     }
@@ -149,7 +149,6 @@ function is_jpeg( $in ) {
 }
 
 function lyte_check_cache_dir( $dir ) {
-
     if ( ! file_exists( $dir ) || ! is_writable( $dir ) ) {
         return false;
     }
@@ -222,16 +221,16 @@ function lyte_thumb_fallback() {
     if ( file_exists( LYTE_CACHE_DIR . '/disableThumbFallback.txt' ) ) {
         // This is a 10x10 Pixel GIF with grey background
         $thumb_error =  base64_decode('R0lGODdhCgAKAIABAMzMzP///ywAAAAACgAKAAACCISPqcvtD2MrADs=');
-        lyte_output_image($thumb_error, 'image/gif');
+        lyte_output_image( $thumb_error, 'image/gif' );
     }
 
     if ( strpos( $origThumbURL, 'http' ) !== 0) {
             $origThumbURL = 'https:' . $origThumbURL;              
     }
     if ( $lyte_thumb_report_err ) {
-        header('X-lyte-error:  '.$lyte_thumb_error);
+        header( 'X-lyte-error:  '.$lyte_thumb_error );
     }
-    header('HTTP/1.1 301 Moved Permanently');
-    header('Location:  '.  $origThumbURL );
+    header( 'HTTP/1.1 301 Moved Permanently' );
+    header( 'Location:  '.  $origThumbURL );
     exit;
 }
