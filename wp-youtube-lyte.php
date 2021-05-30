@@ -230,26 +230,26 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                         break;
                     default:
                         $noscript      = '';
-                        $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '\">' . __( 'Watch this playlist', 'wp-youtube-lyte') . ' <a href=\"' . $lyteSettings['scheme'] . '://www.youtube.com/playlist?list=' . $vid . '">' . __( 'on YouTube', 'wp-youtube-lyte') . '</a></div>';
+                        $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '">' . __( 'Watch this playlist', 'wp-youtube-lyte') . ' <a href="' . $lyteSettings['scheme'] . '://www.youtube.com/playlist?list=' . $vid . '">' . __( 'on YouTube', 'wp-youtube-lyte') . '</a></div>';
                 }
             } else if ($match[9]!="") {
                 $plClass="";
                 $vid=$match[9];
                 switch ($lyteSettings['links']) {
                     case "0":
-                        $noscript_post="<br />".__("Watch this video on YouTube","wp-youtube-lyte");
-                        $lytelinks_txt="<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\"></div>";
+                        $noscript_post = '<br />' . __( 'Watch this video on YouTube', 'wp-youtube-lyte' );
+                        $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] .'"></div>';
                         break;
                     default:
-                        $noscript_post="";
-                        $lytelinks_txt="<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\">".__("Watch this video","wp-youtube-lyte")." <a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\">".__("on YouTube","wp-youtube-lyte")."</a>.</div>";
+                        $noscript_post = '';
+                        $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '">' . __( 'Watch this video', 'wp-youtube-lyte' ) . ' <a href="' . $lyteSettings['scheme'] . '://youtu.be/' . $vid . '">' . __( 'on YouTube', 'wp-youtube-lyte' ) . '</a>.</div>';
                 }
-                $thumbUrl = $lyteSettings['scheme']."://i.ytimg.com/vi/".$vid."/0.jpg";
-                if (get_option('lyte_local_thumb','0') === '1') {
+                $thumbUrl = $lyteSettings['scheme'] . '://i.ytimg.com/vi/' . $vid . '/0.jpg';
+                if ( get_option( 'lyte_local_thumb', '0' ) === '1' ) {
                         $thumbUrl = plugins_url( 'lyteCache.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
                 }
                 $thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl, $vid );
-                $noscript="<noscript><a href=\"".$lyteSettings['scheme']."://youtu.be/".$vid."\"><img src=\"" . $thumbUrl . "\" alt=\"\" width=\"".$lyteSettings[2]."\" height=\"".$NSimgHeight."\" />".$noscript_post."</a></noscript>";
+                $noscript = '<noscript><a href="' . $lyteSettings['scheme'] . '://youtu.be/' . $vid . '"><img src="' . $thumbUrl . '" alt="" width="' . $lyteSettings[2] . '" height="' . $NSimgHeight . '" />' . $noscript_post . '</a></noscript>';
             }
 
             // add disclaimer to lytelinks
@@ -259,9 +259,9 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
             }
 
             if ( $disclaimer && empty( $lytelinks_txt ) ) {
-                $lytelinks_txt = "<div class=\"lL\" style=\"max-width:100%;width:".$lyteSettings[2]."px;".$lyteSettings['pos']."\">".$diclaimer."</div>";
+                $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '">' . $diclaimer . '</div>';
             } else if ( $disclaimer ) {
-                $lytelinks_txt = str_replace('</div>','<br/>'.$disclaimer.'</div>',$lytelinks_txt);
+                $lytelinks_txt = str_replace( '</div>', '<br/>' . $disclaimer . '</div>', $lytelinks_txt );
             }
 
             // fetch data from YT api (v2 or v3)
@@ -351,7 +351,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                 $lytetemplate = '<a href="' . $postURL . '"><img src="' . $thumbUrl . '" alt="YouTube Video"></a>' . $textLink;
                 $templateType = 'feed';
             } elseif ( $audio !== true && $plClass !== " playlist" && $lyteSettings['microdata'] === "1" && $noMicroData !== "1" ) {
-                $lytetemplate = $wrapper . '<div class="lyMe' . $audioClass . $hidefClass . $plClass . $qsaClass . '" id="WYL_' . $vid . '" itemprop="video" itemscope itemtype="https://schema.org/VideoObject"><div><meta itemprop="thumbnailUrl" content="' . $thumbUrl . '" /><meta itemprop="embedURL" content="https://www.youtube.com/embed/' . $vid . '" /><meta itemprop="duration" content="' . $yt_resp_array['duration'] . '" /><meta itemprop="uploadDate" content="' . $yt_resp_array["dateField"] . '" /></div>' . $captionsMeta. '<div id="lyte_' . $vid . '" data-src=\"' . $thumbUrl . '" class="pL"><div class="tC' . $titleClass . '"><div class="tT" itemprop="name">' . $yt_resp_array["title"] . '</div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div>' . $noscript . '<meta itemprop="description" content="' . $yt_resp_array["description"] . '"></div></div>' . $lytelinks_txt;
+                $lytetemplate = $wrapper . '<div class="lyMe' . $audioClass . $hidefClass . $plClass . $qsaClass . '" id="WYL_' . $vid . '" itemprop="video" itemscope itemtype="https://schema.org/VideoObject"><div><meta itemprop="thumbnailUrl" content="' . $thumbUrl . '" /><meta itemprop="embedURL" content="https://www.youtube.com/embed/' . $vid . '" /><meta itemprop="duration" content="' . $yt_resp_array['duration'] . '" /><meta itemprop="uploadDate" content="' . $yt_resp_array["dateField"] . '" /></div>' . $captionsMeta. '<div id="lyte_' . $vid . '" data-src="' . $thumbUrl . '" class="pL"><div class="tC' . $titleClass . '"><div class="tT" itemprop="name">' . $yt_resp_array["title"] . '</div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div>' . $noscript . '<meta itemprop="description" content="' . $yt_resp_array["description"] . '"></div></div>' . $lytelinks_txt;
                 $templateType = 'postMicrodata';
             } else {
                 $lytetemplate = $wrapper . '<div class="lyMe' . $audioClass . $hidefClass . $plClass . $qsaClass . '" id="WYL_' . $vid . '"><div id="lyte_' . $vid . '" data-src="' . $thumbUrl . '" class="pL">';
