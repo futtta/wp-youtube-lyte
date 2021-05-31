@@ -67,6 +67,9 @@ An API is a way to have two pieces of software talk to each other to exchange in
 
 5. Copy your API key to WP YouTube Lyte settings page.
 
+= I'm getting "technical errors" when validating my YouTube API key =
+In certain cases when adding restrictions the API key when tested might give technical warnings even if things are working correctly, make sure to check if new video’s are having the title displayed to confirm all is well.
+
 = Will WP YouTube Lyte work if I don't provide an API key? =
 Yes, with some exceptions; WP YouTube Lyte will continue to work, rendering Lyte players, but without the title and microdata (description, time, ...) and without thumbnails for playlists.
 
