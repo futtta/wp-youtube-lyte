@@ -3,8 +3,8 @@ Contributors: futtta, optimizingmatters
 Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
-Tested up to: 5.5
-Stable tag: 1.7.15
+Tested up to: 5.7
+Stable tag: 1.7.16
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -66,6 +66,9 @@ An API is a way to have two pieces of software talk to each other to exchange in
  * Click on 'Create'
 
 5. Copy your API key to WP YouTube Lyte settings page.
+
+= I'm getting "technical errors" when validating my YouTube API key =
+In certain cases when adding restrictions the API key when tested might give technical warnings even if things are working correctly, make sure to check if new video’s are having the title displayed to confirm all is well.
 
 = Will WP YouTube Lyte work if I don't provide an API key? =
 Yes, with some exceptions; WP YouTube Lyte will continue to work, rendering Lyte players, but without the title and microdata (description, time, ...) and without thumbnails for playlists.
@@ -139,6 +142,13 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.16 =
+* removed old captions code (captions are not natively supported through the YouTube API + the Benetech backend was no longer working)
+* added extra sanitization, thanks m0ze!
+* optionally disable thumbnail fallback to youtube servers (contributed by Benjamin Pick)
+* general code cleanup (spaces, double -> single quotes around strings, ...)
+* misc. smaller fixes/ improvements, see [Github commits](https://github.com/futtta/wp-youtube-lyte/commits/main) for details.
 
 = 1.7.15 =
 * To avoid YouTube cutting API access because no requests were made for 3 months, LYTE now by default caches the YouTube data for 2 months, after which it is refreshed. Previously cached data only refreshed if the cache got cleared manually.

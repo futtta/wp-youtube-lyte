@@ -5,22 +5,22 @@ Classlessly add a "more tools" tab to promote (future) AO addons and/ or affilia
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-add_action('admin_init', 'lyte_partner_tabs_preinit');
+add_action( 'admin_init', 'lyte_partner_tabs_preinit' );
 function lyte_partner_tabs_preinit() {
-    if (apply_filters('wp-youtube-lyte_filter_show_partner_tabs',true)) {
-        add_filter('wp-youtube-lyte_filter_settingsscreen_tabs','lyte_add_partner_tabs');
+    if ( apply_filters( 'wp-youtube-lyte_filter_show_partner_tabs', true ) ) {
+        add_filter( 'wp-youtube-lyte_filter_settingsscreen_tabs', 'lyte_add_partner_tabs' );
     }
 }
 
-function lyte_add_partner_tabs($in) {
-    $in=array_merge($in,array('lyte_partners' => __('More Performance!','wp-youtube-lyte')));
+function lyte_add_partner_tabs( $in ) {
+    $in = array_merge( $in, array( 'lyte_partners' => __( 'More Performance!', 'wp-youtube-lyte' ) ) );
     return $in;
 }
 
-add_action('admin_menu','lyte_partners_init');
+add_action( 'admin_menu', 'lyte_partners_init' );
 function lyte_partners_init() {
-    if (apply_filters('wp-youtube-lyte_filter_show_partner_tabs',true)) {
-        $hook=add_submenu_page(NULL,'Lyte partner','Lyte partner','manage_options','lyte_partners','lyte_partners');
+    if ( apply_filters( 'wp-youtube-lyte_filter_show_partner_tabs', true ) ) {
+        $hook = add_submenu_page( NULL, 'Lyte partner', 'Lyte partner', 'manage_options', 'lyte_partners', 'lyte_partners' );
         // register_settings here as well if needed
     }
 }
@@ -71,10 +71,10 @@ function lyte_partners() {
     }    
     </style>
     <div class="wrap">
-        <h1><?php _e('WP YouTube Lyte Settings','wp-youtube-lyte'); ?></h1>
+        <h1><?php _e( 'WP YouTube Lyte Settings', 'wp-youtube-lyte' ); ?></h1>
         <?php echo lyte_admin_tabs(); ?>
         <?php
-            echo '<h2>'. __("These related services will improve your site's performance even more!",'wp-youtube-lyte') . '</h2>';
+            echo '<h2>'. __( 'These related services will improve your site\'s performance even more!', 'wp-youtube-lyte' ) . '</h2>';
         ?>
         <div>
             <?php getLytePartnerFeed(); ?>
@@ -86,12 +86,12 @@ function lyte_partners() {
 function getLytePartnerFeed() {
     $noFeedText=__( 'Have a look at <a href="http://optimizingmatters.com/">optimizingmatters.com</a> for wp-youtube-lyte power-ups!', 'wp-youtube-lyte' );
 
-    if (apply_filters('wp-youtube-lyte_settingsscreen_remotehttp',true)) {
-        $rss = fetch_feed( "http://feeds.feedburner.com/OptimizingMattersDownloads" );
+    if ( apply_filters( 'wp-youtube-lyte_settingsscreen_remotehttp', true ) ) {
+        $rss      = fetch_feed( 'https://feeds.feedburner.com/OptimizingMattersDownloads' );
         $maxitems = 0;
 
         if ( ! is_wp_error( $rss ) ) {
-            $maxitems = $rss->get_item_quantity( 20 ); 
+            $maxitems  = $rss->get_item_quantity( 20 ); 
             $rss_items = $rss->get_items( 0, $maxitems );
         } ?>
         <ul>
@@ -104,9 +104,9 @@ function getLytePartnerFeed() {
                     <li class="itemDetail">
                         <h3 class="itemTitle"><a href="<?php echo $itemURL; ?>" target="_blank"><?php echo esc_html( $item->get_title() ); ?></a></h3>
                         <?php
-                        if (($enclosure = $item->get_enclosure()) && (strpos($enclosure->get_type(),"image")!==false) ) {
-                            $itemImgURL=esc_url($enclosure->get_link());
-                            echo "<div class=\"itemImage\"><a href=\"".$itemURL."\" target=\"_blank\"><img src=\"".$itemImgURL."\"/></a></div>";
+                        if (($enclosure = $item->get_enclosure()) && ( strpos( $enclosure->get_type(), 'image') !== false ) ) {
+                            $itemImgURL = esc_url( $enclosure->get_link() );
+                            echo '<div class="itemImage"><a href="' . $itemURL . '" target="_blank"><img src="' . $itemImgURL . '"/></a></div>';
                         }
                         ?>
                         <div class="itemDescription"><?php echo wp_kses_post($item -> get_description() ); ?></div>
