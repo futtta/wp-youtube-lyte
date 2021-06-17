@@ -15,7 +15,7 @@ error_reporting( 0 );
 
 // include our custom configuration file in case it exists
 $WP_ROOT_PATH = dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
-if ( file_exists( $WP_ROOT_PATH ) ) require_once( $WP_ROOT_PATH."lyteCache-config.php" );
+if ( file_exists( $WP_ROOT_PATH."lyteCache-config.php" ) ) require_once( $WP_ROOT_PATH."lyteCache-config.php" );
 
 /* 
  * step 0: set constant for dir where thumbs are stored + declaring some variables
