@@ -89,7 +89,6 @@ $lyteSettings['selSize']                      = $selSize;
 $lyteSettings['links']                        = get_option('lyte_show_links');
 $lyteSettings['file']                         = $wyl_file."?wyl_version=".$wyl_version;
 $lyteSettings['file_lazyload']                = $wyl_file_lazyload."?wyl_version=".$wyl_version;
-$lyteSettings['lyte_use_internal_lazyloader'] = apply_filters('lyte_use_internal_lazyloader', false );
 $lyteSettings['ratioClass']                   = ( $pSizeFormat==="43" ) ? " fourthree" : "";
 $lyteSettings['pos']                          = ( get_option('lyte_position','0')==="1" ) ? "margin:5px auto;" : "margin:5px;";
 $lyteSettings['microdata']                    = get_option('lyte_microdata','1');
@@ -99,6 +98,7 @@ $lyteSettings['scheme']                       = ( is_ssl() ) ? "https" : "http";
 /** API: filter hook to alter $lyteSettings */
 function lyte_settings_enforcer() {
     global $lyteSettings;
+    $lyteSettings['lyte_use_internal_lazyloader'] = apply_filters('lyte_use_internal_lazyloader', false );
     $lyteSettings = apply_filters( 'lyte_settings', $lyteSettings );
 }
 add_action('after_setup_theme','lyte_settings_enforcer');
