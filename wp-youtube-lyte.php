@@ -18,27 +18,27 @@ $lyte_db_version = get_option( 'lyte_version', 'none' );
 /** have we updated? */
 if ($lyte_db_version !== $lyte_version) {
     switch( $lyte_db_version ) {
-        case "1.5.0":
+        case '1.5.0':
             lyte_rm_cache();
             break;
-        case "1.4.2":
-        case "1.4.1":
-        case "1.4.0":
+        case '1.4.2':
+        case '1.4.1':
+        case '1.4.0':
             lyte_rm_cache();
             lyte_not_greedy();
             break;
-        case "1.7.0":
-        case "1.7.1":
-        case "1.7.2":
-        case "1.7.3":
-        case "1.7.4":
-        case "1.7.5":
-        case "1.7.6":
-        case "1.7.7":
-        case "1.7.8":
-        case "1.7.9":
-        case "1.7.10":
-        case "1.7.11":
+        case '1.7.0':
+        case '1.7.1':
+        case '1.7.2':
+        case '1.7.3':
+        case '1.7.4':
+        case '1.7.5':
+        case '1.7.6':
+        case '1.7.7':
+        case '1.7.8':
+        case '1.7.9':
+        case '1.7.10':
+        case '1.7.11':
             lyte_mv_cache();
             break;
     }
@@ -50,33 +50,35 @@ if ($lyte_db_version !== $lyte_version) {
 
 if (!$debug) {
     $wyl_version       = $lyte_version;
-    $wyl_file          = "lyte-min.js";
-    $wyl_file_lazyload = "bg-image-layzload.min.js";
+    $wyl_file          = 'lyte-min.js';
+    $wyl_file_lazyload = 'bg-image-layzload.min.js';
 } else {
     $wyl_version       = rand()/1000;
-    $wyl_file          = "lyte.js";
-    $wyl_file_lazyload = "bg-image-layzload.js";
+    $wyl_file          = 'lyte.js';
+    $wyl_file_lazyload = 'bg-image-layzload.js';
     lyte_rm_cache();
 }
 
 /** get paths, language and includes */
-$plugin_dir = basename(dirname(__FILE__)).'/languages';
+$plugin_dir = basename( dirname( __FILE__ ) ) . '/languages';
 load_plugin_textdomain( 'wp-youtube-lyte', null, $plugin_dir );
-require_once(dirname(__FILE__).'/player_sizes.inc.php');
-require_once(dirname(__FILE__).'/widget.php');
+require_once( dirname( __FILE__ ) . '/player_sizes.inc.php' );
+require_once( dirname( __FILE__ ) . '/widget.php' );
 
 /** get default embed size and build array to change size later if requested */
-$oSize = (int) get_option('lyte_size');
+$oSize = (int) get_option( 'lyte_size' );
 if ( (is_bool( $oSize ) ) || ( $pSize[$oSize]['a'] === false ) ) {
-    $sel = (int) $pDefault; } else { $sel=$oSize;
+    $sel = (int) $pDefault;
+} else {
+    $sel=$oSize;
 }
 
 $pSizeFormat = $pSize[$sel]['f'];
 $j           = 0;
 
 foreach ( $pSizeOrder[$pSizeFormat] as $sizeId ) {
-    $sArray[$j]['w']=(int) $pSize[$sizeId]['w'];
-    $sArray[$j]['h']=(int) $pSize[$sizeId]['h'];
+    $sArray[$j]['w'] = (int) $pSize[$sizeId]['w'];
+    $sArray[$j]['h'] = (int) $pSize[$sizeId]['h'];
     if ( $sizeId === $sel ) {
         $selSize=$j;
     }
@@ -86,22 +88,22 @@ foreach ( $pSizeOrder[$pSizeFormat] as $sizeId ) {
 /** get other options and push in array*/
 $lyteSettings['sizeArray']                    = $sArray;
 $lyteSettings['selSize']                      = $selSize;
-$lyteSettings['links']                        = get_option('lyte_show_links');
-$lyteSettings['file']                         = $wyl_file."?wyl_version=".$wyl_version;
-$lyteSettings['file_lazyload']                = $wyl_file_lazyload."?wyl_version=".$wyl_version;
-$lyteSettings['ratioClass']                   = ( $pSizeFormat==="43" ) ? " fourthree" : "";
-$lyteSettings['pos']                          = ( get_option('lyte_position','0')==="1" ) ? "margin:5px auto;" : "margin:5px;";
-$lyteSettings['microdata']                    = get_option('lyte_microdata','1');
-$lyteSettings['hidef']                        = get_option('lyte_hidef',0);
-$lyteSettings['scheme']                       = ( is_ssl() ) ? "https" : "http";
+$lyteSettings['links']                        = get_option( 'lyte_show_links' );
+$lyteSettings['file']                         = $wyl_file . '?wyl_version=' . $wyl_version;
+$lyteSettings['file_lazyload']                = $wyl_file_lazyload . '?wyl_version=' . $wyl_version;
+$lyteSettings['ratioClass']                   = ( $pSizeFormat === '43' ) ? ' fourthree' : '';
+$lyteSettings['pos']                          = ( get_option( 'lyte_position', '0' ) === '1' ) ? 'margin:5px auto;' : 'margin:5px;';
+$lyteSettings['microdata']                    = get_option( 'lyte_microdata', '1' );
+$lyteSettings['hidef']                        = get_option( 'lyte_hidef', 0 );
+$lyteSettings['scheme']                       = ( is_ssl() ) ? 'https' : 'http';
 
 /** API: filter hook to alter $lyteSettings */
 function lyte_settings_enforcer() {
     global $lyteSettings;
-    $lyteSettings['lyte_use_internal_lazyloader'] = apply_filters('lyte_use_internal_lazyloader', false );
+    $lyteSettings['lyte_use_internal_lazyloader'] = apply_filters( 'lyte_use_internal_lazyloader', false );
     $lyteSettings = apply_filters( 'lyte_settings', $lyteSettings );
 }
-add_action('after_setup_theme','lyte_settings_enforcer');
+add_action( 'after_setup_theme', 'lyte_settings_enforcer' );
 
 function lyte_parse( $the_content, $doExcerpt = false ) {
     /** bail if AMP or if LYTE feed disabled and is_feed */
@@ -118,7 +120,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
     /** API: filter hook to preparse the_content, e.g. to force normal youtube links to be parsed */
     $the_content = apply_filters( 'lyte_content_preparse', $the_content );
 
-    if ( get_option( 'lyte_greedy', '1' ) === "1" && strpos( $the_content, "youtu" ) !== false ){
+    if ( get_option( 'lyte_greedy', '1' ) === '1' && strpos( $the_content, 'youtu' ) !== false ){
         // new: also replace original YT embed code (iframes)
         if ( apply_filters( 'lyte_eats_yframes', true ) && preg_match_all( '#<iframe(?:[^<]*)?\ssrc=["|\'](?:http(?:s)?:)?\/\/www\.youtube(?:-nocookie)?\.com\/embed\/(.*)["|\'](?:.*)><\/iframe>#Usm', $the_content, $matches, PREG_SET_ORDER ) ) {
             foreach ( $matches as $match ) {
@@ -264,7 +266,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
             }
 
             if ( $disclaimer && empty( $lytelinks_txt ) ) {
-                $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '">' . $diclaimer . '</div>';
+                $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '">' . $disclaimer . '</div>';
             } else if ( $disclaimer ) {
                 $lytelinks_txt = str_replace( '</div>', '<br/>' . $disclaimer . '</div>', $lytelinks_txt );
             }
