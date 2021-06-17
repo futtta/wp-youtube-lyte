@@ -22,6 +22,7 @@ ly.te = function() {
 			if (thumb !== "") {
 				bgCss="#"+bgId+" { background-image: url("+thumb+"); }";
 				ly.addCss(bgCss);
+				ly.addCss("#"+bgId+".wyl-lazy { background-image: none; background-color: #ccc; }");
 	    		} else {
 				scr = d.createElement('script');
 				scr.src = sch+"://gdata.youtube.com/feeds/api/playlists/"+ vid +"?v=2&alt=json-in-script&callback=ly.parsePL&fields=id,entry";

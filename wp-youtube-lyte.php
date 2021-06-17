@@ -47,12 +47,15 @@ if ($lyte_db_version !== $lyte_version) {
 }
 
 /** are we in debug-mode */
-if ( ! $debug ) {
-    $wyl_version = $lyte_version;
-    $wyl_file    = 'lyte-min.js';
+
+if (!$debug) {
+    $wyl_version       = $lyte_version;
+    $wyl_file          = "lyte-min.js";
+    $wyl_file_lazyload = "bg-image-layzload.min.js";
 } else {
-    $wyl_version = rand()/1000;
-    $wyl_file    = 'lyte.js';
+    $wyl_version       = rand()/1000;
+    $wyl_file          = "lyte.js";
+    $wyl_file_lazyload = "bg-image-layzload.js";
     lyte_rm_cache();
 }
 
@@ -81,19 +84,21 @@ foreach ( $pSizeOrder[$pSizeFormat] as $sizeId ) {
 }
 
 /** get other options and push in array*/
-$lyteSettings['sizeArray']  = $sArray;
-$lyteSettings['selSize']    = $selSize;
-$lyteSettings['links']      = get_option('lyte_show_links');
-$lyteSettings['file']       = $wyl_file."?wyl_version=".$wyl_version;
-$lyteSettings['ratioClass'] = ( $pSizeFormat === '43' ) ? ' fourthree' : '';
-$lyteSettings['pos']        = ( get_option( 'lyte_position', '0' ) === '1' ) ? 'margin:5px auto;' : 'margin:5px;';
-$lyteSettings['microdata']  = get_option( 'lyte_microdata', '1' );
-$lyteSettings['hidef']      = get_option( 'lyte_hidef', 0 );
-$lyteSettings['scheme']     = ( is_ssl() ) ? "https" : "http";
+$lyteSettings['sizeArray']                    = $sArray;
+$lyteSettings['selSize']                      = $selSize;
+$lyteSettings['links']                        = get_option('lyte_show_links');
+$lyteSettings['file']                         = $wyl_file."?wyl_version=".$wyl_version;
+$lyteSettings['file_lazyload']                = $wyl_file_lazyload."?wyl_version=".$wyl_version;
+$lyteSettings['ratioClass']                   = ( $pSizeFormat==="43" ) ? " fourthree" : "";
+$lyteSettings['pos']                          = ( get_option('lyte_position','0')==="1" ) ? "margin:5px auto;" : "margin:5px;";
+$lyteSettings['microdata']                    = get_option('lyte_microdata','1');
+$lyteSettings['hidef']                        = get_option('lyte_hidef',0);
+$lyteSettings['scheme']                       = ( is_ssl() ) ? "https" : "http";
 
 /** API: filter hook to alter $lyteSettings */
 function lyte_settings_enforcer() {
     global $lyteSettings;
+    $lyteSettings['lyte_use_internal_lazyloader'] = apply_filters('lyte_use_internal_lazyloader', false );
     $lyteSettings = apply_filters( 'lyte_settings', $lyteSettings );
 }
 add_action('after_setup_theme','lyte_settings_enforcer');
@@ -351,11 +356,10 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                 $lytetemplate = '<a href="' . $postURL . '"><img src="' . $thumbUrl . '" alt="YouTube Video"></a>' . $textLink;
                 $templateType = 'feed';
             } elseif ( $audio !== true && $plClass !== " playlist" && $lyteSettings['microdata'] === "1" && $noMicroData !== "1" ) {
-                $lytetemplate = $wrapper . '<div class="lyMe' . $audioClass . $hidefClass . $plClass . $qsaClass . '" id="WYL_' . $vid . '" itemprop="video" itemscope itemtype="https://schema.org/VideoObject"><div><meta itemprop="thumbnailUrl" content="' . $thumbUrl . '" /><meta itemprop="embedURL" content="https://www.youtube.com/embed/' . $vid . '" /><meta itemprop="duration" content="' . $yt_resp_array['duration'] . '" /><meta itemprop="uploadDate" content="' . $yt_resp_array["dateField"] . '" /></div>' . $captionsMeta. '<div id="lyte_' . $vid . '" data-src="' . $thumbUrl . '" class="pL"><div class="tC' . $titleClass . '"><div class="tT" itemprop="name">' . $yt_resp_array["title"] . '</div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div>' . $noscript . '<meta itemprop="description" content="' . $yt_resp_array["description"] . '"></div></div>' . $lytelinks_txt;
+                $lytetemplate = $wrapper . '<div class="lyMe' . $audioClass . $hidefClass . $plClass . $qsaClass . '" id="WYL_' . $vid . '" itemprop="video" itemscope itemtype="https://schema.org/VideoObject"><div><meta itemprop="thumbnailUrl" content="' . $thumbUrl . '" /><meta itemprop="embedURL" content="https://www.youtube.com/embed/' . $vid . '" /><meta itemprop="duration" content="' . $yt_resp_array['duration'] . '" /><meta itemprop="uploadDate" content="' . $yt_resp_array["dateField"] . '" /></div>' . $captionsMeta. '<div id="lyte_' . $vid . '" data-src="' . $thumbUrl . '" class="pL'.($lyteSettings['lyte_use_internal_lazyloader'] ? " wyl-lazy" : "").'"><div class="tC' . $titleClass . '"><div class="tT" itemprop="name">' . $yt_resp_array["title"] . '</div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div>' . $noscript . '<meta itemprop="description" content="' . $yt_resp_array["description"] . '"></div></div>' . $lytelinks_txt;
                 $templateType = 'postMicrodata';
             } else {
-                $lytetemplate = $wrapper . '<div class="lyMe' . $audioClass . $hidefClass . $plClass . $qsaClass . '" id="WYL_' . $vid . '"><div id="lyte_' . $vid . '" data-src="' . $thumbUrl . '" class="pL">';
-
+                $lytetemplate = $wrapper . '<div class="lyMe' . $audioClass . $hidefClass . $plClass . $qsaClass . '" id="WYL_' . $vid . '"><div id="lyte_' . $vid . '" data-src="' . $thumbUrl . '" class="pL'.($lyteSettings['lyte_use_internal_lazyloader'] ? " wyl-lazy" : "").'">';
                 if ( isset( $_this_title ) ) {
                     $lytetemplate .= '<div class="tC' . $titleClass . '"><div class="tT">' . $_this_title . '</div></div>';
                 }
@@ -576,9 +580,13 @@ function lyte_init( $echo = true ) {
     /** API: filter hook to change css */
     $lyte_css = apply_filters( 'lyte_css', $lyte_css );
 
+
     $inline_js = '<script type="text/javascript" data-cfasync="false">var bU="' . $lyteSettings['path'] . '";' . $mobJS . $doublecheck_thumb_cookie . 'style = document.createElement("style");style.type = "text/css";rules = document.createTextNode("' . $lyte_css . '");if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName("head")[0].appendChild(style);</script>';
     $linked_js = '<script type="text/javascript" data-cfasync="false" async src="' . $lyteSettings['path'] . $lyteSettings['file'] . '"></script>';
-    
+    if ( $lyteSettings['lyte_use_internal_lazyloader'] ) {
+        $linked_js .= '<script type="text/javascript" data-cfasync="false" async src="'.$lyteSettings['path'].$lyteSettings['file_lazyload'].'"></script>';
+    }
+
     if ( false !== $echo ) {
         echo $inline_js . $linked_js;
     } else {

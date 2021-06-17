@@ -110,4 +110,8 @@ function fgo_lyte_change_css($lyte_css) {
 function no_lyte_on_mobile(){
 	return false;
 	}
+
+/** activate internal lazy loader if you don't have another one configured on your site; the default for this filter is false */
+//add_filter('lyte_use_internal_lazyloader','__return_true');
+
 ?>

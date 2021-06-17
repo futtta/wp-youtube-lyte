@@ -13,6 +13,10 @@
 // no error reporting, those break header() output
 error_reporting( 0 );
 
+// include our custom configuration file in case it exists
+$WP_ROOT_PATH = dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
+if ( file_exists( $WP_ROOT_PATH."lyteCache-config.php" ) ) require_once( $WP_ROOT_PATH."lyteCache-config.php" );
+
 /* 
  * step 0: set constant for dir where thumbs are stored + declaring some variables
  */
@@ -42,7 +46,6 @@ if ( array_key_exists( 'reportErr', $_GET ) ) {
 /*
  * step 2: check if it is safe to serve from cache and redirect if not.
  */
-
 if ( ! file_exists( LYTE_CACHE_DIR ) || ( file_exists( LYTE_CACHE_DIR . '/doubleCheckLyteThumbnailCache.txt' ) && ! array_key_exists( 'lyteCookie', $_COOKIE ) ) ) {
     // local thumbnail caching not on or no cookie found, redirect to original at youtube.
     $lyte_thumb_error = 'possible hotlinker/';
@@ -72,7 +75,7 @@ $now        = time();
 
 if ( ! file_exists( $localThumb ) || $lyte_thumb_dontsave || ( file_exists( $localThumb ) && $expiryTime < $now ) ) {
     $thumbContents = lyte_get_thumb( $origThumbURL );
-    
+
     if ( $thumbContents != '' && ! $lyte_thumb_dontsave ) {
         // save file but immediately check if it is a jpeg and delete if not.
         file_put_contents( $localThumb, $thumbContents );
@@ -145,7 +148,7 @@ function is_jpeg( $in ) {
         return true;
     } else {
         return false;
-    }    
+    }
 }
 
 function lyte_check_cache_dir( $dir ) {
@@ -225,12 +228,14 @@ function lyte_thumb_fallback() {
     }
 
     if ( strpos( $origThumbURL, 'http' ) !== 0) {
-            $origThumbURL = 'https:' . $origThumbURL;              
+            $origThumbURL = 'https:' . $origThumbURL;
     }
     if ( $lyte_thumb_report_err ) {
         header( 'X-lyte-error:  '.$lyte_thumb_error );
     }
-    header( 'HTTP/1.1 301 Moved Permanently' );
-    header( 'Location:  '.  $origThumbURL );
+    // avoid caching and use a "soft" redirect, as we might have got here due to some temporary issue
+    header('Cache-Control: no-cache');
+    header('HTTP/1.1 302 Moved Temporarily');
+    header('Location:  '.  $origThumbURL );
     exit;
 }
