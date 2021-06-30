@@ -400,14 +400,18 @@ function lyte_settings_page() {
 add_action( 'wp_ajax_lyte_check_yt_api_key', 'lyte_check_yt_api_key_callback' );
 function lyte_check_yt_api_key_callback() {
     check_ajax_referer( 'lyte_check_api_key', 'lyte_nonce' );
-    $api_key = strip_tags( $_POST['lyte_yt_api_key'] );
+    $api_key = ( ctype_alnum( $_POST['lyte_yt_api_key'] ) ) ? $_POST['lyte_yt_api_key'] : '' ;
 
     // use random video to make sure a cache is not spoiling things
     $vidToCheck   = array('ZmnZHudtzXg', '2_7oQcAkyl8', 'nOvv80wkSgI', 'pBCt5nfsZ30', 'KHw7gdJ14uQ', 'qJ_PMvjmC6M', 'DVwHCGAr_OE', 'LtOGa5M8AuU', 'VHO9uZX9FNU' );
     $randVidIndex = array_rand( $vidToCheck );
     
-    $api_response = lyte_get_YT_resp( $vidToCheck[$randVidIndex], false, '', $api_key );
-    
+    if ( ! empty( $api_key ) ) {
+        $api_response = lyte_get_YT_resp( $vidToCheck[$randVidIndex], false, '', $api_key );
+    } else {
+        $api_response = 'API key not alphanumeric.';
+    }
+
     if ( is_array( $api_response ) ) {
         if ( ! empty( $api_response['title'] ) ) {
             _e( 'API seems OK, you can Save Changes below now.', 'wp-youtube-lyte' );
@@ -485,9 +489,9 @@ if ( apply_filters( 'lyte_settingsscreen_remotehttp', true ) ) {
 function lyte_admin_tabs(){
         $tabs = apply_filters( 'wp-youtube-lyte_filter_settingsscreen_tabs', array( 'lyte_settings_page' => __('Main', 'wp-youtube-lyte' ) ) );
         $tabContent = '';
-        if (count($tabs) >= 1) {
-            if(isset($_GET['page'])){
-                $currentId = $_GET['page'];
+        if ( count( $tabs ) >= 1 ) {
+            if( isset( $_GET['page'] ) ) {
+                $currentId = sanitize_text_field( $_GET['page'] );
             } else {
                 $currentId = 'wp-youtube-lyte';
             }

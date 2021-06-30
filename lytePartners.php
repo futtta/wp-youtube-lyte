@@ -84,7 +84,7 @@ function lyte_partners() {
 }
 
 function getLytePartnerFeed() {
-    $noFeedText=__( 'Have a look at <a href="http://optimizingmatters.com/">optimizingmatters.com</a> for wp-youtube-lyte power-ups!', 'wp-youtube-lyte' );
+    $noFeedText = esc_html__( 'Have a look at <a href="http://optimizingmatters.com/">optimizingmatters.com</a> for wp-youtube-lyte power-ups!', 'wp-youtube-lyte' );
 
     if ( apply_filters( 'wp-youtube-lyte_settingsscreen_remotehttp', true ) ) {
         $rss      = fetch_feed( 'https://feeds.feedburner.com/OptimizingMattersDownloads' );
@@ -102,15 +102,15 @@ function getLytePartnerFeed() {
                 foreach ( $rss_items as $item ) : 
                     $itemURL = esc_url( $item->get_permalink() ); ?>
                     <li class="itemDetail">
-                        <h3 class="itemTitle"><a href="<?php echo $itemURL; ?>" target="_blank"><?php echo esc_html( $item->get_title() ); ?></a></h3>
+                        <h3 class="itemTitle"><a href="<?php echo esc_url( $itemURL ); ?>" target="_blank"><?php echo esc_html( $item->get_title() ); ?></a></h3>
                         <?php
-                        if (($enclosure = $item->get_enclosure()) && ( strpos( $enclosure->get_type(), 'image') !== false ) ) {
+                        if ( ( $enclosure = $item->get_enclosure() ) && ( strpos( $enclosure->get_type(), 'image') !== false ) ) {
                             $itemImgURL = esc_url( $enclosure->get_link() );
-                            echo '<div class="itemImage"><a href="' . $itemURL . '" target="_blank"><img src="' . $itemImgURL . '"/></a></div>';
+                            echo '<div class="itemImage"><a href="' . esc_url( $itemURL ) . '" target="_blank"><img src="' . esc_url( $itemImgURL ) . '"/></a></div>';
                         }
                         ?>
                         <div class="itemDescription"><?php echo wp_kses_post($item -> get_description() ); ?></div>
-                        <div class="itemButtonRow"><div class="itemButton button-secondary"><a href="<?php echo $itemURL; ?>" target="_blank">More info</a></div></div>
+                        <div class="itemButtonRow"><div class="itemButton button-secondary"><a href="<?php echo esc_url( $itemURL ); ?>" target="_blank">More info</a></div></div>
                     </li>
                 <?php endforeach; ?>
             <?php } ?>

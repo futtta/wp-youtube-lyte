@@ -10,12 +10,16 @@
  * 
  */
 
-// no error reporting, those break header() output
-error_reporting( 0 );
+// no error reporting, those break header() output but only if standalone to avoid impact on other plugins.
+if ( ! defined( 'ABSPATH' ) ) {
+    error_reporting( 0 );
+}
 
 // include our custom configuration file in case it exists
-$WP_ROOT_PATH = dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
-if ( file_exists( $WP_ROOT_PATH."lyteCache-config.php" ) ) require_once( $WP_ROOT_PATH."lyteCache-config.php" );
+$wp_root_path = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+if ( file_exists( $wp_root_path . 'lyteCache-config.php' ) ) {
+    require_once( $wp_root_path . 'lyteCache-config.php' );
+}
 
 /* 
  * step 0: set constant for dir where thumbs are stored + declaring some variables
@@ -188,7 +192,7 @@ function get_origThumbURL() {
     $invalid = false;
 
     // get thumbnail-url from request
-    if ( array_key_exists( 'origThumbUrl', $_GET ) && $_GET['origThumbUrl'] !== '' ) {
+    if ( array_key_exists( 'origThumbUrl', $_GET ) && $_GET['origThumbUrl'] !== '' && 0 === strpos( $_GET['origThumbUrl'], 'https%3A%2F%2F' ) && true === filter_var( $_GET['origThumbUrl'], FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) ) {
         $origThumbURL = urldecode( $_GET['origThumbUrl'] );
     } else {
         $invalid = true;
