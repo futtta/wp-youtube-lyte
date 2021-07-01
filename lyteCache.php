@@ -125,7 +125,11 @@ function lyte_output_image( $thumbContents, $contentType = 'image/jpeg' ) {
         header( 'Connection: close' );
     } else {
         // send all sorts of headers
-        $expireTime = 60 * 60 * 24 * 7; // 1w
+        if ( ! defined( 'LYTE_CACHE_EXPIRE_TIME' ) ) {
+            $expireTime = 60 * 60 * 24 * 7; // 1w
+        } else {
+            $expireTIme = LYTE_CACHE_EXPIRE_TIME;
+        }
         header( 'Content-Length: '. strlen( $thumbContents) );
         header( 'Cache-Control: max-age=' . $expireTime . ', public, immutable' );
         header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + $expireTime ).' GMT' );
