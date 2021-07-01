@@ -195,8 +195,13 @@ function lyte_get_thumb( $thumbUrl ) {
 function get_origThumbURL() {
     $invalid = false;
 
-    // get thumbnail-url from request
-    if ( array_key_exists( 'origThumbUrl', $_GET ) && $_GET['origThumbUrl'] !== '' && 0 === strpos( $_GET['origThumbUrl'], 'https%3A%2F%2F' ) && true === filter_var( $_GET['origThumbUrl'], FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) ) {
+    // if origThumbUrl has no scheme prepend it with "https:" (else filter_var fails).
+    if ( 0 === strpos( $_GET['origThumbUrl'], '//' ) ) {
+        $_GET['origThumbUrl'] = 'https:' . $_GET['origThumbUrl'];
+    }
+
+    // get thumbnail-url from request.
+    if ( array_key_exists( 'origThumbUrl', $_GET ) && $_GET['origThumbUrl'] !== '' && 0 === strpos( $_GET['origThumbUrl'], 'https://' ) && false !== filter_var( $_GET['origThumbUrl'], FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED ) ) {
         $origThumbURL = urldecode( $_GET['origThumbUrl'] );
     } else {
         $invalid = true;
