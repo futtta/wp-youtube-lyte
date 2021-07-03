@@ -128,7 +128,7 @@ function lyte_output_image( $thumbContents, $contentType = 'image/jpeg' ) {
         if ( ! defined( 'LYTE_CACHE_EXPIRE_TIME' ) ) {
             $expireTime = 60 * 60 * 24 * 7; // 1w
         } else {
-            $expireTIme = LYTE_CACHE_EXPIRE_TIME;
+            $expireTime = LYTE_CACHE_EXPIRE_TIME;
         }
         header( 'Content-Length: '. strlen( $thumbContents) );
         header( 'Cache-Control: max-age=' . $expireTime . ', public, immutable' );
