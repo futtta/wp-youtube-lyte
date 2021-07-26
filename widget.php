@@ -97,7 +97,7 @@ class WYLWidget extends WP_Widget {
 
     function form($instance) {
         global $wSize, $wDefault;
-
+error_log( json_encode($instance) );
         if ( isset( $instance['WYLtitle'] ) ) {
             $WYLtitle = esc_attr( $instance['WYLtitle'] );
         } else {
@@ -160,13 +160,13 @@ class WYLWidget extends WP_Widget {
                     $vselected = ' selected="true"';
                     $aselected = '';
                 }
-                echo '<option value="audio"' . $aselected . '>' . __( 'audio', 'wp-youtube-lyte' ) . '</option>';
-                echo '<option value="video"' . $vselected . '>' . __( 'video', 'wp-youtube-lyte' ) . '</option>';
+                echo '<option value="audio"' . esc_html( $aselected ) . '>' . __( 'audio', 'wp-youtube-lyte' ) . '</option>';
+                echo '<option value="video"' . esc_html( $vselected ) . '>' . __( 'video', 'wp-youtube-lyte' ) . '</option>';
                 ?>
                 </select>
             </label></p>
-        <p><label for="<?php echo $this->get_field_id( 'WYLurl' ); ?>"><?php _e( 'Youtube-URL:', 'wp-youtube-lyte' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'WYLurl' ); ?>" name="<?php echo $this->get_field_name( 'WYLurl' ); ?>" type="text" value="<?php echo $WYLurl; ?>" /></label></p>
-        <p><label for="<?php echo $this->get_field_id( 'WYLtext' ); ?>"><?php _e( 'Text:', 'wp-youtube-lyte' ); ?> <textarea class="widefat" id="<?php echo $this->get_field_id( 'WYLtext' ); ?>" name="<?php echo $this->get_field_name( 'WYLtext' ); ?>" rows="16" cols="20"><?php echo $WYLtext; ?></textarea></label></p>
+        <p><label for="<?php echo $this->get_field_id( 'WYLurl' ); ?>"><?php _e( 'Youtube-URL:', 'wp-youtube-lyte' ); ?> <input class="widefat" id="<?php echo $this->get_field_id( 'WYLurl' ); ?>" name="<?php echo $this->get_field_name( 'WYLurl' ); ?>" type="text" value="<?php echo esc_url( $WYLurl ); ?>" /></label></p>
+        <p><label for="<?php echo esc_html( $this->get_field_id( 'WYLtext' ) ); ?>"><?php _e( 'Text:', 'wp-youtube-lyte' ); ?> <textarea class="widefat" id="<?php echo esc_html( $this->get_field_id( 'WYLtext' ) ); ?>" name="<?php echo esc_html( $this->get_field_name( 'WYLtext' ) ); ?>" rows="16" cols="20"><?php echo esc_html( $WYLtext ); ?></textarea></label></p>
         <?php
     }
 }

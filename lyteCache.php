@@ -187,9 +187,9 @@ function lyte_get_thumb( $thumbUrl ) {
         $lyte_thumb_error .= 'no curl/ ';
     }
 
-    // if no curl or if curl error.
-    $resp = file_get_contents( $thumbUrl );
-    return $resp;
+    // if no curl or if curl error
+    // consider switching to alternative approach (fsockopen/ streams)?
+    return file_get_contents( $thumbUrl );
 }
 
 function get_origThumbURL() {
