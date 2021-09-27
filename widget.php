@@ -97,7 +97,7 @@ class WYLWidget extends WP_Widget {
 
     function form($instance) {
         global $wSize, $wDefault;
-error_log( json_encode($instance) );
+
         if ( isset( $instance['WYLtitle'] ) ) {
             $WYLtitle = esc_attr( $instance['WYLtitle'] );
         } else {
