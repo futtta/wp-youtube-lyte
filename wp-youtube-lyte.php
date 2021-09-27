@@ -261,6 +261,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
 
             // add disclaimer to lytelinks
             $disclaimer = wp_kses_data( get_option( 'lyte_disclaimer', '') );
+	    $disclaimer = apply_filters('lyte_disclaimer', $disclaimer);
             if ( !empty( $disclaimer ) ) {
                 $disclaimer = '<span class="lyte_disclaimer">' . $disclaimer . '</span>';
             }
