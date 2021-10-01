@@ -826,7 +826,7 @@ if ( is_admin() ) {
     add_filter( 'the_content', 'lyte_parse', 10 );
     add_shortcode( 'lyte', 'shortcode_lyte' );
     remove_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
-    add_filter( 'get_the_excerpt', 'lyte_trim_excerpt' );
+    add_filter( 'get_the_excerpt', 'lyte_trim_excerpt', 10, 2 );
     add_action( 'init', 'lytecache_doublecheck_activator' );
 
     /** API: action hook to allow extra actions or filters to be added */
