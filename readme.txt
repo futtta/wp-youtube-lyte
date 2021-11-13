@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 5.7
-Stable tag: 1.7.16
+Stable tag: 1.7.17
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -142,6 +142,12 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.17 =
+* misc improvements as suggested by WordPress Plugins team
+* filter added to set description as proposed & contributed by Patrick Robertson
+* filter added to disable fallback to youtube thumbnail as proposed & contributed by Benjamin Pick
+* logic added to switch to different type of lazyload behavior proposed & contributed by @softmanro
 
 = 1.7.16 =
 * removed old captions code (captions are not natively supported through the YouTube API + the Benetech backend was no longer working)
