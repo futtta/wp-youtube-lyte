@@ -409,7 +409,7 @@ function lyte_check_yt_api_key_callback() {
     if ( ! empty( $api_key ) ) {
         $api_response = lyte_get_YT_resp( $vidToCheck[$randVidIndex], false, '', $api_key );
     } else {
-        $api_response = 'API key not alphanumeric.';
+        $api_response = 'API key format error.';
     }
 
     if ( is_array( $api_response ) ) {
