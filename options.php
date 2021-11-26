@@ -400,7 +400,7 @@ function lyte_settings_page() {
 add_action( 'wp_ajax_lyte_check_yt_api_key', 'lyte_check_yt_api_key_callback' );
 function lyte_check_yt_api_key_callback() {
     check_ajax_referer( 'lyte_check_api_key', 'lyte_nonce' );
-    $api_key = ( ctype_alnum( $_POST['lyte_yt_api_key'] ) ) ? $_POST['lyte_yt_api_key'] : '' ;
+    $api_key = ( esc_html( $_POST['lyte_yt_api_key'] ) === $_POST['lyte_yt_api_key'] ) ? $_POST['lyte_yt_api_key'] : '' ;
 
     // use random video to make sure a cache is not spoiling things
     $vidToCheck   = array('ZmnZHudtzXg', '2_7oQcAkyl8', 'nOvv80wkSgI', 'pBCt5nfsZ30', 'KHw7gdJ14uQ', 'qJ_PMvjmC6M', 'DVwHCGAr_OE', 'LtOGa5M8AuU', 'VHO9uZX9FNU' );
