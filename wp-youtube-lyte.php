@@ -468,8 +468,8 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
 
         $yt_api_url = $yt_api_base . $yt_api_target;
         $yt_resp    = wp_remote_get( $yt_api_url, array(
-            ‘headers’ => array(
-                ‘referer’ => home_url()
+            'headers' => array(
+                'referer' => home_url()
                 )
             )
         );
