@@ -177,6 +177,15 @@ function lyte_get_thumb( $thumbUrl ) {
         curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 5 );
         $str = curl_exec( $curl );
         $err = curl_error( $curl );
+        
+        // fallback to hqdefault.jpg if maxresdefault.jpg is missing
+        $info = curl_getinfo($curl);
+        if ($info['http_code'] === 404 && strpos($thumbUrl, 'maxresdefault.jpg') !== false) {
+		curl_setopt( $curl, CURLOPT_URL, str_replace('maxresdefault.jpg', 'hqdefault.jpg', $thumbUrl ));
+		$str = curl_exec( $curl );
+		$err = curl_error( $curl );
+	}
+        
         curl_close( $curl );
         if ( ! $err && $str != '' ) {
             return $str;
