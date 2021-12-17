@@ -373,7 +373,12 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
 
             /** API: filter hook to parse template before being applied */
             $lytetemplate = str_replace( '$', '&#36;', $lytetemplate );
-            $lytetemplate = apply_filters( 'lyte_match_postparse_template', $lytetemplate, $templateType );
+
+            // make sure *something* is passed as $yt_resp_array to avoid notices in below filter.
+            if ( ! isset( $yt_resp_array ) ) {
+                $yt_resp_array = '';
+            }
+            $lytetemplate = apply_filters( 'lyte_match_postparse_template', $lytetemplate, $templateType, $yt_resp_array );
             $the_content  = preg_replace( $lytes_regexp, $lytetemplate, $the_content, 1 );
         }
 
@@ -460,9 +465,11 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
             $yt_api_base = 'https://www.googleapis.com/youtube/v3/';
 
             if ( $playlist ) {
-                $yt_api_target = 'playlists?part=snippet%2C+id&id=' . $vid . '&key=' . $lyte_yt_api_key;
+                // filter to allow extra data to be requested from YT API, eg. statistics (to get view count).
+                $yt_api_target = apply_filters( 'lyte_filter_ytapi_playlist_params', 'playlists?part=snippet%2C+id&id=' . $vid . '&key=' . $lyte_yt_api_key );
             } else {
-                $yt_api_target = 'videos?part=id%2C+snippet%2C+contentDetails&id=' . $vid . '&key=' . $lyte_yt_api_key;
+                // filter to allow extra data to be requested from YT API, eg. statistics (to get view count).
+                $yt_api_target = apply_filters( 'lyte_filter_ytapi_video_params', 'videos?part=id%2C+snippet%2C+contentDetails&id=' . $vid . '&key=' . $lyte_yt_api_key );
             }
         }
 
@@ -521,6 +528,9 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
                     $_thisLyte['description'] = $_thisLyte['title'];
                 }
                 $_thisLyte['description'] = apply_filters( 'lyte_ytapi_description', $_thisLyte['description'] );
+
+                // add filter to alter what data is cached (adding/ removing).
+                $_thisLyte = apply_filters( 'lyte_filter_ytapi_pre_store_results', $_thisLyte, $yt_resp_array );
 
                 // try to cache the result
                 if ( ( ( $postID ) || ( $isWidget ) ) && ! empty( $_thisLyte ) && empty( $apiTestKey ) ) {
