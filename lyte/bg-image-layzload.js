@@ -2,7 +2,7 @@
 *  Original source taken from: https://imagekit.io/blog/lazy-loading-images-complete-guide/#lazy-loading-css-background-images
 */
 
-document.addEventListener("load", function() {
+window.addEventListener("load", function() {
   var wyl_lazyloadImages;
 
   if ("IntersectionObserver" in window) {
