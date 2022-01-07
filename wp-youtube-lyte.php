@@ -9,6 +9,8 @@ Author URI: http://blog.futtta.be/
 Text Domain: wp-youtube-lyte
 */
 
+// fixme: add logic to remove settings/ cache/ ... when removing plugin
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $debug           = false;
