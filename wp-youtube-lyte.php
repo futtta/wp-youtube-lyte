@@ -4,7 +4,7 @@ Plugin Name: WP YouTube Lyte
 Plugin URI: http://blog.futtta.be/wp-youtube-lyte/
 Description: Lite and accessible YouTube audio and video embedding.
 Author: Frank Goossens (futtta)
-Version: 1.7.18
+Version: 1.7.19
 Author URI: http://blog.futtta.be/
 Text Domain: wp-youtube-lyte
 */
@@ -14,7 +14,7 @@ Text Domain: wp-youtube-lyte
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $debug           = false;
-$lyte_version    = '1.7.18';
+$lyte_version    = '1.7.19';
 $lyte_db_version = get_option( 'lyte_version', 'none' );
 
 /** have we updated? */
