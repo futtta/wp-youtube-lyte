@@ -786,13 +786,19 @@ function lyte_prepare( $the_content ) {
 
     // do the most of the greedy part early.
     if ( get_option( 'lyte_greedy', '1' ) === '1' && strpos( $the_content, 'youtu' ) !== false ) {
-        // only preg_replace if "youtu" (as part of youtube.com or youtu.be) is found.
-        if ( strpos( $the_content, '/playlist?list=' ) !== false ) {
-            // only preg_replace for playlists if there are playlists to be parsed.
-            $the_content = preg_replace( '/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/playlist\?list=/m', 'httpv://www.youtube.com/playlist?list=', $the_content );
+        $prep_replas = array();
+        $prep_replas['list'] = array( 'tell' => '/playlist?list=', 'regex' => '#^((?:<p>)?https?:\/\/(?:www.)?youtu(?:be.com|.be)\/(?:playlist\?list=))?.*$#m', 'replace' => 'httpv://www.youtube.com/playlist?list=' );
+        $prep_replas['vid']  = array( 'tell' => '/watch?v=', 'regex' => '#^((?:<p>)?https?:\/\/(?:www.)?youtu(?:be.com|.be)\/(?:watch\?v=))?.*$#m', 'replace' => 'httpv://www.youtube.com/watch?v=' );
+
+        foreach ( $prep_replas as $prep_repla ) {
+            if ( false !== strpos( $the_content, $prep_repla['tell'] ) && preg_match_all( $prep_repla['regex'], $the_content, $vids, PREG_SET_ORDER ) {
+                foreach ( $vids as $vid ) {
+                    if ( is_array( $vid ) && array_key_exists( 1, $vid ) && false === strpos( trim( $vid[0] ), ' ' ) ) {
+                        $the_content = str_replace( $vid[1], $prep_repla['replace'], $the_content );
+                    }
+                }
+            }
         }
-        // and lastly normal single embeds.
-        $the_content = preg_replace( '/^(?:<p>)?https?:\/\/(www.)?youtu(be.com|.be)\/(watch\?v=)?/m', 'httpv://www.youtube.com/watch?v=', $the_content );
     }
     return $the_content;
 }
