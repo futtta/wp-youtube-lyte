@@ -791,7 +791,7 @@ function lyte_prepare( $the_content ) {
         $prep_replas['vid']  = array( 'tell' => '/watch?v=', 'regex' => '#^((?:<p>)?https?:\/\/(?:www.)?youtu(?:be.com|.be)\/(?:watch\?v=))?.*$#m', 'replace' => 'httpv://www.youtube.com/watch?v=' );
 
         foreach ( $prep_replas as $prep_repla ) {
-            if ( false !== strpos( $the_content, $prep_repla['tell'] ) && preg_match_all( $prep_repla['regex'], $the_content, $vids, PREG_SET_ORDER ) {
+            if ( false !== strpos( $the_content, $prep_repla['tell'] ) && preg_match_all( $prep_repla['regex'], $the_content, $vids, PREG_SET_ORDER ) ) {
                 foreach ( $vids as $vid ) {
                     if ( is_array( $vid ) && array_key_exists( 1, $vid ) && false === strpos( trim( $vid[0] ), ' ' ) ) {
                         $the_content = str_replace( $vid[1], $prep_repla['replace'], $the_content );
