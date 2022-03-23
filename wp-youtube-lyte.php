@@ -234,7 +234,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                 switch ( $lyteSettings['links'] ) {
                     case '0':
                         $noscript_post = '<br />' . __( 'Watch this playlist on YouTube', 'wp-youtube-lyte' );
-                        $noscript      = '<noscript><a href="' . $lyteSettings['scheme'] . '://youtube.com/playlist?list=' . $vid . '">' . $noscript_post . '</a></noscript>';
+                        $noscript      = '<noscript><a href="' . $lyteSettings['scheme'] . '://youtube.com/playlist?list=' . $vid . '" rel="nofollow">' . $noscript_post . '</a></noscript>';
                         $lytelinks_txt = '';
                         break;
                     default:
@@ -258,7 +258,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                         $thumbUrl = plugins_url( 'lyteCache.php?origThumbUrl=' . urlencode($thumbUrl) , __FILE__   );
                 }
                 $thumbUrl = apply_filters( 'lyte_match_thumburl', $thumbUrl, $vid );
-                $noscript = '<noscript><a href="' . $lyteSettings['scheme'] . '://youtu.be/' . $vid . '"><img src="' . $thumbUrl . '" alt="" width="' . $lyteSettings[2] . '" height="' . $NSimgHeight . '" />' . $noscript_post . '</a></noscript>';
+                $noscript = '<noscript><a href="' . $lyteSettings['scheme'] . '://youtu.be/' . $vid . '" rel="nofollow"><img src="' . $thumbUrl . '" alt="" width="' . $lyteSettings[2] . '" height="' . $NSimgHeight . '" />' . $noscript_post . '</a></noscript>';
             }
 
             // add disclaimer to lytelinks
