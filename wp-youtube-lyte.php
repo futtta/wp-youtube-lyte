@@ -251,7 +251,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                         break;
                     default:
                         $noscript_post = '';
-                        $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '">' . __( 'Watch this video', 'wp-youtube-lyte' ) . ' <a href="' . $lyteSettings['scheme'] . '://youtu.be/' . $vid . '">' . __( 'on YouTube', 'wp-youtube-lyte' ) . '</a>.</div>';
+                        $lytelinks_txt = '<div class="lL" style="max-width:100%;width:' . $lyteSettings[2] . 'px;' . $lyteSettings['pos'] . '">' . ' <a href="' . $lyteSettings['scheme'] . '://youtu.be/' . $vid . '" target="_blank">' . __( 'Watch this video on YouTube', 'wp-youtube-lyte' ) . '</a>.</div>';
                 }
                 $thumbUrl = $lyteSettings['scheme'] . '://i.ytimg.com/vi/' . $vid . '/0.jpg';
                 if ( get_option( 'lyte_local_thumb', '0' ) === '1' ) {
