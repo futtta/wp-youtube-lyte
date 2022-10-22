@@ -221,8 +221,17 @@ function get_origThumbURL() {
 
     // make sure the thumbnail-domain is for youtube.
     $origThumbDomain = $origThumbURL_parts['host'];
-    if ( ! $invalid && str_replace( array( 'ytimg.com','youtube.com','youtu.be' ), '', $origThumbDomain ) === $origThumbDomain ) {
-        $invalid = true;
+    if ( ! $invalid ) {
+        $_needle_ok = false;
+        foreach( array( 'ytimg.com','youtube.com','youtu.be' ) as $_needle ) {
+            if ( str_ends_in( $origThumbDomain, $_needle ) ) {
+                $_needle_ok = true;
+                break;
+            }
+        }
+        if ( ! $_needle_ok ) {
+            $invalid = true;
+        }
     }
 
     // and make sure the thumbnail-url is for an image (.jpg)
@@ -260,4 +269,9 @@ function lyte_thumb_fallback() {
     header('HTTP/1.1 302 Moved Temporarily');
     header('Location:  '.  $origThumbURL );
     exit;
+}
+
+function str_ends_in( $haystack, $needle ) {
+    $length = strlen( $needle );
+    return ( substr( $haystack, -$length, $length ) === $needle );
 }
