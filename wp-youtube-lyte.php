@@ -140,7 +140,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
             remove_filter( 'the_content', 'wpautop' );
         }
 
-        if ( apply_filters( 'lyte_kinda_textureize', true ) ) {
+        if ( apply_filters( 'lyte_kinda_textureize', false ) ) {
             $char_codes   = array( '&#215;', '&#8211;', '\u002d' );
             $replacements = array( 'x', '--', '-');
             $the_content  = str_replace( $char_codes, $replacements, $the_content );
@@ -396,7 +396,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
         }
     }
 
-    if ( apply_filters( 'lyte_kinda_textureize', true ) ) {
+    if ( apply_filters( 'lyte_kinda_textureize', false ) ) {
         // replace remaining double dash but restore it in comment tags (this is getting ugly though).
         $the_content = str_replace( array( ' -- ', '-- ', ' --' ), ' &#8211; ', $the_content );
         $the_content = str_replace( '<! &#8211;', '<!--', $the_content );
