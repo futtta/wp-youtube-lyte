@@ -767,6 +767,7 @@ function lyte_prepare( $the_content ) {
 
     // catch gutenberg blocks before being rendered.
     if ( apply_filters( 'lyte_filter_do_gutenberg', true ) && strpos( $the_content, '<!-- wp:' ) !== false  && strpos( $the_content, 'youtu' ) !== false ) {
+        echo htmlentities($the_content);
         /*
          * do Gutenberg stuff here, playlists if needed first and then single videos
          *
@@ -777,16 +778,18 @@ function lyte_prepare( $the_content ) {
          * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
          */
         if ( strpos( $the_content, '/playlist?list=' ) !== false ) {
-            $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"(?:.*)?}\s?-->.*(?:(?:<figcaption>(.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
+            $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"(?:.*)?}\s?-->.*(?:(?:<figcaption[^<]*>(.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
             $the_content               = preg_replace( $gutenbeard_playlist_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/playlist?list=\1<figcaption>\2</figcaption></figure>', $the_content );
         }
-        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:(?:<figcaption>(.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
+        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:(?:<figcaption[^<]*>(.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
         $the_content             = preg_replace( $gutenbeard_single_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/watch?v=\1<figcaption>\2</figcaption></figure>', $the_content );
     }
 
     // do the most of the greedy part early.
     if ( get_option( 'lyte_greedy', '1' ) === '1' && strpos( $the_content, 'youtu' ) !== false ) {
         $prep_replas = array();
+        // fixme: tells don't work on youtu.be short URL's
+        // so replace //youtu.be/ with //youtube.com/watch?v= but not for playlists (but those don't have short URL's?)
         $prep_replas['list'] = array( 'tell' => '/playlist?list=', 'regex' => '#^((?:<p>)?https?:\/\/(?:www.)?youtu(?:be.com|.be)\/(?:playlist\?list=))?.*$#m', 'replace' => 'httpv://www.youtube.com/playlist?list=' );
         $prep_replas['vid']  = array( 'tell' => '/watch?v=', 'regex' => '#^((?:<p>)?https?:\/\/(?:www.)?youtu(?:be.com|.be)\/(?:watch\?v=))?.*$#m', 'replace' => 'httpv://www.youtube.com/watch?v=' );
 
