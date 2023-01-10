@@ -767,7 +767,6 @@ function lyte_prepare( $the_content ) {
 
     // catch gutenberg blocks before being rendered.
     if ( apply_filters( 'lyte_filter_do_gutenberg', true ) && strpos( $the_content, '<!-- wp:' ) !== false  && strpos( $the_content, 'youtu' ) !== false ) {
-        echo htmlentities($the_content);
         /*
          * do Gutenberg stuff here, playlists if needed first and then single videos
          *
