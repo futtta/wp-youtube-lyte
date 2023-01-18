@@ -4,7 +4,7 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
 Tested up to: 6.1
-Stable tag: 1.7.21
+Stable tag: 1.7.22
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -142,6 +142,10 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.22 =
+* fix for figcaption in WordPress video block disappearing (thanks Tomas Hartl !)
+* disabled "lyte kinda texturize" by default (an be re-enabled with a filter)
 
 = 1.7.21 =
 * bugfix for regression in parsing improvements which in some cases saw links to youtube being shown as LYTE as well.
