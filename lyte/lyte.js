@@ -6,7 +6,7 @@ var sch="https";
 ly.te = function() {
     if (!rn) {
 	var rn=1;
-	lts = ly.getElementsByClassName("lyMe", "div");
+	var lts = ly.getElementsByClassName("lyMe", "div");
 	
 	for (var i = 0, lln = lts.length; i < lln; i += 1) {
 	    p = lts[i];
