@@ -3,7 +3,7 @@ Contributors: futtta, optimizingmatters
 Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 4.0
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: 1.7.22
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
