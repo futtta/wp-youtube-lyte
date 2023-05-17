@@ -776,12 +776,22 @@ function lyte_prepare( $the_content ) {
          * Luke Cavanagh; thanks for the Gutenbeard reference and for the funny animated gif :)
          * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
          */
-        if ( strpos( $the_content, '/playlist?list=' ) !== false ) {
-            $gutenbeard_playlist_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https://www.youtube.com/playlist\?list=(.*)"(?:.*)?}\s?-->.*(?:(?:<figcaption[^>]*>(.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
-            $the_content               = preg_replace( $gutenbeard_playlist_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/playlist?list=\1<figcaption>\2</figcaption></figure>', $the_content );
-        }
-        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{"url":"https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)(.*)"(?:.*)?}\s?-->.*(?:(?:<figcaption[^>]*>(.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
-        $the_content             = preg_replace( $gutenbeard_single_regex, '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube">httpv://www.youtube.com/watch?v=\1<figcaption>\2</figcaption></figure>', $the_content );
+        $gutenbeard_single_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{(?<params>[^}]+)}\s?-->.*(?:(?:<figcaption[^>]*>(?<caption>.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
+        $the_content             = preg_replace_callback( $gutenbeard_single_regex, function($matches) {
+            $params = json_decode('{' . $matches['params'] . '}', true);
+            if (empty($params['url'])) return $matches[0];
+            $count = 0;
+            $url = str_replace('https://www.youtube.com/playlist?list=', 'httpv://www.youtube.com/playlist?list=', $params['url'], $count);
+            if (!$count) {
+                $url = preg_replace('%^https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be)%', 'httpv://www.youtube.com/watch?v=', $params['url'], 1, $count);
+                if (!$count) {
+                    return $matches[0];
+                }
+            }
+            $alignClasses = isset($params['align']) ? ' lyte-align lyte-align-' . $params['align'] : ''; 
+            $caption = isset($params['caption']) ? $params['caption'] : '';
+            return '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube' . $alignClasses . '">' . $url . '<figcaption>' . $caption . '</figcaption></figure>';
+        }, $the_content );
     }
 
     // do the most of the greedy part early.
