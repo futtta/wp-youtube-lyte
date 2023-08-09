@@ -20,7 +20,7 @@ function lyte_add_partner_tabs( $in ) {
 add_action( 'admin_menu', 'lyte_partners_init' );
 function lyte_partners_init() {
     if ( apply_filters( 'wp-youtube-lyte_filter_show_partner_tabs', true ) ) {
-        $hook = add_submenu_page( NULL, 'Lyte partner', 'Lyte partner', 'manage_options', 'lyte_partners', 'lyte_partners' );
+        $hook = add_submenu_page( '', 'Lyte partner', 'Lyte partner', 'manage_options', 'lyte_partners', 'lyte_partners' );
         // register_settings here as well if needed
     }
 }
