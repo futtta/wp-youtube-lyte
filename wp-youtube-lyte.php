@@ -88,6 +88,7 @@ foreach ( $pSizeOrder[$pSizeFormat] as $sizeId ) {
 }
 
 /** get other options and push in array*/
+global $lyteSettings;
 $lyteSettings['sizeArray']                    = $sArray;
 $lyteSettings['selSize']                      = $selSize;
 $lyteSettings['links']                        = get_option( 'lyte_show_links' );
@@ -115,7 +116,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
 
     /** main function to parse the content, searching and replacing httpv-links */
     global $lyteSettings, $toCache_index, $postID, $cachekey;
-    $lyteSettings['path'] = plugins_url() . '/' . dirname( plugin_basename( __FILE__ ) ) . '/lyte/';
+    $lyteSettings['path'] = plugins_url('/lyte/', __FILE__ );
     $urlArr               = parse_url( $lyteSettings['path'] );
     $origin               = $urlArr['scheme'] . '://' . $urlArr['host'];
 

@@ -343,7 +343,7 @@ function lyte_settings_page() {
             </div>
         </div>
     </div>
-    <div style="float:right;margin:50px 15px;"><a href="http://blog.futtta.be/2013/10/21/do-not-donate-to-me/" target="_blank"><img width="100px" height="85px" src="<?php echo plugins_url() . '/' . plugin_basename( dirname( __FILE__ ) ) . '/external/do_not_donate_smallest.png'; ?>" title="<?php _e( 'Do not donate for this plugin!', 'wp-youtube-lyte' ); ?>"></a></div>
+    <div style="float:right;margin:50px 15px;"><a href="http://blog.futtta.be/2013/10/21/do-not-donate-to-me/" target="_blank"><img width="100px" height="85px" src="<?php echo plugins_url( '/external/do_not_donate_smallest.png', __FILE__ ) ?>" title="<?php _e( 'Do not donate for this plugin!', 'wp-youtube-lyte' ); ?>"></a></div>
 </div>
 
 <script type="text/javascript">
