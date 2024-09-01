@@ -607,10 +607,10 @@ function lyte_init( $echo = true ) {
     echo '<script id="fgo2">' . esc_js("alert('boe')") . '</script>'; -> <script id="fgo2">alert(\'boe\')</script>
     */
     
-    $inline_js = '<script type="text/javascript" data-cfasync="false">var bU="' . $lyteSettings['path'] . '";' . $mobJS . $doublecheck_thumb_cookie . 'style = document.createElement("style");style.type = "text/css";rules = document.createTextNode("' . $lyte_css . '");if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName("head")[0].appendChild(style);</script>';
-    $linked_js = '<script type="text/javascript" data-cfasync="false" async src="' . $lyteSettings['path'] . $lyteSettings['file'] . '"></script>';
+    $inline_js = '<script data-cfasync="false">var bU="' . $lyteSettings['path'] . '";' . $mobJS . $doublecheck_thumb_cookie . 'style = document.createElement("style");style.type = "text/css";rules = document.createTextNode("' . $lyte_css . '");if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName("head")[0].appendChild(style);</script>';
+    $linked_js = '<script data-cfasync="false" async src="' . $lyteSettings['path'] . $lyteSettings['file'] . '"></script>';
     if ( $lyteSettings['lyte_use_internal_lazyloader'] ) {
-        $linked_js .= '<script type="text/javascript" data-cfasync="false" async src="'.$lyteSettings['path'].$lyteSettings['file_lazyload'].'"></script>';
+        $linked_js .= '<script data-cfasync="false" async src="'.$lyteSettings['path'].$lyteSettings['file_lazyload'].'"></script>';
     }
 
     if ( false !== $echo ) {
