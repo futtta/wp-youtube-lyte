@@ -601,12 +601,6 @@ function lyte_init( $echo = true ) {
     /** API: filter hook to change css */
     $lyte_css = apply_filters( 'lyte_css', $lyte_css );
 
-
-    /** using esc_js on script tags breaks the JS as quotes are escaped, seems esc_js indeed is only to be used for onclick/ onfocus/ ... attributes.
-    echo '<script id="fgo1">' . esc_js('alert("boe")') . '</script>'; -> <script id="fgo1">alert(&quot;boe&quot;)</script>
-    echo '<script id="fgo2">' . esc_js("alert('boe')") . '</script>'; -> <script id="fgo2">alert(\'boe\')</script>
-    */
-    
     $inline_js = '<script data-cfasync="false">var bU="' . $lyteSettings['path'] . '";' . $mobJS . $doublecheck_thumb_cookie . 'style = document.createElement("style");style.type = "text/css";rules = document.createTextNode("' . $lyte_css . '");if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName("head")[0].appendChild(style);</script>';
     $linked_js = '<script data-cfasync="false" async src="' . $lyteSettings['path'] . $lyteSettings['file'] . '"></script>';
     if ( $lyteSettings['lyte_use_internal_lazyloader'] ) {
