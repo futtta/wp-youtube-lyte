@@ -772,14 +772,14 @@ function lyte_prepare( $the_content ) {
          * https://media1.giphy.com/media/l2QZTNMFTQ2Z00zHG/giphy.gif
          */
         $gutenbeard_regex = '%<\!--\s?wp:(?:core[-|/])?embed(?:/youtube)?\s?{(?<params>[^}]+)}\s?-->.*(?:(?:<figcaption[^>]*>(?<caption>.*)</figcaption>).*)?<\!--\s?/wp:(?:core[-|/])?embed(?:/youtube)?\s?-->%Us';
-        $the_content             = preg_replace_callback( $gutenbeard_regex, function($matches) {
+        $the_content      = preg_replace_callback( $gutenbeard_regex, function($matches) {
             $params = json_decode('{' . $matches['params'] . '}', true);
-            if (empty($params['url'])) return $matches[0];
+            if ( empty( $params['url'] ) ) return $matches[0];
             $count = 0;
-            $url = str_replace('https://www.youtube.com/playlist?list=', 'httpv://www.youtube.com/playlist?list=', $params['url'], $count);
-            if (!$count) {
-                $url = preg_replace('%^https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be)%', 'httpv://www.youtube.com/watch?v=', $params['url'], 1, $count);
-                if (!$count) {
+            $url   = str_replace( 'https://www.youtube.com/playlist?list=', 'httpv://www.youtube.com/playlist?list=', $params['url'], $count );
+            if ( ! $count ) {
+                $url = preg_replace( '%^https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)%', 'httpv://www.youtube.com/watch?v=', $params['url'], 1, $count );
+                if ( ! $count ) {
                     return $matches[0];
                 }
             }
