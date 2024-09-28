@@ -2,6 +2,8 @@
 Contributors: futtta, optimizingmatters
 Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
+License: GPLv3
+License URI: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
 Requires at least: 4.0
 Tested up to: 6.6
 Stable tag: 1.7.24
