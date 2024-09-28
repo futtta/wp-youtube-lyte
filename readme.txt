@@ -144,7 +144,9 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 == Changelog ==
 
 = 1.7.24 =
-...
+* Compatibility with bedrock-autoloader (thanks to Gerwin Jansen)
+* Improve alignment for Gutenberg YouTube/ video block (kudo's to Benjamin Pick)
+* removed type="text/javascript" attribute from <script tags
 
 = 1.7.23 =
 * fix for PHP deprecation notice in PHP 8.2 in lytePartners.php
