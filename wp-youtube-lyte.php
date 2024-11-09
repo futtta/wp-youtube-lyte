@@ -784,7 +784,7 @@ function lyte_prepare( $the_content ) {
                 }
             }
             $alignClasses = isset($params['align']) ? ' lyte-align align' . $params['align'] : ''; 
-            return '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube ' . (isset($params['className']) ? $params['className'] : '') . $alignClasses . '">' . $url . '<figcaption>' . (isset($params['caption']) ? $params['caption'] : '') . '</figcaption></figure>';
+            return '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube ' . (isset($params['className']) ? $params['className'] : '') . $alignClasses . '">' . $url . '<figcaption>' . (isset($matches['caption']) ? $matches['caption'] : '') . '</figcaption></figure>';
         }, $the_content );
     }
 
