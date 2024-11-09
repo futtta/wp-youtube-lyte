@@ -6,7 +6,7 @@ License: GPLv3
 License URI: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
 Requires at least: 4.0
 Tested up to: 6.6
-Stable tag: 1.7.24
+Stable tag: 1.7.25
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -144,6 +144,9 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.25 =
+* fix for regression that saw youtu.be links in WordPress blocks break.
 
 = 1.7.24 =
 * Compatibility with bedrock-autoloader (thanks to Gerwin Jansen)
