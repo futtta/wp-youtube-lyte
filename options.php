@@ -3,9 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 require( 'lytePartners.php');
 
-$plugin_dir = basename( dirname( __FILE__ ) ) . '/languages';
-load_plugin_textdomain( 'wp-youtube-lyte', false, $plugin_dir );
-
 add_action('admin_menu', 'lyte_create_menu');
 
 if ( get_option( 'lyte_emptycache','0') === '1') {
