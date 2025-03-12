@@ -62,8 +62,13 @@ if (!$debug) {
 }
 
 /** get paths, language and includes */
-$plugin_dir = basename( dirname( __FILE__ ) ) . '/languages';
-load_plugin_textdomain( 'wp-youtube-lyte', null, $plugin_dir );
+
+function lyte_load_textdomain() {
+    $plugin_dir = basename( dirname( __FILE__ ) ) . '/languages';
+    load_plugin_textdomain( 'wp-youtube-lyte', false, $plugin_dir );
+}
+add_action( 'init', 'lyte_load_textdomain' );
+
 require_once( dirname( __FILE__ ) . '/player_sizes.inc.php' );
 require_once( dirname( __FILE__ ) . '/widget.php' );
 
