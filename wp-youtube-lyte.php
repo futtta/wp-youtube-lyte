@@ -65,7 +65,7 @@ if (!$debug) {
 require_once( dirname( __FILE__ ) . '/widget.php' );
 
 function init_settings() {
-	global $pDefault, $pSize, $pSizeOrder, $lyteSettings, $wyl_version, $wyl_file, $wyl_file_lazyload;
+	global $pDefault, $pSize, $pSizeOrder, $wDefault, $wSize, $lyteSettings, $wyl_version, $wyl_file, $wyl_file_lazyload;
 
 	require_once( dirname( __FILE__ ) . '/player_sizes.inc.php' );
 
