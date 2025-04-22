@@ -6,7 +6,7 @@ class WYLWidget extends WP_Widget {
 
     function widget($args, $instance) {
         extract( $args );
-        global $wSize, $wyl_version, $wp_lyte_plugin_url, $lyteSettings;
+        global $wDefault, $wSize, $wyl_version, $wp_lyte_plugin_url, $lyteSettings;
         $lyteSettings['path']= plugins_url( '/lyte/', __FILE__ );
         $qsa = '';
 
