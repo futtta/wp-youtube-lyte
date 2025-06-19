@@ -312,12 +312,16 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                         $thumbUrl = '//i.ytimg.com/vi/' . $vid . '/hqdefault.jpg';
                     }
                 }
-                if ( strpos( $noscript, 'alt=""' ) !== false && array_key_exists( 'title', $yt_resp_array ) ) {
+
+                if ( strpos( $noscript, 'alt=""' ) !== false && array_key_exists( 'title', $yt_resp_array ) && ! empty( $yt_resp_array["title"] ) ) {
                     $noscript = str_replace( 'alt=""', 'alt="' . htmlentities( $yt_resp_array["title"] ). '"', $noscript );
+                } else if ( strpos( $noscript, 'alt=""' ) !== false ) {
+                    $noscript = str_replace( 'alt=""', 'alt="YouTube video thumbnail"', $noscript );
                 }
             } else {
                 $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
             }
+error_log('after noscript thingie' . $noscript);
 
             // do we have to serve the thumbnail from local cache?
             if ( get_option( 'lyte_local_thumb', '0' ) === '1' ) {
