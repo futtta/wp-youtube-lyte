@@ -321,7 +321,6 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
             } else {
                 $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
             }
-error_log('after noscript thingie' . $noscript);
 
             // do we have to serve the thumbnail from local cache?
             if ( get_option( 'lyte_local_thumb', '0' ) === '1' ) {
