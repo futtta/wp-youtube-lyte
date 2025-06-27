@@ -316,7 +316,7 @@ function lyte_parse( $the_content, $doExcerpt = false ) {
                 if ( strpos( $noscript, 'alt=""' ) !== false && array_key_exists( 'title', $yt_resp_array ) && ! empty( $yt_resp_array["title"] ) ) {
                     $noscript = str_replace( 'alt=""', 'alt="' . htmlentities( $yt_resp_array["title"] ). '"', $noscript );
                 } else if ( strpos( $noscript, 'alt=""' ) !== false ) {
-                    $noscript = str_replace( 'alt=""', 'alt="YouTube video thumbnail"', $noscript );
+                    $noscript = str_replace( 'alt=""', 'alt="' . __( 'YouTube video thumbnail', 'wp-youtube-lyte' ) . '"', $noscript );
                 }
             } else {
                 $thumbUrl = "//i.ytimg.com/vi/".$vid."/hqdefault.jpg";
