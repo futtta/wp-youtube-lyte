@@ -49,7 +49,7 @@ if ($lyte_db_version !== $lyte_version) {
 }
 
 /** are we in debug-mode */
-
+global $wyl_version, $wyl_file, $wyl_file_lazyload;
 if (!$debug) {
     $wyl_version       = $lyte_version;
     $wyl_file          = 'lyte-min.js';
