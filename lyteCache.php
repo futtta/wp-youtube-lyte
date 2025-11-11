@@ -226,8 +226,7 @@ function get_origThumbURL() {
         foreach( array( 'ytimg.com','youtube.com','youtu.be' ) as $_needle ) {
             // the orginal thumb URL has to be from one of the 
             // youtube domains with either an exact match or with a
-            // substring-end match with at least .domain.suffix to ensure
-            // i.ytimg.com matches, but i.fake-ytimg.com does not
+            // substring-end-match with at least .domain.suffix
             if ( $_needle === $origThumbDomain || str_ends_in( $origThumbDomain, '.'.$_needle ) ) {
                 $_needle_ok = true;
                 break;
