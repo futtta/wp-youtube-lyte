@@ -532,7 +532,7 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
                 }
 
                 // try to ensure description is never empty to avoid Google structured data test tool complaining about it missing.
-                if ( ! array_key_exists( 'description', $_thisLyte ) || empty( $_thisLyte['description'] ) ) {
+                if ( array_key_exists( 'title', $_thisLyte ) && ( ! array_key_exists( 'description', $_thisLyte ) || empty( $_thisLyte['description'] ) ) ) {
                     $_thisLyte['description'] = $_thisLyte['title'];
                 }
                 $_thisLyte['description'] = apply_filters( 'lyte_ytapi_description', $_thisLyte['description'] );
