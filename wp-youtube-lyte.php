@@ -656,14 +656,14 @@ function shortcode_lyte( $atts ) {
 
     $qs = '';
 
-    if ($audio) { $proto = 'httpa'; } else { $proto = 'httpv'; }
-    if ( $start !== '' ) { $qs .= '&amp;start=' . $start; }
+    if ( $audio ) { $proto = 'httpa'; } else { $proto = 'httpv'; }
+    if ( $start !== '' ) { $qs .= '&amp;start=' . esc_attr( $start ); }
     if ( $showinfo === 'false' ) { $qs .= '&amp;showinfo=0'; }
     if ( $hqthumb ) { $qs .= '&amp;hqThumb=1'; }
-    if ( $stepsize ) { $qs .= '#stepSize=' . $stepsize; }
+    if ( $stepsize ) { $qs .= '#stepSize=' . esc_attr( $stepsize ); }
     if ( $playlist ) { $action = 'playlist?list=';} else { $action = 'watch?v='; }
 
-    return lyte_parse( $proto . '://www.youtube.com/' . $action . $id . $qs );
+    return lyte_parse( $proto . '://www.youtube.com/' . $action . esc_attr( $id ) . $qs );
 }
 
 /** update functions */
