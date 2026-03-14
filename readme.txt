@@ -5,8 +5,8 @@ Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 License: GPLv3
 License URI: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.7.28
+Tested up to: 7.0
+Stable tag: 1.7.30
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -144,6 +144,11 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.30 =
+* avoid error logging when both description and title are not set
+* improve shortcode output sanitization to prevent possible Authenticated Stored Cross-Site Scripting as reported by Muhammad Yudha
+* tested with WordPress 7.0 (beta)
 
 = 1.7.29 =
 * updated "tested up to" string to confirm LYTE is still alive
