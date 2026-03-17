@@ -427,8 +427,9 @@ function lyte_get_YT_resp( $vid, $playlist=false, $cachekey='', $apiTestKey='', 
         if ( ! empty( $cache_resp ) ) {
             $_thisLyte = json_decode( gzuncompress( base64_decode( $cache_resp ) ), 1 );
             // make sure there are not old APIv2 full responses in cache
+            // fixme: likely useless by now, so candidate for removal!
             if ( array_key_exists( 'entry', $_thisLyte ) ) {
-                if ( $_thisLyte['entry']['xmlns$yt'] === 'http://gdata.youtube.com/schemas/2007' ) {
+                if ( array_key_exists( 'xmlns$yt', $_thisLyte['entry'] ) && $_thisLyte['entry']['xmlns$yt'] === 'http://gdata.youtube.com/schemas/2007' ) {
                     $_thisLyte = array();
                 }
             }
