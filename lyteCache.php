@@ -1,13 +1,13 @@
 <?php
 /*
  * simple proxy for YouTube images
- * 
+ *
  * @param string origThumbUrl
  * @return image
- * 
+ *
  * assumption 1: thumbnails are served from known domain ("ytimg.com","youtube.com","youtu.be")
  * assumption 2: thumbnails are always jpg
- * 
+ *
  */
 
 // no error reporting, those break header() output but only if standalone to avoid impact on other plugins.
@@ -21,7 +21,7 @@ if ( file_exists( $wp_root_path . 'lyteCache-config.php' ) ) {
     require_once( $wp_root_path . 'lyteCache-config.php' );
 }
 
-/* 
+/*
  * step 0: set constant for dir where thumbs are stored + declaring some variables
  */
 
@@ -65,7 +65,7 @@ if ( lyte_check_cache_dir( LYTE_CACHE_DIR ) === false ) {
     $lyte_thumb_error   .= 'checkcache fail/ ';
 }
 
-/* 
+/*
  * step 4: if not in cache: fetch from YT and store in cache
  */
 
@@ -175,9 +175,10 @@ function lyte_get_thumb( $thumbUrl ) {
         curl_setopt( $curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727)');
         curl_setopt( $curl, CURLOPT_RETURNTRANSFER, 1 );
         curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 5 );
+        curl_setopt( $curl, CURLOPT_TIMEOUT, 10 );
         $str = curl_exec( $curl );
         $err = curl_error( $curl );
-        
+
         // fallback to hqdefault.jpg if maxresdefault.jpg is missing
         $info = curl_getinfo($curl);
         if ( 404 === $info['http_code'] && false !== strpos( $thumbUrl, 'maxresdefault.jpg' ) ) {
@@ -185,7 +186,7 @@ function lyte_get_thumb( $thumbUrl ) {
             $str = curl_exec( $curl );
             $err = curl_error( $curl );
         }
-        
+
         curl_close( $curl );
         if ( ! $err && $str != '' ) {
             return $str;
@@ -196,9 +197,11 @@ function lyte_get_thumb( $thumbUrl ) {
         $lyte_thumb_error .= 'no curl/ ';
     }
 
-    // if no curl or if curl error
-    // consider switching to alternative approach (fsockopen/ streams)?
-    return file_get_contents( $thumbUrl );
+
+    // if no curl or if curl error, fall back to file_get_contents()
+    // using a stream context so the fallback also has a bounded timeout.
+    $ctx = stream_context_create( array( 'http' => array( 'timeout' => 10 ) ) );
+    return file_get_contents( $thumbUrl, false, $ctx );
 }
 
 function get_origThumbURL() {
@@ -224,7 +227,7 @@ function get_origThumbURL() {
     if ( ! $invalid ) {
         $_needle_ok = false;
         foreach( array( 'ytimg.com','youtube.com','youtu.be' ) as $_needle ) {
-            // the orginal thumb URL has to be from one of the 
+            // the orginal thumb URL has to be from one of the
             // youtube domains with either an exact match or with a
             // substring-end-match with at least .domain.suffix
             if ( $_needle === $origThumbDomain || str_ends_in( $origThumbDomain, '.'.$_needle ) ) {
@@ -247,7 +250,7 @@ function get_origThumbURL() {
     if ( $invalid ) {
         $origThumbURL = 'https://i.ytimg.com/vi/thisisnotavalidvid/hqdefault.jpg';
     }
-    
+
     return $origThumbURL;
 }
 
