@@ -775,15 +775,15 @@ function lyte_prepare( $the_content ) {
             $params = json_decode('{' . $matches['params'] . '}', true);
             if ( empty( $params['url'] ) ) return $matches[0];
             $count = 0;
-            $url   = str_replace( 'https://www.youtube.com/playlist?list=', 'httpv://www.youtube.com/playlist?list=', $params['url'], $count );
+            $url   = str_replace( 'https://www.youtube.com/playlist?list=', 'httpv://www.youtube.com/playlist?list=', esc_url( $params['url'] ), $count );
             if ( ! $count ) {
-                $url = preg_replace( '%^https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)%', 'httpv://www.youtube.com/watch?v=', $params['url'], 1, $count );
+                $url = preg_replace( '%^https?://(?:www\.)?youtu(?:be\.com/watch\?v=|.be/)%', 'httpv://www.youtube.com/watch?v=', esc_url( $params['url'] ), 1, $count );
                 if ( ! $count ) {
                     return $matches[0];
                 }
             }
-            $alignClasses = isset($params['align']) ? ' lyte-align align' . $params['align'] : ''; 
-            return '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube ' . (isset($params['className']) ? $params['className'] : '') . $alignClasses . '">' . $url . '<figcaption>' . (isset($matches['caption']) ? $matches['caption'] : '') . '</figcaption></figure>';
+            $alignClasses = isset( $params['align'] ) ? ' lyte-align align' . esc_attr( $params['align'] ) : ''; 
+            return '<figure class="wp-block-embed-youtube wp-block-embed is-type-video is-provider-youtube ' . ( isset( $params['className'] ) ? esc_attr( $params['className'] ) : '') . $alignClasses . '">' . $url . '<figcaption>' . ( isset ( $matches['caption'] ) ? wp_kses_post( $matches['caption'] ) : '') . '</figcaption></figure>';
         }, $the_content );
     }
 
