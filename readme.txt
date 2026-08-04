@@ -4,9 +4,9 @@ Tags: youtube, video, performance, gdpr, lazy load
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 License: GPLv3
 License URI: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
-Requires at least: 5.0
+Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.7.30
+Stable tag: 1.7.31
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
