@@ -145,6 +145,12 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 
 == Changelog ==
 
+= 1.7.31 =
+* improve accessiblity of the "play" button
+* fixes for 2 PHP notices that were sometimes logged
+* improve Gutenberg block parsing
+* add Curl timeout to lyteCache.php
+
 = 1.7.30 =
 * avoid error logging when both description and title are not set
 * improve shortcode output sanitization to prevent possible Authenticated Stored Cross-Site Scripting as reported by Muhammad Yudha
