@@ -6,7 +6,7 @@ License: GPLv3
 License URI: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.7.31
+Stable tag: 1.7.32
 
 High performance YouTube video, playlist and audio-only embeds which don't slow down your blog and offer optimal accessibility.
 
@@ -144,6 +144,9 @@ Just tell me, I like the feedback! Use the [Contact-page on my blog](http://blog
 * [Rate my plugin on wordpress.org](http://wordpress.org/extend/plugins/wp-youtube-lyte/)
 
 == Changelog ==
+
+= 1.7.32 =
+* override some theme that add a border and/ or a transition to a button
 
 = 1.7.31 =
 * improve accessiblity of the "play" button
